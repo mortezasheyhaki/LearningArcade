@@ -2466,3 +2466,644 @@ body.light-mode .player-modal input {
     }
 
 }
+/* =====================================================
+   PHONE / MOBILE VERSION
+===================================================== */
+
+@media (max-width: 600px) {
+
+    /* -----------------------------------------------
+       PAGE
+    ----------------------------------------------- */
+
+    body {
+        font-size: 14px;
+    }
+
+
+    /* -----------------------------------------------
+       HEADER / BANNER
+    ----------------------------------------------- */
+
+    .arcade-header {
+        height: 220px;
+    }
+
+    .arcade-banner {
+        background-position: center center;
+    }
+
+
+    /* -----------------------------------------------
+       FLOATING NAV
+    ----------------------------------------------- */
+
+    .arcade-nav {
+        position: fixed;
+
+        top: 10px;
+        left: 50%;
+
+        width: calc(100% - 16px);
+
+        padding: 5px;
+
+        gap: 3px;
+
+        border-radius: 13px;
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+        overflow: hidden;
+    }
+
+
+    .arcade-nav.nav-scrolled {
+        transform:
+            translateX(-50%)
+            scale(0.94);
+
+        opacity: 0.76;
+    }
+
+
+    .arcade-nav .nav-link {
+        flex: 1;
+
+        min-height: 34px;
+
+        padding: 0 6px;
+
+        border-radius: 8px;
+
+        font-size: 9px;
+
+        white-space: nowrap;
+    }
+
+
+    .arcade-nav .theme-toggle {
+        flex: 0 0 34px;
+
+        width: 34px;
+        height: 34px;
+
+        font-size: 14px;
+
+        border-radius: 8px;
+    }
+
+
+    /* -----------------------------------------------
+       HERO
+    ----------------------------------------------- */
+
+    .hero {
+        min-height: auto;
+
+        padding:
+            55px 20px
+            65px;
+
+        display:
+            block;
+
+        text-align:
+            center;
+    }
+
+
+    .hero-content {
+        max-width:
+            100%;
+    }
+
+
+    .badge {
+        font-size:
+            9px;
+
+        padding:
+            7px 10px;
+    }
+
+
+    .hero h2 {
+        margin-top:
+            20px;
+
+        font-size:
+            clamp(38px, 11vw, 52px);
+
+        line-height:
+            1.02;
+
+        letter-spacing:
+            -2px;
+    }
+
+
+    .hero p {
+        margin:
+            22px auto 0;
+
+        max-width:
+            450px;
+
+        font-size:
+            14px;
+
+        line-height:
+            1.65;
+    }
+
+
+    .primary-button {
+        margin-top:
+            25px;
+
+        width:
+            100%;
+
+        max-width:
+            280px;
+
+        padding:
+            14px 20px;
+
+        font-size:
+            13px;
+    }
+
+
+    .hero-decoration {
+        display:
+            none;
+    }
+
+
+    /* -----------------------------------------------
+       QUICK STATS
+    ----------------------------------------------- */
+
+    .stats-section {
+        padding:
+            18px 14px;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap:
+            10px;
+    }
+
+
+    .stat-card {
+        padding:
+            14px 12px;
+
+        gap:
+            10px;
+
+        border-radius:
+            13px;
+    }
+
+
+    .stat-icon {
+        width:
+            38px;
+
+        height:
+            38px;
+
+        flex-shrink:
+            0;
+
+        font-size:
+            17px;
+
+        border-radius:
+            10px;
+    }
+
+
+    .stat-card strong {
+        font-size:
+            17px;
+    }
+
+
+    .stat-card span {
+        font-size:
+            9px;
+
+        margin-top:
+            2px;
+    }
+
+
+    /* -----------------------------------------------
+       GAMES SECTION
+    ----------------------------------------------- */
+
+    .games-section {
+        padding:
+            50px 14px;
+    }
+
+
+    .section-heading {
+        display:
+            block;
+
+        margin-bottom:
+            25px;
+    }
+
+
+    .section-label {
+        font-size:
+            9px;
+
+        letter-spacing:
+            2px;
+    }
+
+
+    .section-heading h3,
+    .about-section h3 {
+        font-size:
+            28px;
+    }
+
+
+    .section-heading p {
+        margin-top:
+            8px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.5;
+    }
+
+
+    .games-grid {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            12px;
+    }
+
+
+    /* -----------------------------------------------
+       GAME CARDS
+    ----------------------------------------------- */
+
+    .game-card {
+        min-height:
+            auto;
+
+        padding:
+            19px;
+
+        border-radius:
+            17px;
+    }
+
+
+    .game-icon {
+        width:
+            48px;
+
+        height:
+            48px;
+
+        border-radius:
+            13px;
+
+        font-size:
+            24px;
+    }
+
+
+    .game-status {
+        margin-top:
+            15px;
+
+        font-size:
+            9px;
+    }
+
+
+    .game-info h4 {
+        margin-top:
+            6px;
+
+        font-size:
+            22px;
+    }
+
+
+    .game-info p {
+        margin-top:
+            7px;
+
+        font-size:
+            12px;
+
+        line-height:
+            1.5;
+    }
+
+
+    .game-tags {
+        margin-top:
+            11px;
+
+        gap:
+            5px;
+    }
+
+
+    .game-tags span {
+        padding:
+            5px 7px;
+
+        font-size:
+            8px;
+
+        border-radius:
+            6px;
+    }
+
+
+    .game-button {
+        width:
+            100%;
+
+        margin-top:
+            14px;
+
+        padding:
+            11px 12px;
+
+        font-size:
+            11px;
+
+        border-radius:
+            9px;
+    }
+
+
+    /* -----------------------------------------------
+       LEADERBOARD
+    ----------------------------------------------- */
+
+    .dashboard-section {
+        padding:
+            50px 14px;
+    }
+
+
+    .leaderboard-preview {
+        margin-top:
+            25px;
+
+        border-radius:
+            15px;
+    }
+
+
+    .leaderboard-row {
+        padding:
+            14px;
+
+        grid-template-columns:
+            35px 1fr auto;
+
+        gap:
+            8px;
+    }
+
+
+    .rank {
+        font-size:
+            16px;
+    }
+
+
+    .player {
+        font-size:
+            12px;
+    }
+
+
+    .leaderboard-row strong {
+        font-size:
+            10px;
+    }
+
+
+    /* -----------------------------------------------
+       PROFILE
+    ----------------------------------------------- */
+
+    .profile-section {
+        padding:
+            15px 14px 55px;
+    }
+
+
+    .profile-card {
+        padding:
+            25px 18px;
+
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+
+        gap:
+            16px;
+
+        border-radius:
+            17px;
+    }
+
+
+    .profile-avatar {
+        width:
+            68px;
+
+        height:
+            68px;
+
+        font-size:
+            29px;
+    }
+
+
+    .profile-info h3 {
+        font-size:
+            22px;
+    }
+
+
+    .profile-info p {
+        font-size:
+            12px;
+    }
+
+
+    .profile-stats {
+        width:
+            100%;
+
+        justify-content:
+            space-around;
+
+        gap:
+            10px;
+    }
+
+
+    .profile-stats strong {
+        font-size:
+            18px;
+    }
+
+
+    .profile-stats span {
+        font-size:
+            9px;
+    }
+
+
+    .profile-button {
+        width:
+            100%;
+
+        padding:
+            12px 15px;
+    }
+
+
+    /* -----------------------------------------------
+       ABOUT
+    ----------------------------------------------- */
+
+    .about-section {
+        padding:
+            65px 20px;
+    }
+
+
+    .about-section p {
+        font-size:
+            14px;
+
+        line-height:
+            1.65;
+    }
+
+
+    /* -----------------------------------------------
+       FOOTER
+    ----------------------------------------------- */
+
+    footer {
+        padding:
+            25px 15px;
+
+        flex-direction:
+            column;
+
+        gap:
+            10px;
+
+        text-align:
+            center;
+    }
+
+
+    footer p {
+        font-size:
+            10px;
+    }
+
+
+    /* -----------------------------------------------
+       MODAL
+    ----------------------------------------------- */
+
+    .modal-overlay {
+        padding:
+            12px;
+    }
+
+
+    .player-modal {
+        padding:
+            30px 20px;
+
+        border-radius:
+            20px;
+    }
+
+
+    .modal-icon {
+        width:
+            60px;
+
+        height:
+            60px;
+
+        font-size:
+            28px;
+
+        border-radius:
+            17px;
+    }
+
+
+    .player-modal h3 {
+        font-size:
+            25px;
+    }
+
+
+    .player-modal p {
+        font-size:
+            13px;
+    }
+
+
+    /* -----------------------------------------------
+       REMOVE HOVER LIFT ON TOUCH DEVICES
+    ----------------------------------------------- */
+
+    .game-card:hover {
+        transform:
+            none;
+    }
+
+
+    .game-button:not(.disabled):hover {
+        transform:
+            none;
+    }
+
+
+    .primary-button:hover {
+        transform:
+            none;
+    }
+
+}
