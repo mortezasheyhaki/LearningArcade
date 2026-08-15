@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mr. Sheyhaki Learning Arcade</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         ARCADE HEADER / BANNER
+    ========================================== -->
+
+    <header class="arcade-header">
+
+        <div class="arcade-banner"></div>
+
+
+        <nav class="arcade-nav">
+
+            <a
+                href="#home"
+                class="nav-link active"
+            >
+                Home
+            </a>
+
+
+            <a
+                href="#games"
+                class="nav-link"
+            >
+                Games
+            </a>
+
+
+            <a
+                href="#leaderboard"
+                class="nav-link"
+            >
+                Leaderboard
+            </a>
+
+
+            <a
+                href="#profile"
+                class="nav-link"
+            >
+                Profile
+            </a>
+
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                aria-label="Toggle light and dark mode"
+                type="button"
+            >
+                ☀️
+            </button>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section
+            id="home"
+            class="hero"
+        >
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    🎮 ENGLISH LEARNING • GAMIFIED
+                </div>
+
+
+                <h2>
+                    Learn English.<br>
+                    <span>Play. Compete. Improve.</span>
+                </h2>
+
+
+                <p>
+                    Welcome to your English Learning Arcade.
+                    Practice vocabulary, grammar, listening and
+                    more through fun interactive games.
+                </p>
+
+
+                <button
+                    class="primary-button"
+                    onclick="scrollToSection('games')"
+                    type="button"
+                >
+                    START PLAYING →
+                </button>
+
+            </div>
+
+
+            <div class="hero-decoration">
+
+                <div class="floating-card card-one">
+                    🧠
+                    <span>Vocabulary</span>
+                </div>
+
+
+                <div class="floating-card card-two">
+                    ⚡
+                    <span>Grammar</span>
+                </div>
+
+
+                <div class="floating-card card-three">
+                    🏆
+                    <span>Challenge</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- QUICK STATS -->
+
+        <section class="stats-section">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎮
+                </div>
+
+                <div>
+
+                    <strong id="gamesPlayedStat">
+                        0
+                    </strong>
+
+                    <span>
+                        Games Played
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⭐
+                </div>
+
+                <div>
+
+                    <strong id="xpStat">
+                        0
+                    </strong>
+
+                    <span>
+                        Total XP
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🔥
+                </div>
+
+                <div>
+
+                    <strong id="streakStat">
+                        0
+                    </strong>
+
+                    <span>
+                        Day Streak
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="playerNameStat">
+                        Guest
+                    </strong>
+
+                    <span>
+                        Player
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- GAMES -->
+
+        <section
+            id="games"
+            class="games-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        ARCADE
+                    </span>
+
+                    <h3>
+                        Choose Your Game
+                    </h3>
+
+                </div>
+
+
+                <p>
+                    Pick a game and start improving your English.
+                </p>
+
+            </div>
+
+
+            <div class="games-grid">
+
+
+                <!-- MATCH RUSH -->
+
+                <article class="game-card featured">
+
+                    <div class="game-icon">
+                        ⚡
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status available">
+                            ● PLAY NOW
+                        </span>
+
+
+                        <h4>
+                            Match Rush
+                        </h4>
+
+
+                        <p>
+                            Match words and meanings before
+                            time runs out!
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Vocabulary
+                            </span>
+
+                            <span>
+                                Speed
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="games/match-rush/index.html"
+                            class="game-button"
+                        >
+                            PLAY GAME →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- MULTIPLE CHOICE -->
+
+                <article class="game-card featured">
+
+                    <div class="game-icon">
+                        🧠
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status available">
+                            ● PLAY NOW
+                        </span>
+
+
+                        <h4>
+                            Multiple Choice
+                        </h4>
+
+
+                        <p>
+                            Test your grammar and vocabulary
+                            with questions from Units 1–12.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Grammar
+                            </span>
+
+                            <span>
+                                Vocabulary
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="games/multiple-choice/index.html"
+                            class="game-button"
+                        >
+                            PLAY GAME →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- VIDEO QUEST -->
+
+                <article class="game-card featured">
+
+                    <div class="game-icon">
+                        🎬
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status available">
+                            ● PLAY NOW
+                        </span>
+
+
+                        <h4>
+                            Video Quest
+                        </h4>
+
+
+                        <p>
+                            Watch English videos, learn
+                            vocabulary and grammar, and
+                            complete fun challenges.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Listening
+                            </span>
+
+                            <span>
+                                Vocabulary
+                            </span>
+
+                            <span>
+                                Speaking
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="games/video-quest/index.html"
+                            class="game-button"
+                        >
+                            PLAY GAME →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- GRAMMAR BATTLE -->
+
+                <article class="game-card featured">
+
+                    <div class="game-icon">
+                        ⚔️
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status available">
+                            ● PLAY NOW
+                        </span>
+
+
+                        <h4>
+                            Grammar Battle
+                        </h4>
+
+
+                        <p>
+                            Battle your way through English
+                            grammar and choose the correct answers.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Grammar
+                            </span>
+
+                            <span>
+                                Challenge
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="games/grammar-battle/index.html"
+                            class="game-button"
+                        >
+                            PLAY GAME →
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- WORD RACE -->
+
+                <article class="game-card">
+
+                    <div class="game-icon">
+                        🏃
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status coming">
+                            COMING SOON
+                        </span>
+
+
+                        <h4>
+                            Word Race
+                        </h4>
+
+
+                        <p>
+                            Race against the clock and find
+                            the right words.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Vocabulary
+                            </span>
+
+                            <span>
+                                Speed
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="game-button disabled"
+                            type="button"
+                            disabled
+                        >
+                            COMING SOON
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- SENTENCE BUILDER -->
+
+                <article class="game-card">
+
+                    <div class="game-icon">
+                        🧩
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status coming">
+                            COMING SOON
+                        </span>
+
+
+                        <h4>
+                            Sentence Builder
+                        </h4>
+
+
+                        <p>
+                            Build correct English sentences
+                            from mixed words.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Grammar
+                            </span>
+
+                            <span>
+                                Sentences
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="game-button disabled"
+                            type="button"
+                            disabled
+                        >
+                            COMING SOON
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- LISTENING -->
+
+                <article class="game-card">
+
+                    <div class="game-icon">
+                        🎧
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status coming">
+                            COMING SOON
+                        </span>
+
+
+                        <h4>
+                            Listening Challenge
+                        </h4>
+
+
+                        <p>
+                            Listen carefully and answer
+                            before the timer ends.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Listening
+                            </span>
+
+                            <span>
+                                Challenge
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="game-button disabled"
+                            type="button"
+                            disabled
+                        >
+                            COMING SOON
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- MEMORY -->
+
+                <article class="game-card">
+
+                    <div class="game-icon">
+                        🃏
+                    </div>
+
+
+                    <div class="game-info">
+
+                        <span class="game-status coming">
+                            COMING SOON
+                        </span>
+
+
+                        <h4>
+                            Memory Match
+                        </h4>
+
+
+                        <p>
+                            Test your memory while learning
+                            new vocabulary.
+                        </p>
+
+
+                        <div class="game-tags">
+
+                            <span>
+                                Vocabulary
+                            </span>
+
+                            <span>
+                                Memory
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="game-button disabled"
+                            type="button"
+                            disabled
+                        >
+                            COMING SOON
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LEADERBOARD -->
+
+        <section
+            id="leaderboard"
+            class="dashboard-section"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        COMPETE
+                    </span>
+
+                    <h3>
+                        Leaderboard
+                    </h3>
+
+                </div>
+
+
+                <p>
+                    Your online leaderboard will come later.
+                </p>
+
+            </div>
+
+
+            <div class="leaderboard-preview">
+
+                <div class="leaderboard-row">
+
+                    <span class="rank">
+                        🥇
+                    </span>
+
+                    <span class="player">
+                        Player One
+                    </span>
+
+                    <strong>
+                        2,450 XP
+                    </strong>
+
+                </div>
+
+
+                <div class="leaderboard-row">
+
+                    <span class="rank">
+                        🥈
+                    </span>
+
+                    <span class="player">
+                        Player Two
+                    </span>
+
+                    <strong>
+                        2,120 XP
+                    </strong>
+
+                </div>
+
+
+                <div class="leaderboard-row">
+
+                    <span class="rank">
+                        🥉
+                    </span>
+
+                    <span class="player">
+                        Player Three
+                    </span>
+
+                    <strong>
+                        1,980 XP
+                    </strong>
+
+                </div>
+
+
+                <div class="leaderboard-row locked">
+
+                    <span class="rank">
+                        🔒
+                    </span>
+
+                    <span
+                        class="player"
+                        id="leaderboardPlayer"
+                    >
+                        Your position
+                    </span>
+
+                    <strong>
+                        Play to appear here
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PROFILE -->
+
+        <section
+            id="profile"
+            class="profile-section"
+        >
+
+            <div class="profile-card">
+
+                <div
+                    class="profile-avatar"
+                    id="profileAvatar"
+                >
+                    👤
+                </div>
+
+
+                <div class="profile-info">
+
+                    <span class="section-label">
+                        PLAYER PROFILE
+                    </span>
+
+
+                    <h3 id="profileName">
+                        Guest Player
+                    </h3>
+
+
+                    <p id="profileMessage">
+                        Enter your name to start your
+                        learning journey.
+                    </p>
+
+                </div>
+
+
+                <div class="profile-stats">
+
+                    <div>
+
+                        <strong id="profileXP">
+                            0
+                        </strong>
+
+                        <span>
+                            XP
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong id="profileGames">
+                            0
+                        </strong>
+
+                        <span>
+                            Games
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong id="profileStreak">
+                            0
+                        </strong>
+
+                        <span>
+                            Streak
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="playerButton"
+                    class="profile-button"
+                    onclick="openPlayerModal()"
+                    type="button"
+                >
+                    SET PLAYER NAME
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ABOUT -->
+
+        <section
+            id="about"
+            class="about-section"
+        >
+
+            <div class="about-content">
+
+                <span class="section-label">
+                    THE ARCADE
+                </span>
+
+
+                <h3>
+                    English doesn't have to be boring.
+                </h3>
+
+
+                <p>
+                    Learning Arcade turns English practice
+                    into interactive challenges where students
+                    can learn, compete and have fun.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- PLAYER MODAL -->
+
+    <div
+        id="playerModal"
+        class="modal-overlay"
+    >
+
+        <div class="player-modal">
+
+            <button
+                class="modal-close"
+                onclick="closePlayerModal()"
+                type="button"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-icon">
+                👋
+            </div>
+
+
+            <span class="section-label">
+                WELCOME TO THE ARCADE
+            </span>
+
+
+            <h3>
+                What's your name?
+            </h3>
+
+
+            <p>
+                Enter your name to create your
+                player profile.
+            </p>
+
+
+            <input
+                type="text"
+                id="playerNameInput"
+                placeholder="Enter your name"
+                maxlength="20"
+                autocomplete="off"
+            >
+
+
+            <button
+                class="primary-button modal-button"
+                onclick="savePlayerName()"
+                type="button"
+            >
+                START MY PROFILE →
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-brand">
+
+            <strong>
+                MR. SHEYHAKI
+            </strong>
+
+            <span>
+                Learning Arcade
+            </span>
+
+        </div>
+
+
+        <p>
+            Learn English • Play • Improve
+        </p>
+
+    </footer>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

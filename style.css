@@ -1,0 +1,2402 @@
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #090b14;
+
+    color:
+        #ffffff;
+
+    min-height:
+        100vh;
+
+    overflow-x:
+        hidden;
+}
+
+
+/* =====================================================
+   ARCADE HEADER / BANNER
+===================================================== */
+
+.arcade-header {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    height:
+        360px;
+
+    overflow:
+        hidden;
+
+    background:
+        #050712;
+}
+
+
+/* =====================================================
+   BANNER IMAGE
+===================================================== */
+
+.arcade-banner {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    background-image:
+
+        linear-gradient(
+            to bottom,
+            rgba(4,6,18,0.08),
+            rgba(4,6,18,0.03) 45%,
+            rgba(4,6,18,0.55) 100%
+        ),
+
+        url(
+            "https://cdn.imgurl.ir/uploads/i811231_Untitled_design.png"
+        );
+
+    background-position:
+        center center;
+
+    background-size:
+        cover;
+
+    background-repeat:
+        no-repeat;
+
+    transform:
+        scale(1.01);
+}
+
+
+.arcade-banner::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.50),
+            transparent 22%,
+            transparent 78%,
+            rgba(0,0,0,0.40)
+        );
+
+    pointer-events:
+        none;
+}
+
+
+/* =====================================================
+   FLOATING NAVIGATION
+===================================================== */
+
+.arcade-nav {
+
+    position:
+        absolute;
+
+    top:
+        18px;
+
+    left:
+        50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:
+        10;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        7px;
+
+    padding:
+        7px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.14);
+
+    border-radius:
+        15px;
+
+    background:
+        rgba(5,7,18,0.58);
+
+    backdrop-filter:
+        blur(14px);
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.30);
+
+    white-space:
+        nowrap;
+}
+
+
+/* =====================================================
+   NAV LINKS
+===================================================== */
+
+.arcade-nav .nav-link {
+
+    position:
+        relative;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        38px;
+
+    padding:
+        0 14px;
+
+    border:
+        1px solid
+        transparent;
+
+    border-radius:
+        10px;
+
+    color:
+        #e2e8f0;
+
+    background:
+        transparent;
+
+    text-decoration:
+        none;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.arcade-nav .nav-link:hover {
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border-color:
+        rgba(255,255,255,0.12);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.arcade-nav .nav-link.active {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,92,255,0.78),
+            rgba(78,203,255,0.42)
+        );
+
+    border-color:
+        rgba(255,255,255,0.18);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 5px 18px
+        rgba(124,92,255,0.28);
+}
+
+
+.arcade-nav .nav-link.active::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    bottom:
+        -5px;
+
+    width:
+        16px;
+
+    height:
+        2px;
+
+    border-radius:
+        10px;
+
+    background:
+        #ffffff;
+
+    transform:
+        translateX(-50%);
+}
+
+
+/* =====================================================
+   THEME BUTTON
+===================================================== */
+
+.arcade-nav .theme-toggle {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color:
+        #ffffff;
+
+    font-size:
+        16px;
+
+    cursor:
+        pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.arcade-nav .theme-toggle:hover {
+
+    transform:
+        translateY(-2px)
+        rotate(8deg);
+
+    background:
+        rgba(255,255,255,0.14);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height:
+        620px;
+
+    padding:
+        90px 7%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+}
+
+
+.hero::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        500px;
+
+    height:
+        500px;
+
+    background:
+        #5c43ff;
+
+    filter:
+        blur(180px);
+
+    opacity:
+        0.16;
+
+    top:
+        50px;
+
+    left:
+        20%;
+}
+
+
+.hero-content {
+
+    max-width:
+        650px;
+
+    position:
+        relative;
+
+    z-index:
+        2;
+}
+
+
+.badge {
+
+    display:
+        inline-block;
+
+    padding:
+        8px 14px;
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(124,92,255,0.12);
+
+    border:
+        1px solid
+        rgba(124,92,255,0.30);
+
+    color:
+        #a99aff;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        1px;
+}
+
+
+.hero h2 {
+
+    margin-top:
+        25px;
+
+    font-size:
+        clamp(45px,6vw,80px);
+
+    line-height:
+        0.98;
+
+    letter-spacing:
+        -3px;
+}
+
+
+.hero h2 span {
+    color:
+        #7c8cff;
+}
+
+
+.hero p {
+
+    margin-top:
+        30px;
+
+    max-width:
+        560px;
+
+    color:
+        #9da3b7;
+
+    font-size:
+        17px;
+
+    line-height:
+        1.7;
+}
+
+
+.primary-button {
+
+    margin-top:
+        35px;
+
+    padding:
+        16px 26px;
+
+    border:
+        none;
+
+    border-radius:
+        12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cff,
+            #4ecbff
+        );
+
+    color:
+        #ffffff;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.5px;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.25s;
+}
+
+
+.primary-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 15px 40px
+        rgba(92,72,255,0.30);
+}
+
+
+/* =====================================================
+   HERO DECORATION
+===================================================== */
+
+.hero-decoration {
+
+    width:
+        380px;
+
+    height:
+        380px;
+
+    position:
+        relative;
+}
+
+
+.floating-card {
+
+    position:
+        absolute;
+
+    width:
+        150px;
+
+    height:
+        120px;
+
+    border-radius:
+        22px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    backdrop-filter:
+        blur(10px);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        38px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,0.30);
+
+    animation:
+        float 4s ease-in-out infinite;
+}
+
+
+.floating-card span {
+
+    margin-top:
+        10px;
+
+    font-size:
+        12px;
+
+    color:
+        #aeb3c7;
+}
+
+
+.card-one {
+
+    top:
+        20px;
+
+    left:
+        20px;
+}
+
+
+.card-two {
+
+    top:
+        130px;
+
+    right:
+        0;
+
+    animation-delay:
+        1s;
+}
+
+
+.card-three {
+
+    bottom:
+        20px;
+
+    left:
+        80px;
+
+    animation-delay:
+        2s;
+}
+
+
+@keyframes float {
+
+    0%, 100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-12px);
+    }
+
+}
+
+
+/* =====================================================
+   GAMES
+===================================================== */
+
+.games-section {
+
+    padding:
+        90px 7%;
+
+    background:
+        #0d101b;
+}
+
+
+.section-heading {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        end;
+
+    margin-bottom:
+        40px;
+}
+
+
+.section-label {
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #7c8cff;
+}
+
+
+.section-heading h3,
+.about-section h3 {
+
+    margin-top:
+        8px;
+
+    font-size:
+        38px;
+
+    letter-spacing:
+        -1px;
+}
+
+
+.section-heading p {
+
+    color:
+        #858b9e;
+}
+
+
+.games-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:
+        20px;
+}
+
+
+.game-card {
+
+    padding:
+        28px;
+
+    min-height:
+        300px;
+
+    border-radius:
+        22px;
+
+    background:
+        #141827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    transition:
+        0.25s;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        space-between;
+}
+
+
+.game-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(124,92,255,0.40);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.25);
+}
+
+
+.game-card.featured {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,92,255,0.18),
+            rgba(20,24,39,1)
+        );
+}
+
+
+.game-icon {
+
+    width:
+        60px;
+
+    height:
+        60px;
+
+    border-radius:
+        17px;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        30px;
+}
+
+
+/* =====================================================
+   GAME STATUS
+===================================================== */
+
+.game-status {
+
+    display:
+        inline-block;
+
+    margin-top:
+        22px;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1px;
+
+    font-weight:
+        800;
+}
+
+
+.game-status.available {
+
+    color:
+        #62e6a5;
+}
+
+
+.game-card.featured
+.game-status.available::first-letter {
+
+    color:
+        #22c55e;
+}
+
+
+.game-status.coming {
+
+    color:
+        #777e95;
+}
+
+
+/* =====================================================
+   GAME INFO
+===================================================== */
+
+.game-info h4 {
+
+    margin-top:
+        8px;
+
+    font-size:
+        27px;
+}
+
+
+.game-info p {
+
+    margin-top:
+        10px;
+
+    color:
+        #858b9e;
+
+    line-height:
+        1.5;
+}
+
+
+/* =====================================================
+   TAGS
+===================================================== */
+
+.game-tags {
+
+    display:
+        flex;
+
+    gap:
+        8px;
+
+    margin-top:
+        15px;
+
+    flex-wrap:
+        wrap;
+}
+
+
+.game-tags span {
+
+    padding:
+        6px 9px;
+
+    border-radius:
+        7px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color:
+        #9da3b7;
+
+    font-size:
+        10px;
+}
+
+
+/* =====================================================
+   GAME BUTTON
+===================================================== */
+
+.game-button {
+
+    display:
+        inline-block;
+
+    margin-top:
+        20px;
+
+    padding:
+        12px 16px;
+
+    border-radius:
+        10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    background:
+        transparent;
+
+    color:
+        #ffffff;
+
+    cursor:
+        pointer;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+
+    text-align:
+        center;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.game-button:not(.disabled):hover {
+
+    background:
+        #7c5cff;
+
+    border-color:
+        #7c5cff;
+
+    color:
+        #ffffff;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 22px
+        rgba(124,92,255,0.20);
+}
+
+
+.game-button.disabled {
+
+    color:
+        #5f6577;
+
+    cursor:
+        not-allowed;
+}
+
+
+/* =====================================================
+   QUICK STATS
+===================================================== */
+
+.stats-section {
+
+    padding:
+        30px 7%;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:
+        15px;
+
+    background:
+        #090b14;
+}
+
+
+.stat-card {
+
+    padding:
+        20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    background:
+        #141827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    border-radius:
+        16px;
+}
+
+
+.stat-icon {
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border-radius:
+        12px;
+
+    font-size:
+        20px;
+}
+
+
+.stat-card strong {
+
+    display:
+        block;
+
+    font-size:
+        20px;
+}
+
+
+.stat-card span {
+
+    display:
+        block;
+
+    margin-top:
+        3px;
+
+    color:
+        #858b9e;
+
+    font-size:
+        11px;
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-section {
+
+    padding:
+        90px 7%;
+}
+
+
+.leaderboard-preview {
+
+    max-width:
+        800px;
+
+    margin:
+        40px auto 0;
+
+    background:
+        #141827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    border-radius:
+        20px;
+
+    overflow:
+        hidden;
+}
+
+
+.leaderboard-row {
+
+    padding:
+        20px 25px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        60px 1fr auto;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.06);
+}
+
+
+.leaderboard-row:last-child {
+    border-bottom:
+        none;
+}
+
+
+.rank {
+    font-size:
+        20px;
+}
+
+
+.player {
+    font-weight:
+        600;
+}
+
+
+.leaderboard-row strong {
+
+    color:
+        #8e80ff;
+}
+
+
+.leaderboard-row.locked {
+
+    color:
+        #777e91;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-section {
+
+    padding:
+        30px 7% 100px;
+}
+
+
+.profile-card {
+
+    max-width:
+        1000px;
+
+    margin:
+        auto;
+
+    padding:
+        35px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        25px;
+
+    background:
+        #141827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    border-radius:
+        22px;
+}
+
+
+.profile-avatar {
+
+    width:
+        80px;
+
+    height:
+        80px;
+
+    flex-shrink:
+        0;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cff,
+            #4ecbff
+        );
+
+    font-size:
+        35px;
+}
+
+
+.profile-info {
+    flex:
+        1;
+}
+
+
+.profile-info h3 {
+
+    margin-top:
+        5px;
+
+    font-size:
+        25px;
+}
+
+
+.profile-info p {
+
+    margin-top:
+        8px;
+
+    color:
+        #858b9e;
+}
+
+
+.profile-stats {
+
+    display:
+        flex;
+
+    gap:
+        30px;
+}
+
+
+.profile-stats div {
+    text-align:
+        center;
+}
+
+
+.profile-stats strong {
+
+    display:
+        block;
+
+    font-size:
+        22px;
+}
+
+
+.profile-stats span {
+
+    display:
+        block;
+
+    margin-top:
+        4px;
+
+    color:
+        #858b9e;
+
+    font-size:
+        11px;
+}
+
+
+.profile-button {
+
+    padding:
+        13px 18px;
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cff,
+            #4ecbff
+        );
+
+    color:
+        #ffffff;
+
+    font-weight:
+        800;
+
+    font-size:
+        11px;
+
+    cursor:
+        pointer;
+
+    white-space:
+        nowrap;
+
+    transition:
+        0.25s;
+}
+
+
+.profile-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(92,72,255,0.30);
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-section {
+
+    padding:
+        110px 7%;
+
+    text-align:
+        center;
+}
+
+
+.about-content {
+
+    max-width:
+        700px;
+
+    margin:
+        auto;
+}
+
+
+.about-section p {
+
+    margin-top:
+        20px;
+
+    color:
+        #858b9e;
+
+    line-height:
+        1.7;
+
+    font-size:
+        17px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    padding:
+        35px 7%;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.07);
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    color:
+        #6f7588;
+}
+
+
+.footer-brand strong {
+
+    display:
+        block;
+
+    color:
+        #ffffff;
+
+    font-size:
+        13px;
+
+    letter-spacing:
+        2px;
+}
+
+
+.footer-brand span {
+
+    font-size:
+        11px;
+}
+
+
+footer p {
+
+    font-size:
+        12px;
+}
+
+
+/* =====================================================
+   PLAYER MODAL
+===================================================== */
+
+.modal-overlay {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        1000;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+    background:
+        rgba(0,0,0,0.70);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+.modal-overlay.show {
+    display:
+        flex;
+}
+
+
+.player-modal {
+
+    width:
+        100%;
+
+    max-width:
+        430px;
+
+    padding:
+        40px;
+
+    position:
+        relative;
+
+    text-align:
+        center;
+
+    background:
+        #141827;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius:
+        25px;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.50);
+
+    animation:
+        modalIn 0.25s ease;
+}
+
+
+@keyframes modalIn {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+.modal-close {
+
+    position:
+        absolute;
+
+    top:
+        15px;
+
+    right:
+        18px;
+
+    width:
+        35px;
+
+    height:
+        35px;
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color:
+        #aeb3c7;
+
+    font-size:
+        23px;
+
+    cursor:
+        pointer;
+}
+
+
+.modal-close:hover {
+
+    background:
+        rgba(255,255,255,0.10);
+
+    color:
+        white;
+}
+
+
+.modal-icon {
+
+    width:
+        70px;
+
+    height:
+        70px;
+
+    margin:
+        0 auto 20px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cff,
+            #4ecbff
+        );
+
+    font-size:
+        32px;
+}
+
+
+.player-modal h3 {
+
+    margin-top:
+        10px;
+
+    font-size:
+        30px;
+}
+
+
+.player-modal p {
+
+    margin-top:
+        10px;
+
+    color:
+        #858b9e;
+
+    line-height:
+        1.6;
+}
+
+
+.player-modal input {
+
+    width:
+        100%;
+
+    margin-top:
+        25px;
+
+    padding:
+        16px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.10);
+
+    border-radius:
+        12px;
+
+    outline:
+        none;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    color:
+        white;
+
+    font-size:
+        16px;
+
+    text-align:
+        center;
+}
+
+
+.player-modal input:focus {
+
+    border-color:
+        #7c5cff;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(124,92,255,0.12);
+}
+
+
+.player-modal input::placeholder {
+
+    color:
+        #666d80;
+}
+
+
+.modal-button {
+
+    width:
+        100%;
+
+    margin-top:
+        15px;
+}
+
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+body.light-mode {
+
+    background:
+        #f4f6fb;
+
+    color:
+        #171a26;
+}
+
+
+/* =====================================================
+   LIGHT MODE BANNER
+===================================================== */
+
+body.light-mode .arcade-banner {
+
+    background-image:
+
+        linear-gradient(
+            to bottom,
+            rgba(4,6,18,0.08),
+            rgba(4,6,18,0.03) 45%,
+            rgba(4,6,18,0.50) 100%
+        ),
+
+        url(
+            "https://cdn.imgurl.ir/uploads/i811231_Untitled_design.png"
+        );
+}
+
+
+/* =====================================================
+   LIGHT MODE NAV
+===================================================== */
+
+body.light-mode .arcade-nav {
+
+    background:
+        rgba(255,255,255,0.68);
+
+    border-color:
+        rgba(255,255,255,0.45);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.16);
+}
+
+
+body.light-mode .arcade-nav .nav-link {
+
+    color:
+        #334155;
+}
+
+
+body.light-mode .arcade-nav .nav-link:hover {
+
+    color:
+        #1e1b4b;
+
+    background:
+        rgba(99,102,241,0.10);
+
+    border-color:
+        rgba(99,102,241,0.14);
+}
+
+
+body.light-mode .arcade-nav .nav-link.active {
+
+    color:
+        #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cff,
+            #4ecbff
+        );
+
+    border-color:
+        rgba(255,255,255,0.24);
+}
+
+
+body.light-mode .arcade-nav .theme-toggle {
+
+    background:
+        rgba(255,255,255,0.72);
+
+    color:
+        #171a26;
+
+    border-color:
+        rgba(255,255,255,0.45);
+}
+
+
+/* =====================================================
+   LIGHT MODE HERO
+===================================================== */
+
+body.light-mode .hero {
+
+    background:
+        #f4f6fb;
+}
+
+
+body.light-mode .hero p {
+
+    color:
+        #62697a;
+}
+
+
+/* =====================================================
+   LIGHT MODE GAMES
+===================================================== */
+
+body.light-mode .games-section {
+
+    background:
+        #e9ecf4;
+}
+
+
+body.light-mode .section-heading p {
+
+    color:
+        #686f81;
+}
+
+
+body.light-mode .game-card {
+
+    background:
+        #ffffff;
+
+    border-color:
+        rgba(0,0,0,0.07);
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.05);
+}
+
+
+body.light-mode .game-card.featured {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,92,255,0.10),
+            #ffffff
+        );
+}
+
+
+body.light-mode .game-card:hover {
+
+    border-color:
+        rgba(124,92,255,0.30);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,0.10);
+}
+
+
+body.light-mode .game-icon {
+
+    background:
+        #f0f1f7;
+}
+
+
+/* =====================================================
+   LIGHT MODE PLAY NOW
+===================================================== */
+
+body.light-mode .game-status.available {
+
+    color:
+        #15803d !important;
+}
+
+
+body.light-mode
+.game-card.featured
+.game-status.available::first-letter {
+
+    color:
+        #16a34a;
+}
+
+
+body.light-mode .game-status.coming {
+
+    color:
+        #64748b;
+}
+
+
+/* =====================================================
+   LIGHT MODE GAME CONTENT
+===================================================== */
+
+body.light-mode .game-info p {
+
+    color:
+        #686f81;
+}
+
+
+body.light-mode .game-tags span {
+
+    background:
+        #f0f1f7;
+
+    color:
+        #666d80;
+}
+
+
+body.light-mode .game-button {
+
+    border-color:
+        rgba(0,0,0,0.10);
+
+    color:
+        #171a26;
+}
+
+
+body.light-mode .game-button:not(.disabled):hover {
+
+    color:
+        #ffffff;
+}
+
+
+/* =====================================================
+   LIGHT MODE STATS
+===================================================== */
+
+body.light-mode .stats-section {
+
+    background:
+        #f4f6fb;
+}
+
+
+body.light-mode .stat-card {
+
+    background:
+        #ffffff;
+
+    border-color:
+        rgba(0,0,0,0.07);
+}
+
+
+body.light-mode .stat-icon {
+
+    background:
+        #f0f1f7;
+}
+
+
+body.light-mode .stat-card span {
+
+    color:
+        #686f81;
+}
+
+
+/* =====================================================
+   LIGHT MODE LEADERBOARD
+===================================================== */
+
+body.light-mode .leaderboard-preview {
+
+    background:
+        #ffffff;
+
+    border-color:
+        rgba(0,0,0,0.07);
+}
+
+
+body.light-mode .leaderboard-row {
+
+    border-bottom-color:
+        rgba(0,0,0,0.07);
+}
+
+
+body.light-mode .leaderboard-row.locked {
+
+    color:
+        #777d90;
+}
+
+
+/* =====================================================
+   LIGHT MODE PROFILE
+===================================================== */
+
+body.light-mode .profile-card {
+
+    background:
+        #ffffff;
+
+    border-color:
+        rgba(0,0,0,0.07);
+}
+
+
+body.light-mode .profile-info p {
+
+    color:
+        #686f81;
+}
+
+
+body.light-mode .profile-stats span {
+
+    color:
+        #686f81;
+}
+
+
+/* =====================================================
+   LIGHT MODE ABOUT
+===================================================== */
+
+body.light-mode .about-section p {
+
+    color:
+        #686f81;
+}
+
+
+/* =====================================================
+   LIGHT MODE MODAL
+===================================================== */
+
+body.light-mode .player-modal {
+
+    background:
+        #ffffff;
+
+    border-color:
+        rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.20);
+}
+
+
+body.light-mode .player-modal p {
+
+    color:
+        #686f81;
+}
+
+
+body.light-mode .modal-close {
+
+    background:
+        #f0f1f7;
+
+    color:
+        #686f81;
+}
+
+
+body.light-mode .modal-close:hover {
+
+    background:
+        #e5e7ef;
+
+    color:
+        #171a26;
+}
+
+
+body.light-mode .player-modal input {
+
+    background:
+        #f4f5f9;
+
+    border-color:
+        rgba(0,0,0,0.08);
+
+    color:
+        #171a26;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 850px) {
+
+    .arcade-header {
+
+        height:
+            260px;
+    }
+
+
+    .arcade-nav {
+
+        top:
+            12px;
+
+        width:
+            calc(100% - 24px);
+
+        justify-content:
+            center;
+
+        flex-wrap:
+            wrap;
+    }
+
+
+    .arcade-nav .nav-link {
+
+        min-height:
+            34px;
+
+        padding:
+            0 10px;
+
+        font-size:
+            11px;
+    }
+
+
+    .hero {
+
+        padding:
+            70px 5%;
+    }
+
+
+    .hero-decoration {
+
+        display:
+            none;
+    }
+
+
+    .games-section {
+
+        padding:
+            70px 5%;
+    }
+
+
+    .games-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .section-heading {
+
+        display:
+            block;
+    }
+
+
+    .section-heading p {
+
+        margin-top:
+            12px;
+    }
+
+
+    .stats-section {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        padding:
+            25px 5%;
+    }
+
+
+    .dashboard-section {
+
+        padding:
+            70px 5%;
+    }
+
+
+    .profile-section {
+
+        padding:
+            20px 5% 70px;
+    }
+
+
+    .profile-card {
+
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+    }
+
+
+    .profile-stats {
+
+        width:
+            100%;
+
+        justify-content:
+            center;
+    }
+
+
+    .profile-button {
+
+        width:
+            100%;
+    }
+
+
+    .leaderboard-row {
+
+        grid-template-columns:
+            45px 1fr auto;
+
+        padding:
+            17px;
+    }
+
+
+    footer {
+
+        flex-direction:
+            column;
+
+        gap:
+            15px;
+
+        text-align:
+            center;
+    }
+
+
+    .player-modal {
+
+        padding:
+            35px 25px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .arcade-header {
+
+        height:
+            220px;
+    }
+
+
+    .arcade-nav {
+
+        gap:
+            4px;
+
+        padding:
+            6px;
+    }
+
+
+    .arcade-nav .nav-link {
+
+        padding:
+            0 8px;
+
+        font-size:
+            10px;
+    }
+
+
+    .arcade-nav .nav-link.active::after {
+
+        bottom:
+            -4px;
+
+        width:
+            14px;
+
+        height:
+            2px;
+    }
+
+}/* =====================================================
+   LIGHT MODE HERO BADGE
+===================================================== */
+
+body.light-mode .badge {
+    background:
+        rgba(99,102,241,0.10);
+
+    border-color:
+        rgba(79,70,229,0.22);
+
+    color:
+        #4338ca;
+}
+
+body.light-mode .badge::first-letter {
+    color:
+        #4f46e5;
+}

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Match Rush | Learning Arcade</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="game-header">
+
+        <!-- BACK TO MAIN ARCADE -->
+
+        <a
+            href="../../index.html"
+            class="back-button"
+        >
+            ← Arcade
+        </a>
+
+
+        <!-- CENTER TITLE -->
+
+        <div class="game-title">
+
+            <span class="game-icon">
+                ⚡
+            </span>
+
+
+            <div class="game-title-text">
+
+                <h1>
+                    Match Rush
+                </h1>
+
+                <p>
+                    Vocabulary • Speed
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="header-right">
+
+
+            <!-- TIMER -->
+
+            <div
+                id="timerBox"
+                class="timer-box"
+            >
+
+                <span>
+                    TIME
+                </span>
+
+                <strong id="timer">
+                    90
+                </strong>
+
+            </div>
+
+
+            <!-- THEME -->
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                type="button"
+                aria-label="Toggle light and dark mode"
+                title="Toggle theme"
+            >
+                ☀️
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         START SCREEN
+    ================================================== -->
+
+    <section
+        id="startScreen"
+        class="screen"
+    >
+
+        <div class="start-card">
+
+
+            <div class="big-icon">
+                ⚡
+            </div>
+
+
+            <span class="eyebrow">
+                VOCABULARY • SPEED
+            </span>
+
+
+            <h2>
+                Match Rush
+            </h2>
+
+
+            <p>
+                Match the words with the correct
+                phrases before the timer runs out.
+                Build your combo and earn XP!
+            </p>
+
+
+            <!-- INSTRUCTIONS -->
+
+            <div class="instructions">
+
+
+                <div>
+
+                    <span>
+                        ⚡
+                    </span>
+
+                    <strong>
+                        Match
+                    </strong>
+
+                    <small>
+                        Choose the correct answer
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🔥
+                    </span>
+
+                    <strong>
+                        Combo
+                    </strong>
+
+                    <small>
+                        Keep your streak alive
+                    </small>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        🏆
+                    </span>
+
+                    <strong>
+                        Score
+                    </strong>
+
+                    <small>
+                        Earn more XP
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- START -->
+
+            <button
+                id="startButton"
+                class="main-button"
+                type="button"
+            >
+                START GAME →
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         GAME SCREEN
+    ================================================== -->
+
+    <section
+        id="gameScreen"
+        class="screen hidden"
+    >
+
+        <div class="game-container">
+
+
+            <!-- SCORE BAR -->
+
+            <div class="score-bar">
+
+
+                <!-- SCORE -->
+
+                <div class="score-item">
+
+                    <span>
+                        SCORE
+                    </span>
+
+                    <strong id="score">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <!-- MATCHED -->
+
+                <div class="score-item">
+
+                    <span>
+                        MATCHED
+                    </span>
+
+                    <strong id="matched">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <!-- COMBO -->
+
+                <div class="score-item combo-display">
+
+                    <span>
+                        COMBO
+                    </span>
+
+                    <strong id="combo">
+                        ×1
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- QUESTION -->
+
+            <div class="game-instruction">
+
+                <span class="eyebrow">
+                    MATCH THE PHRASE
+                </span>
+
+
+                <h2>
+                    Complete the phrase
+                </h2>
+
+
+                <div
+                    id="phrase"
+                    class="phrase"
+                >
+                    <span>
+                        _____
+                    </span>
+
+                    breakfast
+                </div>
+
+
+                <p id="message">
+                    Choose the correct verb.
+                </p>
+
+            </div>
+
+
+
+            <!-- ANSWERS -->
+
+            <div
+                id="answersContainer"
+                class="answers-container"
+            ></div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-area">
+
+
+                <div class="progress-label">
+
+                    <span>
+                        PROGRESS
+                    </span>
+
+
+                    <span id="progressText">
+                        0 / 39
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        id="progressFill"
+                        class="progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESULT SCREEN
+    ================================================== -->
+
+    <section
+        id="resultScreen"
+        class="screen hidden"
+    >
+
+        <div class="result-card">
+
+
+            <!-- TROPHY -->
+
+            <div class="result-icon">
+                🏆
+            </div>
+
+
+            <span class="eyebrow">
+                GAME COMPLETE
+            </span>
+
+
+            <h1>
+                Great Job!
+            </h1>
+
+
+
+            <!-- FINAL SCORE -->
+
+            <div class="final-score">
+
+                <span>
+                    FINAL SCORE
+                </span>
+
+
+                <strong id="finalScore">
+                    0
+                </strong>
+
+            </div>
+
+
+
+            <!-- RESULT STATS -->
+
+            <div class="result-grid">
+
+
+                <!-- MATCHED -->
+
+                <div>
+
+                    <strong id="finalMatched">
+                        0 / 39
+                    </strong>
+
+                    <span>
+                        MATCHED
+                    </span>
+
+                </div>
+
+
+                <!-- ACCURACY -->
+
+                <div>
+
+                    <strong id="finalAccuracy">
+                        0%
+                    </strong>
+
+                    <span>
+                        ACCURACY
+                    </span>
+
+                </div>
+
+
+                <!-- BEST COMBO -->
+
+                <div>
+
+                    <strong id="finalBestCombo">
+                        ×1
+                    </strong>
+
+                    <span>
+                        BEST COMBO
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- XP -->
+
+            <div class="xp-box">
+
+                <span>
+                    XP EARNED
+                </span>
+
+
+                <strong id="xpEarned">
+                    +0 XP
+                </strong>
+
+            </div>
+
+
+
+            <!-- RESULT BUTTONS -->
+
+            <div class="result-buttons">
+
+
+                <button
+                    id="playAgainButton"
+                    class="main-button"
+                    type="button"
+                >
+                    PLAY AGAIN →
+                </button>
+
+
+                <a
+                    href="../../index.html"
+                    class="secondary-button"
+                >
+                    ← Back to Arcade
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SCRIPT
+    ================================================== -->
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Video Quest | Learning Arcade</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="game-container">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="quest-header">
+
+        <!-- BACK TO MAIN ARCADE -->
+
+        <a
+            href="../../index.html"
+            class="arcade-back"
+        >
+            ← Arcade
+        </a>
+
+
+        <!-- CENTER BRAND -->
+
+        <div class="quest-brand">
+
+            <div class="quest-brand-icon">
+                🎬
+            </div>
+
+
+            <div class="quest-brand-text">
+
+                <h1>
+                    Video Quest
+                </h1>
+
+                <span>
+                    Listening &amp; Vocabulary
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- THEME -->
+
+        <button
+            id="themeBtn"
+            class="quest-theme-btn"
+            type="button"
+            aria-label="Toggle light and dark mode"
+            title="Toggle theme"
+        >
+            🌙
+        </button>
+
+    </header>
+
+
+
+    <!-- =========================================
+         MAIN
+    ========================================== -->
+
+    <main>
+
+
+        <!-- =====================================
+             WELCOME
+        ====================================== -->
+
+        <section
+            id="welcomeScreen"
+            class="screen"
+        >
+
+            <div class="quest-icon">
+                🎬
+            </div>
+
+
+            <h2>
+                Video Quest
+            </h2>
+
+
+            <p class="subtitle">
+
+                Watch. Listen. Think. Answer.
+
+                <br>
+
+                Complete the video challenges
+                and earn your points!
+
+            </p>
+
+
+            <div class="quest-info">
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🎥
+                    </div>
+
+                    <div class="info-title">
+                        Watch
+                    </div>
+
+                    <div class="info-text">
+                        Watch short English videos.
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🧠
+                    </div>
+
+                    <div class="info-title">
+                        Think
+                    </div>
+
+                    <div class="info-text">
+                        Understand what you hear.
+                    </div>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        🏆
+                    </div>
+
+                    <div class="info-title">
+                        Score
+                    </div>
+
+                    <div class="info-text">
+                        Complete the activities.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="startBtn"
+                class="start-btn"
+                type="button"
+            >
+                Start Quest 🚀
+            </button>
+
+        </section>
+
+
+
+        <!-- =====================================
+             LEVEL SCREEN
+        ====================================== -->
+
+        <section
+            id="levelScreen"
+            class="screen hidden"
+        >
+
+            <div class="screen-icon">
+                🌱
+            </div>
+
+
+            <h2 class="screen-title">
+                Choose Your Level
+            </h2>
+
+
+            <p class="screen-description">
+                Start with a level that matches you.
+            </p>
+
+
+            <div class="level-grid">
+
+
+                <button
+                    class="level-card"
+                    data-level="A1"
+                    type="button"
+                >
+
+                    <span class="level-icon">
+                        🌱
+                    </span>
+
+                    <span class="level-name">
+                        A1
+                    </span>
+
+                    <span class="level-description">
+                        Beginner
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="level-card coming-soon"
+                    type="button"
+                    disabled
+                >
+
+                    <span class="level-icon">
+                        🌿
+                    </span>
+
+                    <span class="level-name">
+                        A2
+                    </span>
+
+                    <span class="level-description">
+                        Coming soon
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="level-card coming-soon"
+                    type="button"
+                    disabled
+                >
+
+                    <span class="level-icon">
+                        🌳
+                    </span>
+
+                    <span class="level-name">
+                        B1
+                    </span>
+
+                    <span class="level-description">
+                        Coming soon
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             VIDEO SELECTION
+        ====================================== -->
+
+        <section
+            id="videoSelectScreen"
+            class="screen hidden"
+        >
+
+            <button
+                id="backToLevels"
+                class="internal-back"
+                type="button"
+            >
+                ← Back to Levels
+            </button>
+
+
+            <div class="screen-icon">
+                🎬
+            </div>
+
+
+            <h2 class="screen-title">
+                Choose Your Video
+            </h2>
+
+
+            <p class="screen-description">
+                Choose a video challenge.
+            </p>
+
+
+            <div class="video-grid">
+
+
+                <button
+                    class="video-card"
+                    data-video="1"
+                    type="button"
+                >
+
+                    <div class="video-number">
+                        01
+                    </div>
+
+
+                    <div class="video-card-content">
+
+                        <div class="video-level">
+                            A1 • VIDEO 01
+                        </div>
+
+                        <h3>
+                            Sarah's House
+                        </h3>
+
+                        <p>
+                            Talk about things in
+                            your house using
+                            <strong>a / an / the</strong>.
+                        </p>
+
+                    </div>
+
+
+                    <span class="video-arrow">
+                        →
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             LESSON SCREEN
+        ====================================== -->
+
+        <section
+            id="lessonScreen"
+            class="screen hidden"
+        >
+
+            <button
+                id="backToVideos"
+                class="internal-back"
+                type="button"
+            >
+                ← Back to Videos
+            </button>
+
+
+            <div class="lesson-header">
+
+                <div class="lesson-badge">
+                    A1 • VIDEO 01
+                </div>
+
+
+                <h2>
+                    Sarah's House
+                </h2>
+
+
+                <p>
+                    Watch the video and complete
+                    the activities below.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================
+                 VIDEO
+            ================================== -->
+
+            <div class="accordion-section active">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            🎬
+                        </span>
+
+                        <span>
+                            Watch the Video
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        −
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="video-wrapper">
+
+                        <iframe
+                            src="https://www.aparat.com/video/video/embed/videohash/nic1i5g/vt/frame"
+                            title="Sarah's House - Ten Things"
+                            allowfullscreen
+                            scrolling="no"
+                            allow="autoplay; encrypted-media"
+                        ></iframe>
+
+                    </div>
+
+
+                    <p class="video-tip">
+                        💡 Watch carefully. You can
+                        watch the video more than once.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 VOCABULARY
+            ================================== -->
+
+            <div class="accordion-section">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            📚
+                        </span>
+
+                        <span>
+                            Vocabulary
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="vocab-intro">
+
+                        <h3>
+                            Match the words to the pictures
+                        </h3>
+
+                        <p id="matchInstruction">
+                            First choose a word.
+                        </p>
+
+                    </div>
+
+
+                    <div class="matching-game">
+
+
+                        <div class="match-column">
+
+                            <h4>
+                                Words
+                            </h4>
+
+
+                            <button
+                                class="match-word"
+                                data-match="washing-machine"
+                                type="button"
+                            >
+                                washing machine
+                            </button>
+
+
+                            <button
+                                class="match-word"
+                                data-match="fridge"
+                                type="button"
+                            >
+                                fridge
+                            </button>
+
+
+                            <button
+                                class="match-word"
+                                data-match="stove"
+                                type="button"
+                            >
+                                stove
+                            </button>
+
+
+                            <button
+                                class="match-word"
+                                data-match="vacuum-cleaner"
+                                type="button"
+                            >
+                                vacuum cleaner
+                            </button>
+
+
+                            <button
+                                class="match-word"
+                                data-match="microwave"
+                                type="button"
+                            >
+                                microwave
+                            </button>
+
+                        </div>
+
+
+
+                        <div class="match-column">
+
+                            <h4>
+                                Pictures
+                            </h4>
+
+
+                            <button
+                                class="match-picture"
+                                data-match="microwave"
+                                type="button"
+                            >
+
+                                <img
+                                    src="./images/microwave.jpg"
+                                    alt="microwave"
+                                >
+
+                            </button>
+
+
+                            <button
+                                class="match-picture"
+                                data-match="washing-machine"
+                                type="button"
+                            >
+
+                                <img
+                                    src="./images/washing-machine.jpg"
+                                    alt="washing machine"
+                                >
+
+                            </button>
+
+
+                            <button
+                                class="match-picture"
+                                data-match="stove"
+                                type="button"
+                            >
+
+                                <img
+                                    src="./images/stove.jpg"
+                                    alt="stove"
+                                >
+
+                            </button>
+
+
+                            <button
+                                class="match-picture"
+                                data-match="fridge"
+                                type="button"
+                            >
+
+                                <img
+                                    src="./images/fridge.jpg"
+                                    alt="fridge"
+                                >
+
+                            </button>
+
+
+                            <button
+                                class="match-picture"
+                                data-match="vacuum-cleaner"
+                                type="button"
+                            >
+
+                                <img
+                                    src="./images/vacuum-cleaner.jpg"
+                                    alt="vacuum cleaner"
+                                >
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="matchFeedback"
+                        class="feedback"
+                    ></div>
+
+
+                    <div class="match-progress">
+
+                        <span>
+                            matched:
+                        </span>
+
+                        <strong id="matchCount">
+                            0 / 5
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 GRAMMAR
+            ================================== -->
+
+            <div class="accordion-section">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            🧠
+                        </span>
+
+                        <span>
+                            Grammar
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="grammar-box">
+
+                        <h3>
+                            Articles: a / an / the
+                        </h3>
+
+
+                        <p>
+                            We use <strong>a</strong> or
+                            <strong>an</strong> when we talk
+                            about one thing in general.
+                        </p>
+
+
+                        <div class="grammar-examples">
+
+                            <div>
+
+                                <span>
+                                    a
+                                </span>
+
+                                <p>
+                                    a washing machine
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    an
+                                </span>
+
+                                <p>
+                                    an air conditioner
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    the
+                                </span>
+
+                                <p>
+                                    the house
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <p class="grammar-note">
+                            💡 Use <strong>an</strong> before
+                            a vowel sound.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 TRANSCRIPT
+            ================================== -->
+
+            <div class="accordion-section">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            📝
+                        </span>
+
+                        <span>
+                            Transcript
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="transcript-box">
+
+                        <p>
+                            Hi, my name is Sarah and I will
+                            say 10 things about myself using
+                            articles "a" and "the" and I'll
+                            talk about what is in my house.
+                        </p>
+
+
+                        <p>
+                            Okay. I have a washing machine.
+                            I also have a fridge. I have a
+                            small stove. I want a bigger stove.
+                        </p>
+
+
+                        <p>
+                            I don't have an electric toaster.
+                            I do have a vacuum cleaner,
+                            and I have a TV.
+                        </p>
+
+
+                        <p>
+                            I have an air conditioner,
+                            and I have a microwave.
+                            I want another TV.
+                        </p>
+
+
+                        <p>
+                            So how about you? Can you say 10
+                            things using articles about things
+                            in your house?
+                        </p>
+
+
+                        <p>
+                            You should try!
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 QUESTIONS
+            ================================== -->
+
+            <div class="accordion-section">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            ❓
+                        </span>
+
+                        <span>
+                            Questions
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="quiz-topbar">
+
+                        <div>
+
+                            <span class="quiz-label">
+                                SCORE
+                            </span>
+
+                            <strong id="quizScore">
+                                0
+                            </strong>
+
+                            <span>
+                                / 5
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="quizMessage"
+                            class="quiz-message"
+                        >
+                            choose the best answer
+                        </div>
+
+                    </div>
+
+
+                    <div class="question-list">
+
+
+                        <div
+                            class="question-card"
+                            data-question="1"
+                        >
+
+                            <div class="question-number">
+                                01
+                            </div>
+
+
+                            <div class="question-content">
+
+                                <p class="question-text">
+                                    What does Sarah have
+                                    in her house?
+                                </p>
+
+
+                                <div class="answer-options">
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="true"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            A
+                                        </span>
+
+                                        <span>
+                                            A washing machine
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            B
+                                        </span>
+
+                                        <span>
+                                            A bicycle
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            C
+                                        </span>
+
+                                        <span>
+                                            A computer
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div
+                            class="question-card"
+                            data-question="2"
+                        >
+
+                            <div class="question-number">
+                                02
+                            </div>
+
+
+                            <div class="question-content">
+
+                                <p class="question-text">
+                                    What kind of stove
+                                    does Sarah have?
+                                </p>
+
+
+                                <div class="answer-options">
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="true"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            A
+                                        </span>
+
+                                        <span>
+                                            A small stove
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            B
+                                        </span>
+
+                                        <span>
+                                            A big stove
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            C
+                                        </span>
+
+                                        <span>
+                                            No stove
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div
+                            class="question-card"
+                            data-question="3"
+                        >
+
+                            <div class="question-number">
+                                03
+                            </div>
+
+
+                            <div class="question-content">
+
+                                <p class="question-text">
+                                    What doesn't Sarah have?
+                                </p>
+
+
+                                <div class="answer-options">
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="true"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            A
+                                        </span>
+
+                                        <span>
+                                            An electric toaster
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            B
+                                        </span>
+
+                                        <span>
+                                            A microwave
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            C
+                                        </span>
+
+                                        <span>
+                                            A TV
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div
+                            class="question-card"
+                            data-question="4"
+                        >
+
+                            <div class="question-number">
+                                04
+                            </div>
+
+
+                            <div class="question-content">
+
+                                <p class="question-text">
+                                    What does Sarah want?
+                                </p>
+
+
+                                <div class="answer-options">
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            A
+                                        </span>
+
+                                        <span>
+                                            A smaller stove
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="true"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            B
+                                        </span>
+
+                                        <span>
+                                            A bigger stove
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            C
+                                        </span>
+
+                                        <span>
+                                            A new fridge
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div
+                            class="question-card"
+                            data-question="5"
+                        >
+
+                            <div class="question-number">
+                                05
+                            </div>
+
+
+                            <div class="question-content">
+
+                                <p class="question-text">
+                                    How many things does
+                                    Sarah talk about?
+                                </p>
+
+
+                                <div class="answer-options">
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            A
+                                        </span>
+
+                                        <span>
+                                            Five
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="false"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            B
+                                        </span>
+
+                                        <span>
+                                            Eight
+                                        </span>
+
+                                    </button>
+
+
+                                    <button
+                                        class="answer-btn"
+                                        data-correct="true"
+                                        type="button"
+                                    >
+                                        <span class="option-letter">
+                                            C
+                                        </span>
+
+                                        <span>
+                                            Ten
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="quizFeedback"
+                        class="quiz-feedback"
+                    ></div>
+
+
+                    <div
+                        id="quizComplete"
+                        class="quiz-complete hidden"
+                    >
+
+                        🏆 Quiz complete!
+
+                        <strong>
+
+                            <span id="finalQuizScore">
+                                0
+                            </span>
+
+                            / 5
+
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 SPEAK & WRITE
+            ================================== -->
+
+            <div class="accordion-section">
+
+                <button
+                    class="accordion-header"
+                    type="button"
+                >
+
+                    <span class="accordion-left">
+
+                        <span class="accordion-icon">
+                            ✍️
+                        </span>
+
+                        <span>
+                            Speak &amp; Write
+                        </span>
+
+                    </span>
+
+
+                    <span class="accordion-arrow">
+                        +
+                    </span>
+
+                </button>
+
+
+                <div class="accordion-content">
+
+                    <div class="speak-box">
+
+
+                        <div class="speak-prompt">
+
+                            <span class="speak-big-icon">
+                                🏠
+                            </span>
+
+
+                            <div>
+
+                                <h3>
+                                    Your Turn!
+                                </h3>
+
+                                <p>
+                                    Write 10 things about
+                                    your house. Try to use
+                                    <strong>a</strong>,
+                                    <strong>an</strong>,
+                                    and
+                                    <strong>the</strong>.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div id="writingArea">
+
+                            <textarea
+                                id="speakAnswer"
+                                placeholder="Example: I have a TV. I have a fridge. I have an air conditioner..."
+                            ></textarea>
+
+
+                            <div class="speak-footer">
+
+                                <span id="wordCount">
+                                    0 words
+                                </span>
+
+
+                                <div class="speak-actions">
+
+                                    <button
+                                        id="clearAnswer"
+                                        type="button"
+                                        class="clear-btn"
+                                    >
+                                        Clear
+                                    </button>
+
+
+                                    <button
+                                        id="submitAnswer"
+                                        type="button"
+                                        class="submit-btn"
+                                    >
+                                        Submit ✓
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="speakFeedback"
+                                class="speak-feedback"
+                            ></div>
+
+                        </div>
+
+
+                        <div
+                            id="answerResult"
+                            class="answer-result hidden"
+                        >
+
+                            <div class="result-header">
+
+                                <div class="result-icon">
+                                    ✅
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Your Answer
+                                    </h3>
+
+                                    <p>
+                                        Nice work! Here is what
+                                        you wrote.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="submittedText"
+                                class="submitted-text"
+                            ></div>
+
+
+                            <div class="article-check">
+
+                                <h4>
+                                    Article Check
+                                </h4>
+
+
+                                <div class="article-results">
+
+                                    <div
+                                        id="aResult"
+                                        class="article-item"
+                                    >
+
+                                        <span>
+                                            a
+                                        </span>
+
+                                        <strong>
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div
+                                        id="anResult"
+                                        class="article-item"
+                                    >
+
+                                        <span>
+                                            an
+                                        </span>
+
+                                        <strong>
+                                            —
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div
+                                        id="theResult"
+                                        class="article-item"
+                                    >
+
+                                        <span>
+                                            the
+                                        </span>
+
+                                        <strong>
+                                            —
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                id="resultMessage"
+                                class="result-message"
+                            ></div>
+
+
+                            <button
+                                id="editAnswer"
+                                type="button"
+                                class="edit-btn"
+                            >
+                                ✏️ Edit Answer
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 FINISH
+            ================================== -->
+
+            <div class="finish-card">
+
+                <div>
+                    🏆
+                </div>
+
+                <h3>
+                    Great job!
+                </h3>
+
+                <p>
+                    You completed Sarah's House.
+                </p>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer>
+        Learning Arcade • Video Quest
+    </footer>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
