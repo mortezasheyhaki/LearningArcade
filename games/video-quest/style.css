@@ -3687,3 +3687,543 @@ body:not(.light-mode) footer {
     }
 
 }
+/* =====================================================
+   MOBILE — VIDEO QUEST
+   Supports 320px / 390px / 430px
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 0;
+        display: block;
+    }
+
+    .game-container {
+        width: 100%;
+        max-width: none;
+        min-height: 100vh;
+        border-radius: 0;
+    }
+
+    header {
+        padding: 14px 12px;
+        gap: 8px;
+    }
+
+    .brand {
+        font-size: 13px;
+    }
+
+    .header-actions {
+        gap: 5px;
+    }
+
+    .theme-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+        border-radius: 9px;
+    }
+
+    .back-btn {
+        min-width: 70px;
+        height: 34px;
+        padding: 0 10px;
+        font-size: 10px;
+        border-radius: 9px;
+    }
+
+
+    /* MAIN */
+
+    main {
+        min-height: auto;
+        padding: 22px 10px 35px;
+    }
+
+    .screen {
+        max-width: none;
+    }
+
+
+    /* WELCOME */
+
+    .quest-icon {
+        width: 76px;
+        height: 76px;
+        margin-bottom: 18px;
+        border-radius: 20px;
+        font-size: 36px;
+    }
+
+    h1 {
+        font-size: 43px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 25px;
+    }
+
+    .quest-info {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+        gap: 8px;
+        margin-bottom: 25px;
+    }
+
+    .info-card {
+        padding: 13px 10px;
+        border-radius: 13px;
+    }
+
+    .info-icon {
+        font-size: 20px;
+    }
+
+    .info-title {
+        font-size: 12px;
+    }
+
+    .info-text {
+        font-size: 10px;
+    }
+
+    .start-btn {
+        width: 100%;
+        max-width: 280px;
+        padding: 13px 20px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+
+    /* LEVELS */
+
+    .screen-title {
+        font-size: 27px;
+    }
+
+    .screen-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .level-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
+        gap: 9px;
+    }
+
+    .level-card {
+        min-height: 105px;
+        border-radius: 15px;
+    }
+
+    .level-icon {
+        font-size: 25px;
+    }
+
+    .level-name {
+        font-size: 19px;
+    }
+
+    .level-description {
+        font-size: 10px;
+    }
+
+
+    /* VIDEO SELECTION */
+
+    .video-card {
+        gap: 10px;
+        padding: 14px;
+        border-radius: 15px;
+    }
+
+    .video-number {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+
+    .video-card h3 {
+        font-size: 16px;
+    }
+
+    .video-card p {
+        font-size: 11px;
+    }
+
+    .video-arrow {
+        font-size: 19px;
+    }
+
+
+    /* LESSON */
+
+    .lesson-header h2 {
+        font-size: 27px;
+    }
+
+    .lesson-header p {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .lesson-badge {
+        font-size: 9px;
+        padding: 6px 9px;
+    }
+
+
+    /* ACCORDION */
+
+    .accordion-section {
+        margin-bottom: 8px;
+        border-radius: 13px;
+    }
+
+    .accordion-header {
+        padding: 13px 12px;
+        font-size: 13px;
+    }
+
+    .accordion-left {
+        gap: 8px;
+    }
+
+    .accordion-icon {
+        font-size: 17px;
+    }
+
+    .accordion-arrow {
+        font-size: 18px;
+    }
+
+
+    /* VIDEO */
+
+    .video-wrapper {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+    }
+
+    .video-tip {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+
+    /* VOCAB MATCHING */
+
+    .vocab-intro {
+        padding: 10px 8px 5px;
+    }
+
+    .vocab-intro h3 {
+        font-size: 15px;
+    }
+
+    .vocab-intro p {
+        font-size: 10px;
+    }
+
+    .matching-game {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 6px 7px;
+    }
+
+    .match-column {
+        max-width: 100%;
+        gap: 6px;
+    }
+
+    .match-column h4 {
+        font-size: 9px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: min(100%, 105px);
+        aspect-ratio: 1 / 1;
+        height: auto;
+    }
+
+    .match-word {
+        padding: 7px;
+        font-size: 10px;
+        border-radius: 10px;
+    }
+
+    .match-picture {
+        padding: 2px;
+        border-radius: 10px;
+    }
+
+    .match-picture img {
+        border-radius: 7px;
+    }
+
+    .match-word.selected {
+        transform: scale(1.03);
+    }
+
+    .match-word.selected::before {
+        width: 10px;
+        height: 10px;
+        top: 5px;
+        right: 5px;
+        border-width: 2px;
+    }
+
+
+    /* GRAMMAR */
+
+    .grammar-box {
+        padding: 15px;
+    }
+
+    .grammar-box h3 {
+        font-size: 17px;
+    }
+
+    .grammar-box > p {
+        font-size: 12px;
+        line-height: 1.55;
+    }
+
+    .grammar-examples {
+        grid-template-columns: 1fr;
+        gap: 7px;
+        margin: 13px 0;
+    }
+
+    .grammar-examples > div {
+        padding: 11px;
+        border-radius: 10px;
+    }
+
+
+    /* TRANSCRIPT */
+
+    .transcript-box {
+        margin: 10px;
+        padding: 14px;
+        max-height: 390px;
+        border-radius: 11px;
+    }
+
+    .transcript-box p {
+        font-size: 12px;
+        line-height: 1.7;
+        margin-bottom: 13px;
+    }
+
+
+    /* QUESTIONS */
+
+    .quiz-topbar {
+        margin: 10px;
+        padding: 11px 12px;
+        border-radius: 11px;
+    }
+
+    .quiz-topbar strong {
+        font-size: 17px;
+    }
+
+    .quiz-message {
+        font-size: 10px;
+    }
+
+    .question-list {
+        padding: 0 10px 6px;
+    }
+
+    .question-card {
+        grid-template-columns: 34px 1fr;
+        gap: 9px;
+        padding: 12px;
+        margin-bottom: 9px;
+        border-radius: 13px;
+    }
+
+    .question-number {
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        font-size: 10px;
+    }
+
+    .question-text {
+        font-size: 13px;
+        line-height: 1.45;
+        margin: 0 0 9px;
+    }
+
+    .answer-options {
+        gap: 6px;
+    }
+
+    .answer-btn {
+        min-height: 42px;
+        padding: 8px 9px;
+        border-radius: 9px;
+        gap: 7px;
+        font-size: 11px;
+    }
+
+    .option-letter {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        font-size: 9px;
+    }
+
+    .quiz-feedback {
+        min-height: 22px;
+        padding: 2px 10px 8px;
+        font-size: 11px;
+    }
+
+
+    /* SPEAK */
+
+    .speak-box {
+        padding: 12px;
+    }
+
+    .speak-prompt {
+        gap: 10px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .speak-big-icon {
+        font-size: 28px;
+    }
+
+    .speak-prompt h3 {
+        font-size: 16px;
+    }
+
+    .speak-prompt p {
+        font-size: 11px;
+    }
+
+    #speakAnswer {
+        min-height: 125px;
+        padding: 11px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 11px;
+    }
+
+    .speak-footer {
+        gap: 8px;
+    }
+
+    .speak-actions {
+        width: 100%;
+    }
+
+    .clear-btn,
+    .submit-btn {
+        flex: 1;
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+
+    /* RESULT */
+
+    .answer-result {
+        padding: 14px;
+        border-radius: 13px;
+    }
+
+    .result-header h3 {
+        font-size: 16px;
+    }
+
+    .result-header p {
+        font-size: 10px;
+    }
+
+    .submitted-text {
+        padding: 11px;
+        font-size: 11px;
+        line-height: 1.6;
+    }
+
+    .article-results {
+        grid-template-columns: 1fr;
+    }
+
+    .article-item {
+        padding: 8px;
+    }
+
+    .result-message {
+        font-size: 11px;
+    }
+
+    .edit-btn {
+        padding: 10px;
+    }
+
+
+    /* FINISH */
+
+    .finish-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .finish-card > div {
+        font-size: 27px;
+    }
+
+    .finish-card h3 {
+        font-size: 17px;
+    }
+
+    .finish-card p {
+        font-size: 11px;
+    }
+
+}
+
+
+@media (max-width: 340px) {
+
+    .matching-game {
+        gap: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: 92px;
+    }
+
+    .match-word {
+        font-size: 9px;
+    }
+
+    .question-card {
+        grid-template-columns: 30px 1fr;
+        padding: 10px;
+    }
+
+    .answer-btn {
+        font-size: 10px;
+    }
+
+}
