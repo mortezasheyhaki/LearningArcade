@@ -1,112 +1,232 @@
-/* =========================================
-   PLAYER DATA
-========================================= */
-
-let player = JSON.parse(
-    localStorage.getItem("learningArcadePlayer")
-);
+/* =====================================================
+   LEARNING ARCADE - MAIN SCRIPT
+===================================================== */
 
 
-/* =========================================
-   CREATE DEFAULT PLAYER
-========================================= */
+/* =====================================================
+   ELEMENTS
+===================================================== */
 
-if (!player) {
+const themeToggle =
+    document.getElementById("themeToggle");
 
-    player = {
+const arcadeNav =
+    document.querySelector(".arcade-nav");
 
-        name: "Guest Player",
+const navLinks =
+    document.querySelectorAll(".arcade-nav .nav-link");
 
-        xp: 0,
+const startPlayingButton =
+    document.getElementById("startPlayingButton");
 
-        gamesPlayed: 0,
+const playerButton =
+    document.getElementById("playerButton");
 
-        streak: 0,
+const playerModal =
+    document.getElementById("playerModal");
 
-        lastPlayed: null
+const modalClose =
+    document.getElementById("modalClose");
 
+const savePlayerButton =
+    document.getElementById("savePlayerButton");
+
+const playerNameInput =
+    document.getElementById("playerNameInput");
+
+
+/* =====================================================
+   PLAYER DISPLAY ELEMENTS
+===================================================== */
+
+const gamesPlayedStat =
+    document.getElementById("gamesPlayedStat");
+
+const xpStat =
+    document.getElementById("xpStat");
+
+const streakStat =
+    document.getElementById("streakStat");
+
+const playerNameStat =
+    document.getElementById("playerNameStat");
+
+const profileName =
+    document.getElementById("profileName");
+
+const profileMessage =
+    document.getElementById("profileMessage");
+
+const profileXP =
+    document.getElementById("profileXP");
+
+const profileGames =
+    document.getElementById("profileGames");
+
+const profileStreak =
+    document.getElementById("profileStreak");
+
+const leaderboardPlayer =
+    document.getElementById("leaderboardPlayer");
+
+
+/* =====================================================
+   LOCAL STORAGE KEYS
+===================================================== */
+
+const PLAYER_KEY =
+    "learningArcadePlayer";
+
+const THEME_KEY =
+    "learningArcadeTheme";
+
+
+/* =====================================================
+   DEFAULT PLAYER
+===================================================== */
+
+function getDefaultPlayer() {
+
+    return {
+
+        name:
+            "Guest Player",
+
+        xp:
+            0,
+
+        gamesPlayed:
+            0,
+
+        streak:
+            0,
+
+        lastPlayed:
+            null
     };
-
 }
 
 
-/* =========================================
-   SAVE PLAYER
-========================================= */
+/* =====================================================
+   LOAD PLAYER
+===================================================== */
 
-function savePlayer() {
+function loadPlayer() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                PLAYER_KEY
+            );
+
+
+        if (!saved) {
+            return getDefaultPlayer();
+        }
+
+
+        const player =
+            JSON.parse(saved);
+
+
+        return {
+            ...getDefaultPlayer(),
+            ...player
+        };
+
+    } catch (error) {
+
+        console.error(
+            "Could not load player:",
+            error
+        );
+
+        return getDefaultPlayer();
+    }
+}
+
+
+/* =====================================================
+   SAVE PLAYER
+===================================================== */
+
+function savePlayer(player) {
 
     localStorage.setItem(
-        "learningArcadePlayer",
+        PLAYER_KEY,
         JSON.stringify(player)
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    UPDATE PLAYER UI
-========================================= */
+===================================================== */
 
 function updatePlayerUI() {
 
-    const isGuest =
-        player.name === "Guest Player";
+    const player =
+        loadPlayer();
 
 
-    /* Quick stats */
-
-    document.getElementById(
-        "gamesPlayedStat"
-    ).textContent = player.gamesPlayed;
-
-
-    document.getElementById(
-        "xpStat"
-    ).textContent = player.xp;
+    const displayName =
+        player.name &&
+        player.name.trim()
+            ? player.name.trim()
+            : "Guest Player";
 
 
-    document.getElementById(
-        "streakStat"
-    ).textContent = player.streak;
+    gamesPlayedStat.textContent =
+        Number(
+            player.gamesPlayed || 0
+        ).toLocaleString();
 
 
-    document.getElementById(
-        "playerNameStat"
-    ).textContent = isGuest
-        ? "Guest"
-        : player.name;
+    xpStat.textContent =
+        Number(
+            player.xp || 0
+        ).toLocaleString();
 
 
-    /* Profile */
-
-    document.getElementById(
-        "profileName"
-    ).textContent = player.name;
-
-
-    document.getElementById(
-        "profileXP"
-    ).textContent = player.xp;
+    streakStat.textContent =
+        Number(
+            player.streak || 0
+        );
 
 
-    document.getElementById(
-        "profileGames"
-    ).textContent = player.gamesPlayed;
+    playerNameStat.textContent =
+        displayName === "Guest Player"
+            ? "Guest"
+            : displayName;
 
 
-    document.getElementById(
-        "profileStreak"
-    ).textContent = player.streak;
+    profileName.textContent =
+        displayName;
 
 
-    /* Profile message */
+    profileXP.textContent =
+        Number(
+            player.xp || 0
+        ).toLocaleString();
 
-    const profileMessage =
-        document.getElementById("profileMessage");
+
+    profileGames.textContent =
+        Number(
+            player.gamesPlayed || 0
+        );
 
 
-    if (isGuest) {
+    profileStreak.textContent =
+        Number(
+            player.streak || 0
+        );
+
+
+    if (
+        displayName ===
+        "Guest Player"
+    ) {
 
         profileMessage.textContent =
             "Enter your name to start your learning journey.";
@@ -114,142 +234,233 @@ function updatePlayerUI() {
     } else {
 
         profileMessage.textContent =
-            "Keep playing and build your English skills!";
+            "Keep playing and improving your English!";
 
     }
 
 
-    /* Button */
+    if (leaderboardPlayer) {
 
-    const playerButton =
-        document.getElementById("playerButton");
+        leaderboardPlayer.textContent =
+            displayName === "Guest Player"
+                ? "Your position"
+                : displayName;
+
+    }
 
 
-    if (isGuest) {
+    if (playerButton) {
 
         playerButton.textContent =
-            "SET PLAYER NAME";
+            displayName === "Guest Player"
+                ? "SET PLAYER NAME"
+                : "EDIT PLAYER NAME";
+
+    }
+
+}
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function applyTheme(theme) {
+
+    if (
+        theme === "light"
+    ) {
+
+        document.body.classList.add(
+            "light-mode"
+        );
+
+        themeToggle.textContent =
+            "🌙";
 
     } else {
 
-        playerButton.textContent =
-            "CHANGE NAME";
+        document.body.classList.remove(
+            "light-mode"
+        );
 
+        themeToggle.textContent =
+            "☀️";
     }
-
-
-    /* Avatar */
-
-    document.getElementById(
-        "profileAvatar"
-    ).textContent = isGuest
-        ? "👤"
-        : getPlayerInitial();
-
-
-    /* Leaderboard */
-
-    document.getElementById(
-        "leaderboardPlayer"
-    ).textContent = isGuest
-        ? "Your position"
-        : player.name;
 
 }
 
 
-/* =========================================
-   PLAYER INITIAL
-========================================= */
+function loadTheme() {
 
-function getPlayerInitial() {
+    const savedTheme =
+        localStorage.getItem(
+            THEME_KEY
+        );
 
-    if (!player.name) {
-        return "👤";
+
+    if (
+        savedTheme === "light"
+    ) {
+
+        applyTheme("light");
+
+    } else {
+
+        applyTheme("dark");
     }
-
-    return player.name
-        .trim()
-        .charAt(0)
-        .toUpperCase();
 
 }
 
 
-/* =========================================
-   OPEN PLAYER MODAL
-========================================= */
+themeToggle.addEventListener(
+    "click",
+    function () {
+
+        const lightMode =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+
+        const newTheme =
+            lightMode
+                ? "dark"
+                : "light";
+
+
+        applyTheme(
+            newTheme
+        );
+
+
+        localStorage.setItem(
+            THEME_KEY,
+            newTheme
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PLAYER MODAL
+===================================================== */
 
 function openPlayerModal() {
 
-    const modal =
-        document.getElementById("playerModal");
+    const player =
+        loadPlayer();
 
 
-    const input =
-        document.getElementById("playerNameInput");
-
-
-    input.value =
+    playerNameInput.value =
         player.name === "Guest Player"
             ? ""
             : player.name;
 
 
-    modal.classList.add("show");
+    playerModal.classList.add(
+        "show"
+    );
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        input.focus();
+            playerNameInput.focus();
 
-    }, 100);
+        },
+        100
+    );
 
 }
 
-
-/* =========================================
-   CLOSE PLAYER MODAL
-========================================= */
 
 function closePlayerModal() {
 
-    document
-        .getElementById("playerModal")
-        .classList.remove("show");
+    playerModal.classList.remove(
+        "show"
+    );
 
 }
 
 
-/* =========================================
+playerButton.addEventListener(
+    "click",
+    openPlayerModal
+);
+
+
+modalClose.addEventListener(
+    "click",
+    closePlayerModal
+);
+
+
+playerModal.addEventListener(
+    "click",
+    function (event) {
+
+        if (
+            event.target ===
+            playerModal
+        ) {
+
+            closePlayerModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    SAVE PLAYER NAME
-========================================= */
+===================================================== */
 
 function savePlayerName() {
 
-    const input =
-        document.getElementById("playerNameInput");
-
-
     const name =
-        input.value.trim();
+        playerNameInput.value.trim();
 
 
     if (!name) {
 
-        input.focus();
+        playerNameInput.focus();
 
-        input.style.borderColor = "#ff5c7a";
+        playerNameInput.classList.add(
+            "input-error"
+        );
+
+
+        setTimeout(
+            function () {
+
+                playerNameInput.classList.remove(
+                    "input-error"
+                );
+
+            },
+            500
+        );
+
 
         return;
-
     }
 
 
-    player.name = name;
+    const player =
+        loadPlayer();
 
 
-    savePlayer();
+    player.name =
+        name;
+
+
+    savePlayer(
+        player
+    );
+
 
     updatePlayerUI();
 
@@ -258,130 +469,205 @@ function savePlayerName() {
 }
 
 
-/* =========================================
-   ENTER KEY
-========================================= */
+savePlayerButton.addEventListener(
+    "click",
+    savePlayerName
+);
 
-document
-    .getElementById("playerNameInput")
-    .addEventListener("keydown", function(event) {
 
-        if (event.key === "Enter") {
+/* =====================================================
+   ENTER KEY IN NAME FIELD
+===================================================== */
+
+playerNameInput.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            event.preventDefault();
 
             savePlayerName();
 
         }
 
-    });
 
-
-/* =========================================
-   CLOSE MODAL BY CLICKING OUTSIDE
-========================================= */
-
-document
-    .getElementById("playerModal")
-    .addEventListener("click", function(event) {
-
-        if (event.target === this) {
+        if (
+            event.key ===
+            "Escape"
+        ) {
 
             closePlayerModal();
 
         }
 
-    });
+    }
+);
 
 
-/* =========================================
-   SCROLL
-========================================= */
+/* =====================================================
+   SCROLL TO SECTION
+===================================================== */
 
-function scrollToSection(sectionId) {
+function scrollToSection(
+    sectionId
+) {
 
     const section =
-        document.getElementById(sectionId);
-
-
-    if (section) {
-
-        section.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================================
-   OPEN GAME
-========================================= */
-
-function openGame(gameName) {
-
-    if (gameName === "match-rush") {
-
-        alert(
-            "Match Rush will be connected here next! 🎮"
+        document.getElementById(
+            sectionId
         );
 
+
+    if (!section) {
+        return;
     }
 
-}
 
+    section.scrollIntoView({
+        behavior:
+            "smooth",
 
-/* =========================================
-   LIGHT / DARK MODE
-========================================= */
-
-const themeToggle =
-    document.getElementById("themeToggle");
-
-
-const savedTheme =
-    localStorage.getItem("theme");
-
-
-if (savedTheme === "light") {
-
-    document.body.classList.add("light-mode");
-
-    themeToggle.textContent = "🌙";
+        block:
+            "start"
+    });
 
 }
 
 
-themeToggle.addEventListener(
+startPlayingButton.addEventListener(
     "click",
-    function() {
+    function () {
 
-        document.body.classList.toggle(
-            "light-mode"
+        scrollToSection(
+            "games"
         );
 
+    }
+);
 
-        const isLight =
-            document.body.classList.contains(
-                "light-mode"
+
+/* =====================================================
+   NAVIGATION LINKS
+===================================================== */
+
+navLinks.forEach(
+    function (link) {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                const sectionId =
+                    link.dataset.section;
+
+
+                if (sectionId) {
+
+                    scrollToSection(
+                        sectionId
+                    );
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ACTIVE NAVIGATION ON SCROLL
+===================================================== */
+
+const trackedSections = [
+    "home",
+    "games",
+    "leaderboard",
+    "profile"
+];
+
+
+const sectionObserver =
+    new IntersectionObserver(
+        function (entries) {
+
+            const visibleSections =
+                entries
+                    .filter(
+                        entry =>
+                            entry.isIntersecting
+                    )
+                    .sort(
+                        (
+                            a,
+                            b
+                        ) =>
+                            b.intersectionRatio -
+                            a.intersectionRatio
+                    );
+
+
+            if (
+                visibleSections.length ===
+                0
+            ) {
+                return;
+            }
+
+
+            const currentId =
+                visibleSections[0]
+                    .target
+                    .id;
+
+
+            navLinks.forEach(
+                function (link) {
+
+                    link.classList.toggle(
+                        "active",
+                        link.dataset.section ===
+                        currentId
+                    );
+
+                }
+            );
+
+        },
+        {
+            rootMargin:
+                "-20% 0px -55% 0px",
+
+            threshold:
+                [
+                    0,
+                    0.1,
+                    0.25,
+                    0.5,
+                    0.75
+                ]
+        }
+    );
+
+
+trackedSections.forEach(
+    function (sectionId) {
+
+        const section =
+            document.getElementById(
+                sectionId
             );
 
 
-        if (isLight) {
+        if (section) {
 
-            themeToggle.textContent = "🌙";
-
-            localStorage.setItem(
-                "theme",
-                "light"
-            );
-
-        } else {
-
-            themeToggle.textContent = "☀️";
-
-            localStorage.setItem(
-                "theme",
-                "dark"
+            sectionObserver.observe(
+                section
             );
 
         }
@@ -390,8 +676,222 @@ themeToggle.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
+   NAV SCROLL EFFECT
+   12px sustained movement
+   + 250ms cooldown
+===================================================== */
+
+let lastScrollY =
+    window.scrollY;
+
+let direction =
+    null;
+
+let directionStartY =
+    window.scrollY;
+
+let lastToggleTime =
+    0;
+
+
+const SCROLL_THRESHOLD =
+    12;
+
+
+const NAV_COOLDOWN =
+    250;
+
+
+window.addEventListener(
+    "scroll",
+    function () {
+
+        if (!arcadeNav) {
+            return;
+        }
+
+
+        const currentScrollY =
+            window.scrollY;
+
+
+        /* =============================================
+           ALWAYS SHOW FULL NAV NEAR TOP
+        ============================================== */
+
+        if (
+            currentScrollY <= 20
+        ) {
+
+            arcadeNav.classList.remove(
+                "nav-scrolled"
+            );
+
+
+            direction =
+                null;
+
+
+            directionStartY =
+                currentScrollY;
+
+
+            lastScrollY =
+                currentScrollY;
+
+
+            return;
+        }
+
+
+        const delta =
+            currentScrollY -
+            lastScrollY;
+
+
+        /*
+         * Ignore extremely tiny movements.
+         */
+
+        if (
+            Math.abs(delta) < 1
+        ) {
+
+            return;
+        }
+
+
+        const newDirection =
+            delta > 0
+                ? "down"
+                : "up";
+
+
+        /* =============================================
+           DIRECTION CHANGE
+        ============================================== */
+
+        if (
+            newDirection !==
+            direction
+        ) {
+
+            direction =
+                newDirection;
+
+
+            directionStartY =
+                currentScrollY;
+        }
+
+
+        /* =============================================
+           COOLDOWN
+        ============================================== */
+
+        const now =
+            performance.now();
+
+
+        const cooldownActive =
+            now -
+            lastToggleTime <
+            NAV_COOLDOWN;
+
+
+        if (
+            cooldownActive
+        ) {
+
+            lastScrollY =
+                currentScrollY;
+
+            return;
+        }
+
+
+        /* =============================================
+           SUSTAINED SCROLL DOWN
+        ============================================== */
+
+        if (
+            direction === "down" &&
+
+            currentScrollY -
+            directionStartY >=
+            SCROLL_THRESHOLD
+        ) {
+
+            if (
+                !arcadeNav.classList.contains(
+                    "nav-scrolled"
+                )
+            ) {
+
+                arcadeNav.classList.add(
+                    "nav-scrolled"
+                );
+
+
+                lastToggleTime =
+                    now;
+            }
+
+
+            directionStartY =
+                currentScrollY;
+        }
+
+
+        /* =============================================
+           SUSTAINED SCROLL UP
+        ============================================== */
+
+        if (
+            direction === "up" &&
+
+            directionStartY -
+            currentScrollY >=
+            SCROLL_THRESHOLD
+        ) {
+
+            if (
+                arcadeNav.classList.contains(
+                    "nav-scrolled"
+                )
+            ) {
+
+                arcadeNav.classList.remove(
+                    "nav-scrolled"
+                );
+
+
+                lastToggleTime =
+                    now;
+            }
+
+
+            directionStartY =
+                currentScrollY;
+        }
+
+
+        lastScrollY =
+            currentScrollY;
+
+    },
+    {
+        passive:
+            true
+    }
+);
+
+
+/* =====================================================
    INITIALIZE
-========================================= */
+===================================================== */
+
+loadTheme();
 
 updatePlayerUI();
