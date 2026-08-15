@@ -623,7 +623,7 @@ main {
 .grammar-card.selected::after {
 
     content:
-        "✓";
+        "âœ“";
 
     position:
         absolute;
@@ -1051,7 +1051,7 @@ main {
 .answer-button.correct::after {
 
     content:
-        "✓";
+        "âœ“";
 
     position:
         absolute;
@@ -1093,7 +1093,7 @@ main {
 .answer-button.wrong::after {
 
     content:
-        "✕";
+        "âœ•";
 
     position:
         absolute;
@@ -1778,7 +1778,7 @@ main {
 
 }
 /* =====================================================
-   MOBILE — GRAMMAR BATTLE
+   MOBILE â€” GRAMMAR BATTLE
    Supports 320px / 390px / 430px
 ===================================================== */
 
@@ -2030,4 +2030,26 @@ main {
         font-size: 9px;
     }
 
+}
+
+/* =====================================================
+   THERE IS / THERE ARE AVAILABLE CARD
+===================================================== */
+
+.grammar-card[data-grammar="there-is"] {
+    background:
+        linear-gradient(145deg,
+            rgba(78,203,255,0.06),
+            var(--bg-card)
+        );
+}
+
+.grammar-card[data-grammar="there-is"] .grammar-card-topic {
+    color:
+        var(--accent-two);
+}
+
+.grammar-card[data-grammar="there-is"]:hover:not(:disabled) {
+    border-color:
+        rgba(78,203,255,0.40);
 }
