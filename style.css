@@ -958,7 +958,7 @@ body.light-mode .badge {
 
 
 /* =====================================================
-   TAGS
+   GAME TAGS
 ===================================================== */
 
 .game-tags {
@@ -1175,7 +1175,7 @@ body.light-mode .badge {
 
 
 /* =====================================================
-   DASHBOARD / LEADERBOARD
+   DASHBOARD
 ===================================================== */
 
 .dashboard-section {
@@ -1250,14 +1250,12 @@ body.light-mode .badge {
 
 
 .leaderboard-row strong {
-
     color:
         #8e80ff;
 }
 
 
 .leaderboard-row.locked {
-
     color:
         #777e91;
 }
@@ -1542,12 +1540,14 @@ footer {
 
 
 .footer-brand span {
+
     font-size:
         11px;
 }
 
 
 footer p {
+
     font-size:
         12px;
 }
@@ -2244,7 +2244,7 @@ body.light-mode .player-modal input {
 
 
 /* =====================================================
-   MOBILE
+   TABLET
 ===================================================== */
 
 @media (max-width: 850px) {
@@ -2411,161 +2411,142 @@ body.light-mode .player-modal input {
 
 
 /* =====================================================
-   SMALL MOBILE
+   RESPONSIVE MOBILE BANNER
+   Scales with viewport width
 ===================================================== */
 
 @media (max-width: 600px) {
 
     .arcade-header {
 
+        /*
+         * Responsive height based on viewport width.
+         * Works naturally at 320 / 390 / 430px.
+         */
         height:
-            220px;
+            clamp(
+                190px,
+                56.25vw,
+                245px
+            );
+
+        background:
+            #050712;
     }
 
 
+    .arcade-banner {
+
+        position:
+            absolute;
+
+        inset:
+            0;
+
+        width:
+            100%;
+
+        height:
+            100%;
+
+        background-size:
+            cover;
+
+        background-position:
+            center center;
+
+        background-repeat:
+            no-repeat;
+    }
+
+
+    /* FLOATING NAV */
+
     .arcade-nav {
 
+        top:
+            10px;
+
+        width:
+            calc(100% - 16px);
+
+        justify-content:
+            center;
+
         gap:
-            4px;
+            3px;
 
         padding:
-            6px;
+            5px;
+
+        border-radius:
+            13px;
     }
 
 
     .arcade-nav .nav-link {
 
+        flex:
+            1;
+
+        min-height:
+            34px;
+
         padding:
-            0 8px;
+            0 6px;
+
+        border-radius:
+            8px;
 
         font-size:
-            10px;
-    }
+            9px;
 
-
-    .arcade-nav .nav-link.active::after {
-
-        bottom:
-            -4px;
-
-        width:
-            14px;
-
-        height:
-            2px;
+        white-space:
+            nowrap;
     }
 
 
     .arcade-nav .theme-toggle {
 
+        flex:
+            0 0 34px;
+
         width:
-            36px;
+            34px;
 
         height:
-            36px;
-    }
+            34px;
 
-}
-/* =====================================================
-   PHONE / MOBILE VERSION
-===================================================== */
+        font-size:
+            14px;
 
-@media (max-width: 600px) {
-
-    /* -----------------------------------------------
-       PAGE
-    ----------------------------------------------- */
-
-    body {
-        font-size: 14px;
+        border-radius:
+            8px;
     }
 
 
-    /* -----------------------------------------------
-       HEADER / BANNER
-    ----------------------------------------------- */
-
-    .arcade-header {
-        height: 220px;
-    }
-
-    .arcade-banner {
-        background-position: center center;
-    }
-
-
-    /* -----------------------------------------------
-       FLOATING NAV
-    ----------------------------------------------- */
-
-    .arcade-nav {
-        position: fixed;
-
-        top: 10px;
-        left: 50%;
-
-        width: calc(100% - 16px);
-
-        padding: 5px;
-
-        gap: 3px;
-
-        border-radius: 13px;
-
-        transform:
-            translateX(-50%)
-            scale(1);
-
-        overflow: hidden;
-    }
-
+    /* Keep scroll effect on mobile */
 
     .arcade-nav.nav-scrolled {
+
         transform:
             translateX(-50%)
             scale(0.94);
 
-        opacity: 0.76;
+        opacity:
+            0.76;
     }
 
 
-    .arcade-nav .nav-link {
-        flex: 1;
-
-        min-height: 34px;
-
-        padding: 0 6px;
-
-        border-radius: 8px;
-
-        font-size: 9px;
-
-        white-space: nowrap;
-    }
-
-
-    .arcade-nav .theme-toggle {
-        flex: 0 0 34px;
-
-        width: 34px;
-        height: 34px;
-
-        font-size: 14px;
-
-        border-radius: 8px;
-    }
-
-
-    /* -----------------------------------------------
-       HERO
-    ----------------------------------------------- */
+    /* HERO */
 
     .hero {
-        min-height: auto;
+
+        min-height:
+            auto;
 
         padding:
-            55px 20px
-            65px;
+            55px 20px 65px;
 
         display:
             block;
@@ -2576,12 +2557,14 @@ body.light-mode .player-modal input {
 
 
     .hero-content {
+
         max-width:
             100%;
     }
 
 
     .badge {
+
         font-size:
             9px;
 
@@ -2591,11 +2574,16 @@ body.light-mode .player-modal input {
 
 
     .hero h2 {
+
         margin-top:
             20px;
 
         font-size:
-            clamp(38px, 11vw, 52px);
+            clamp(
+                38px,
+                11vw,
+                52px
+            );
 
         line-height:
             1.02;
@@ -2606,6 +2594,7 @@ body.light-mode .player-modal input {
 
 
     .hero p {
+
         margin:
             22px auto 0;
 
@@ -2621,6 +2610,7 @@ body.light-mode .player-modal input {
 
 
     .primary-button {
+
         margin-top:
             25px;
 
@@ -2644,16 +2634,15 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       QUICK STATS
-    ----------------------------------------------- */
+    /* QUICK STATS */
 
     .stats-section {
+
         padding:
             18px 14px;
 
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(2,1fr);
 
         gap:
             10px;
@@ -2661,6 +2650,7 @@ body.light-mode .player-modal input {
 
 
     .stat-card {
+
         padding:
             14px 12px;
 
@@ -2673,6 +2663,7 @@ body.light-mode .player-modal input {
 
 
     .stat-icon {
+
         width:
             38px;
 
@@ -2691,12 +2682,14 @@ body.light-mode .player-modal input {
 
 
     .stat-card strong {
+
         font-size:
             17px;
     }
 
 
     .stat-card span {
+
         font-size:
             9px;
 
@@ -2705,17 +2698,17 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       GAMES SECTION
-    ----------------------------------------------- */
+    /* GAMES */
 
     .games-section {
+
         padding:
             50px 14px;
     }
 
 
     .section-heading {
+
         display:
             block;
 
@@ -2725,6 +2718,7 @@ body.light-mode .player-modal input {
 
 
     .section-label {
+
         font-size:
             9px;
 
@@ -2735,12 +2729,14 @@ body.light-mode .player-modal input {
 
     .section-heading h3,
     .about-section h3 {
+
         font-size:
             28px;
     }
 
 
     .section-heading p {
+
         margin-top:
             8px;
 
@@ -2753,6 +2749,7 @@ body.light-mode .player-modal input {
 
 
     .games-grid {
+
         grid-template-columns:
             1fr;
 
@@ -2761,11 +2758,10 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       GAME CARDS
-    ----------------------------------------------- */
+    /* GAME CARDS */
 
     .game-card {
+
         min-height:
             auto;
 
@@ -2777,7 +2773,15 @@ body.light-mode .player-modal input {
     }
 
 
+    .game-card:hover {
+
+        transform:
+            none;
+    }
+
+
     .game-icon {
+
         width:
             48px;
 
@@ -2793,6 +2797,7 @@ body.light-mode .player-modal input {
 
 
     .game-status {
+
         margin-top:
             15px;
 
@@ -2802,6 +2807,7 @@ body.light-mode .player-modal input {
 
 
     .game-info h4 {
+
         margin-top:
             6px;
 
@@ -2811,6 +2817,7 @@ body.light-mode .player-modal input {
 
 
     .game-info p {
+
         margin-top:
             7px;
 
@@ -2823,6 +2830,7 @@ body.light-mode .player-modal input {
 
 
     .game-tags {
+
         margin-top:
             11px;
 
@@ -2832,6 +2840,7 @@ body.light-mode .player-modal input {
 
 
     .game-tags span {
+
         padding:
             5px 7px;
 
@@ -2844,6 +2853,7 @@ body.light-mode .player-modal input {
 
 
     .game-button {
+
         width:
             100%;
 
@@ -2861,17 +2871,24 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       LEADERBOARD
-    ----------------------------------------------- */
+    .game-button:not(.disabled):hover {
+
+        transform:
+            none;
+    }
+
+
+    /* LEADERBOARD */
 
     .dashboard-section {
+
         padding:
             50px 14px;
     }
 
 
     .leaderboard-preview {
+
         margin-top:
             25px;
 
@@ -2881,6 +2898,7 @@ body.light-mode .player-modal input {
 
 
     .leaderboard-row {
+
         padding:
             14px;
 
@@ -2893,34 +2911,37 @@ body.light-mode .player-modal input {
 
 
     .rank {
+
         font-size:
             16px;
     }
 
 
     .player {
+
         font-size:
             12px;
     }
 
 
     .leaderboard-row strong {
+
         font-size:
             10px;
     }
 
 
-    /* -----------------------------------------------
-       PROFILE
-    ----------------------------------------------- */
+    /* PROFILE */
 
     .profile-section {
+
         padding:
             15px 14px 55px;
     }
 
 
     .profile-card {
+
         padding:
             25px 18px;
 
@@ -2939,6 +2960,7 @@ body.light-mode .player-modal input {
 
 
     .profile-avatar {
+
         width:
             68px;
 
@@ -2951,18 +2973,21 @@ body.light-mode .player-modal input {
 
 
     .profile-info h3 {
+
         font-size:
             22px;
     }
 
 
     .profile-info p {
+
         font-size:
             12px;
     }
 
 
     .profile-stats {
+
         width:
             100%;
 
@@ -2975,18 +3000,21 @@ body.light-mode .player-modal input {
 
 
     .profile-stats strong {
+
         font-size:
             18px;
     }
 
 
     .profile-stats span {
+
         font-size:
             9px;
     }
 
 
     .profile-button {
+
         width:
             100%;
 
@@ -2995,17 +3023,17 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       ABOUT
-    ----------------------------------------------- */
+    /* ABOUT */
 
     .about-section {
+
         padding:
             65px 20px;
     }
 
 
     .about-section p {
+
         font-size:
             14px;
 
@@ -3014,11 +3042,10 @@ body.light-mode .player-modal input {
     }
 
 
-    /* -----------------------------------------------
-       FOOTER
-    ----------------------------------------------- */
+    /* FOOTER */
 
     footer {
+
         padding:
             25px 15px;
 
@@ -3034,22 +3061,23 @@ body.light-mode .player-modal input {
 
 
     footer p {
+
         font-size:
             10px;
     }
 
 
-    /* -----------------------------------------------
-       MODAL
-    ----------------------------------------------- */
+    /* MODAL */
 
     .modal-overlay {
+
         padding:
             12px;
     }
 
 
     .player-modal {
+
         padding:
             30px 20px;
 
@@ -3059,6 +3087,7 @@ body.light-mode .player-modal input {
 
 
     .modal-icon {
+
         width:
             60px;
 
@@ -3074,36 +3103,82 @@ body.light-mode .player-modal input {
 
 
     .player-modal h3 {
+
         font-size:
             25px;
     }
 
 
     .player-modal p {
+
+        font-size:
+            13px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL PHONES
+===================================================== */
+
+@media (max-width: 360px) {
+
+    .arcade-nav .nav-link {
+
+        padding:
+            0 5px;
+
+        font-size:
+            8px;
+    }
+
+
+    .arcade-nav .theme-toggle {
+
+        flex:
+            0 0 32px;
+
+        width:
+            32px;
+
+        height:
+            32px;
+
         font-size:
             13px;
     }
 
 
-    /* -----------------------------------------------
-       REMOVE HOVER LIFT ON TOUCH DEVICES
-    ----------------------------------------------- */
+    .hero h2 {
 
-    .game-card:hover {
-        transform:
-            none;
+        font-size:
+            clamp(
+                34px,
+                10.8vw,
+                45px
+            );
     }
 
 
-    .game-button:not(.disabled):hover {
-        transform:
-            none;
+    .game-card {
+
+        padding:
+            17px;
     }
 
 
-    .primary-button:hover {
-        transform:
-            none;
+    .game-info h4 {
+
+        font-size:
+            20px;
+    }
+
+
+    .game-info p {
+
+        font-size:
+            11px;
     }
 
 }
