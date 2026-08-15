@@ -23,20 +23,23 @@
 <body>
 
 
-    <!-- =========================================
+    <!-- =================================================
          ARCADE HEADER / BANNER
-    ========================================== -->
+    ================================================== -->
 
     <header class="arcade-header">
 
         <div class="arcade-banner"></div>
 
 
+        <!-- FLOATING NAVIGATION -->
+
         <nav class="arcade-nav">
 
             <a
                 href="#home"
                 class="nav-link active"
+                data-section="home"
             >
                 Home
             </a>
@@ -45,6 +48,7 @@
             <a
                 href="#games"
                 class="nav-link"
+                data-section="games"
             >
                 Games
             </a>
@@ -53,6 +57,7 @@
             <a
                 href="#leaderboard"
                 class="nav-link"
+                data-section="leaderboard"
             >
                 Leaderboard
             </a>
@@ -61,6 +66,7 @@
             <a
                 href="#profile"
                 class="nav-link"
+                data-section="profile"
             >
                 Profile
             </a>
@@ -69,8 +75,9 @@
             <button
                 id="themeToggle"
                 class="theme-toggle"
-                aria-label="Toggle light and dark mode"
                 type="button"
+                aria-label="Toggle light and dark mode"
+                title="Toggle theme"
             >
                 ☀️
             </button>
@@ -81,14 +88,16 @@
 
 
 
-    <!-- =========================================
+    <!-- =================================================
          MAIN
-    ========================================== -->
+    ================================================== -->
 
     <main>
 
 
-        <!-- HERO -->
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
         <section
             id="home"
@@ -117,7 +126,7 @@
 
                 <button
                     class="primary-button"
-                    onclick="scrollToSection('games')"
+                    id="startPlayingButton"
                     type="button"
                 >
                     START PLAYING →
@@ -130,19 +139,25 @@
 
                 <div class="floating-card card-one">
                     🧠
-                    <span>Vocabulary</span>
+                    <span>
+                        Vocabulary
+                    </span>
                 </div>
 
 
                 <div class="floating-card card-two">
                     ⚡
-                    <span>Grammar</span>
+                    <span>
+                        Grammar
+                    </span>
                 </div>
 
 
                 <div class="floating-card card-three">
                     🏆
-                    <span>Challenge</span>
+                    <span>
+                        Challenge
+                    </span>
                 </div>
 
             </div>
@@ -151,9 +166,12 @@
 
 
 
-        <!-- QUICK STATS -->
+        <!-- =================================================
+             QUICK STATS
+        ================================================== -->
 
         <section class="stats-section">
+
 
             <div class="stat-card">
 
@@ -174,6 +192,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="stat-card">
@@ -197,6 +216,7 @@
             </div>
 
 
+
             <div class="stat-card">
 
                 <div class="stat-icon">
@@ -216,6 +236,7 @@
                 </div>
 
             </div>
+
 
 
             <div class="stat-card">
@@ -238,11 +259,14 @@
 
             </div>
 
+
         </section>
 
 
 
-        <!-- GAMES -->
+        <!-- =================================================
+             GAMES
+        ================================================== -->
 
         <section
             id="games"
@@ -257,6 +281,7 @@
                         ARCADE
                     </span>
 
+
                     <h3>
                         Choose Your Game
                     </h3>
@@ -269,6 +294,7 @@
                 </p>
 
             </div>
+
 
 
             <div class="games-grid">
@@ -712,7 +738,9 @@
 
 
 
-        <!-- LEADERBOARD -->
+        <!-- =================================================
+             LEADERBOARD
+        ================================================== -->
 
         <section
             id="leaderboard"
@@ -726,6 +754,7 @@
                     <span class="section-label">
                         COMPETE
                     </span>
+
 
                     <h3>
                         Leaderboard
@@ -742,6 +771,7 @@
 
 
             <div class="leaderboard-preview">
+
 
                 <div class="leaderboard-row">
 
@@ -813,13 +843,16 @@
 
                 </div>
 
+
             </div>
 
         </section>
 
 
 
-        <!-- PROFILE -->
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
 
         <section
             id="profile"
@@ -827,6 +860,7 @@
         >
 
             <div class="profile-card">
+
 
                 <div
                     class="profile-avatar"
@@ -857,6 +891,7 @@
 
 
                 <div class="profile-stats">
+
 
                     <div>
 
@@ -896,17 +931,18 @@
 
                     </div>
 
+
                 </div>
 
 
                 <button
                     id="playerButton"
                     class="profile-button"
-                    onclick="openPlayerModal()"
                     type="button"
                 >
                     SET PLAYER NAME
                 </button>
+
 
             </div>
 
@@ -914,7 +950,9 @@
 
 
 
-        <!-- ABOUT -->
+        <!-- =================================================
+             ABOUT
+        ================================================== -->
 
         <section
             id="about"
@@ -948,7 +986,9 @@
 
 
 
-    <!-- PLAYER MODAL -->
+    <!-- =================================================
+         PLAYER NAME MODAL
+    ================================================== -->
 
     <div
         id="playerModal"
@@ -957,10 +997,12 @@
 
         <div class="player-modal">
 
+
             <button
+                id="modalClose"
                 class="modal-close"
-                onclick="closePlayerModal()"
                 type="button"
+                aria-label="Close"
             >
                 ×
             </button>
@@ -997,12 +1039,13 @@
 
 
             <button
+                id="savePlayerButton"
                 class="primary-button modal-button"
-                onclick="savePlayerName()"
                 type="button"
             >
                 START MY PROFILE →
             </button>
+
 
         </div>
 
@@ -1010,9 +1053,12 @@
 
 
 
-    <!-- FOOTER -->
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
 
     <footer>
+
 
         <div class="footer-brand">
 
@@ -1030,6 +1076,7 @@
         <p>
             Learn English • Play • Improve
         </p>
+
 
     </footer>
 
