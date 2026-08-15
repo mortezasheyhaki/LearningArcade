@@ -129,19 +129,20 @@ body {
 .arcade-nav {
 
     position:
-        absolute;
+        fixed;
 
     top:
-        18px;
+        16px;
 
     left:
         50%;
 
     transform:
-        translateX(-50%);
+        translateX(-50%)
+        scale(1);
 
     z-index:
-        10;
+        9999;
 
     display:
         flex;
@@ -157,23 +158,68 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,0.14);
+        rgba(255,255,255,0.18);
 
     border-radius:
         15px;
 
     background:
-        rgba(5,7,18,0.58);
+        rgba(8,10,20,0.72);
 
     backdrop-filter:
-        blur(14px);
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
 
     box-shadow:
-        0 10px 35px
-        rgba(0,0,0,0.30);
+        0 12px 35px
+        rgba(0,0,0,0.30),
+
+        0 0 0 1px
+        rgba(255,255,255,0.04);
 
     white-space:
         nowrap;
+
+    transition:
+        transform 0.28s ease,
+        opacity 0.28s ease,
+        background 0.28s ease,
+        box-shadow 0.28s ease;
+}
+
+
+/* =====================================================
+   SCROLLED NAV STATE
+===================================================== */
+
+.arcade-nav.nav-scrolled {
+
+    transform:
+        translateX(-50%)
+        scale(0.92);
+
+    opacity:
+        0.78;
+
+    background:
+        rgba(5,7,18,0.42);
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,0.20);
+}
+
+
+.arcade-nav:not(.nav-scrolled) {
+
+    opacity:
+        1;
+
+    transform:
+        translateX(-50%)
+        scale(1);
 }
 
 
@@ -246,12 +292,12 @@ body {
     background:
         linear-gradient(
             135deg,
-            rgba(124,92,255,0.78),
-            rgba(78,203,255,0.42)
+            rgba(124,92,255,0.80),
+            rgba(78,203,255,0.45)
         );
 
     border-color:
-        rgba(255,255,255,0.18);
+        rgba(255,255,255,0.20);
 
     color:
         #ffffff;
@@ -442,6 +488,21 @@ body {
 }
 
 
+/* LIGHT MODE BADGE */
+
+body.light-mode .badge {
+
+    background:
+        rgba(99,102,241,0.10);
+
+    border-color:
+        rgba(79,70,229,0.22);
+
+    color:
+        #4338ca;
+}
+
+
 .hero h2 {
 
     margin-top:
@@ -459,6 +520,7 @@ body {
 
 
 .hero h2 span {
+
     color:
         #7c8cff;
 }
@@ -1113,7 +1175,7 @@ body {
 
 
 /* =====================================================
-   DASHBOARD
+   DASHBOARD / LEADERBOARD
 ===================================================== */
 
 .dashboard-section {
@@ -1480,14 +1542,12 @@ footer {
 
 
 .footer-brand span {
-
     font-size:
         11px;
 }
 
 
 footer p {
-
     font-size:
         12px;
 }
@@ -1804,14 +1864,28 @@ body.light-mode .arcade-banner {
 body.light-mode .arcade-nav {
 
     background:
-        rgba(255,255,255,0.68);
+        rgba(255,255,255,0.78);
 
     border-color:
-        rgba(255,255,255,0.45);
+        rgba(20,25,45,0.10);
 
     box-shadow:
-        0 10px 30px
-        rgba(0,0,0,0.16);
+        0 12px 35px
+        rgba(15,23,42,0.14);
+}
+
+
+body.light-mode .arcade-nav.nav-scrolled {
+
+    background:
+        rgba(255,255,255,0.55);
+
+    opacity:
+        0.78;
+
+    box-shadow:
+        0 8px 24px
+        rgba(15,23,42,0.10);
 }
 
 
@@ -1828,7 +1902,7 @@ body.light-mode .arcade-nav .nav-link:hover {
         #1e1b4b;
 
     background:
-        rgba(99,102,241,0.10);
+        rgba(99,102,241,0.08);
 
     border-color:
         rgba(99,102,241,0.14);
@@ -1848,7 +1922,7 @@ body.light-mode .arcade-nav .nav-link.active {
         );
 
     border-color:
-        rgba(255,255,255,0.24);
+        rgba(255,255,255,0.25);
 }
 
 
@@ -1861,7 +1935,7 @@ body.light-mode .arcade-nav .theme-toggle {
         #171a26;
 
     border-color:
-        rgba(255,255,255,0.45);
+        rgba(15,23,42,0.08);
 }
 
 
@@ -2381,22 +2455,14 @@ body.light-mode .player-modal input {
             2px;
     }
 
-}/* =====================================================
-   LIGHT MODE HERO BADGE
-===================================================== */
 
-body.light-mode .badge {
-    background:
-        rgba(99,102,241,0.10);
+    .arcade-nav .theme-toggle {
 
-    border-color:
-        rgba(79,70,229,0.22);
+        width:
+            36px;
 
-    color:
-        #4338ca;
-}
+        height:
+            36px;
+    }
 
-body.light-mode .badge::first-letter {
-    color:
-        #4f46e5;
 }
