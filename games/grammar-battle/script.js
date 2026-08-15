@@ -1,6 +1,7 @@
 /* =====================================================
    GRAMMAR BATTLE
    BE + COUNTRIES & NATIONALITIES
+   + THERE IS / THERE ARE
 ===================================================== */
 
 
@@ -15,12 +16,6 @@ const XP_PER_CORRECT = 10;
 
 /* =====================================================
    QUESTION BANK
-
-   5 Positive
-   5 Negative
-   5 Question + Answer
-
-   Every question has exactly ONE correct answer.
 ===================================================== */
 
 const questionBank = [
@@ -215,9 +210,6 @@ const questionBank = [
 
     /* =================================================
        QUESTION + SHORT ANSWER
-
-       The statement before the question makes
-       the correct answer unambiguous.
     ================================================= */
 
     {
@@ -402,7 +394,9 @@ const progressFill =
     );
 
 
-/* RESULTS */
+/* =====================================================
+   RESULTS
+===================================================== */
 
 const finalScore =
     document.getElementById(
@@ -443,6 +437,221 @@ const earnedXP =
     document.getElementById(
         "earnedXP"
     );
+
+
+/* =====================================================
+   GRAMMAR SELECTION
+===================================================== */
+
+let selectedGrammar =
+    "be";
+
+
+/*
+ * The existing HTML already contains the BE card.
+ * We add the new "There Is / There Are" card
+ * automatically with JavaScript.
+ */
+
+const grammarGrid =
+    document.querySelector(
+        ".grammar-grid"
+    );
+
+
+function createThereIsGrammarCard() {
+
+    if (
+        !grammarGrid
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Avoid creating the card twice.
+     */
+
+    if (
+        document.querySelector(
+            '[data-grammar="there-is"]'
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const card =
+        document.createElement(
+            "button"
+        );
+
+
+    card.type =
+        "button";
+
+
+    card.className =
+        "grammar-card";
+
+
+    card.dataset.grammar =
+        "there-is";
+
+
+    card.innerHTML = `
+
+        <span class="grammar-card-icon">
+            🏠
+        </span>
+
+
+        <span class="grammar-card-title">
+            There Is / There Are
+        </span>
+
+
+        <span class="grammar-card-text">
+            Positive • Negative • Questions
+        </span>
+
+
+        <span class="grammar-card-topic">
+            Rooms &amp; Places
+        </span>
+
+    `;
+
+
+    grammarGrid.appendChild(
+        card
+    );
+
+}
+
+
+/*
+ * Create the new grammar card.
+ */
+
+createThereIsGrammarCard();
+
+
+/* =====================================================
+   GRAMMAR CARD SELECTION
+===================================================== */
+
+function setupGrammarCards() {
+
+    const cards =
+        document.querySelectorAll(
+            ".grammar-card"
+        );
+
+
+    cards.forEach(
+        function (card) {
+
+            /*
+             * Locked cards remain disabled.
+             */
+
+            if (
+                card.disabled
+            ) {
+
+                return;
+
+            }
+
+
+            /*
+             * Existing BE card doesn't have
+             * data-grammar in the original HTML.
+             *
+             * The first available card is BE.
+             */
+
+            if (
+                !card.dataset.grammar
+            ) {
+
+                card.dataset.grammar =
+                    "be";
+
+            }
+
+
+            card.addEventListener(
+                "click",
+                function () {
+
+                    /*
+                     * Remove selected state
+                     * from all cards.
+                     */
+
+                    cards.forEach(
+                        function (item) {
+
+                            item.classList.remove(
+                                "selected"
+                            );
+
+                        }
+                    );
+
+
+                    /*
+                     * Select current card.
+                     */
+
+                    card.classList.add(
+                        "selected"
+                    );
+
+
+                    selectedGrammar =
+                        card.dataset.grammar;
+
+                }
+            );
+
+        }
+    );
+
+
+    /*
+     * Make sure BE is initially selected.
+     */
+
+    const beCard =
+        document.querySelector(
+            '[data-grammar="be"]'
+        );
+
+
+    if (
+        beCard
+    ) {
+
+        beCard.classList.add(
+            "selected"
+        );
+
+        selectedGrammar =
+            "be";
+
+    }
+
+}
+
+
+setupGrammarCards();
 
 
 /* =====================================================
@@ -507,6 +716,7 @@ function shuffle(array) {
 
 
     return result;
+
 }
 
 
@@ -579,20 +789,58 @@ loadTheme();
 
 
 /* =====================================================
-   BUTTONS
+   START BATTLE
 ===================================================== */
 
 startBattleButton.addEventListener(
     "click",
-    startBattle
+    function () {
+
+        /*
+         * THERE IS / THERE ARE
+         * opens the separate game.
+         *
+         * This path is relative to the current
+         * Grammar Battle folder.
+         */
+
+        if (
+            selectedGrammar ===
+            "there-is"
+        ) {
+
+            window.location.href =
+                "../grammar-there-is/index.html";
+
+            return;
+
+        }
+
+
+        /*
+         * BE continues to use the current
+         * built-in Grammar Battle.
+         */
+
+        startBattle();
+
+    }
 );
 
+
+/* =====================================================
+   RETRY
+===================================================== */
 
 retryButton.addEventListener(
     "click",
     startBattle
 );
 
+
+/* =====================================================
+   CHOOSE GRAMMAR
+===================================================== */
 
 grammarButton.addEventListener(
     "click",
@@ -611,7 +859,7 @@ grammarButton.addEventListener(
 
 
 /* =====================================================
-   START BATTLE
+   START BE BATTLE
 ===================================================== */
 
 function startBattle() {
@@ -710,6 +958,7 @@ function setQuestionType(
             "Choose the correct BE verb.";
 
         return;
+
     }
 
 
@@ -724,6 +973,7 @@ function setQuestionType(
             "Choose the correct negative form.";
 
         return;
+
     }
 
 
@@ -755,7 +1005,9 @@ function showQuestion() {
 
 
     const question =
-        questions[currentQuestion];
+        questions[
+            currentQuestion
+        ];
 
 
     setQuestionType(
@@ -858,7 +1110,9 @@ function checkAnswer(
     if (
         !gameActive
     ) {
+
         return;
+
     }
 
 
@@ -921,7 +1175,10 @@ function handleCorrect(
 
     const points =
         10 +
-        ((combo - 1) * 5);
+        (
+            (combo - 1) *
+            5
+        );
 
 
     score +=
@@ -1004,7 +1261,8 @@ function handleWrong(
 
     wrongAnswers++;
 
-    combo = 0;
+    combo =
+        0;
 
 
     selectedButton.classList.add(
@@ -1066,7 +1324,8 @@ function handleWrong(
 
 function finishBattle() {
 
-    gameActive = false;
+    gameActive =
+        false;
 
 
     const accuracy =
