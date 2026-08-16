@@ -1002,9 +1002,22 @@ function saveArcadeProgress(
             .toISOString()
             .split("T")[0];
 
+    const yesterday =
+        new Date(
+            Date.now() - 86400000
+        )
+            .toISOString()
+            .split("T")[0];
+
 
     if (
-        player.lastPlayed !== today
+        player.lastPlayed === today
+    ) {
+
+        // already played today, streak unchanged
+
+    } else if (
+        player.lastPlayed === yesterday
     ) {
 
         player.streak =
@@ -1012,6 +1025,12 @@ function saveArcadeProgress(
                 player.streak || 0
             ) + 1;
 
+        player.lastPlayed =
+            today;
+
+    } else {
+
+        player.streak = 1;
 
         player.lastPlayed =
             today;
@@ -1019,10 +1038,21 @@ function saveArcadeProgress(
     }
 
 
-    localStorage.setItem(
-        "learningArcadePlayer",
-        JSON.stringify(player)
-    );
+    try {
+
+        localStorage.setItem(
+            "learningArcadePlayer",
+            JSON.stringify(player)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save progress:",
+            error
+        );
+
+    }
 
 }
 
@@ -1093,10 +1123,25 @@ function loadTheme() {
     }
 
 
-    const savedTheme =
-        localStorage.getItem(
-            "multipleChoiceTheme"
+    let savedTheme = null;
+
+    try {
+
+        savedTheme =
+            localStorage.getItem(
+                "learningArcadeTheme"
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load theme:",
+            error
         );
+
+        savedTheme = null;
+
+    }
 
 
     if (
@@ -1138,12 +1183,23 @@ if (themeToggle) {
                 );
 
 
-            localStorage.setItem(
-                "multipleChoiceTheme",
-                lightMode
-                    ? "light"
-                    : "dark"
-            );
+            try {
+
+                localStorage.setItem(
+                    "learningArcadeTheme",
+                    lightMode
+                        ? "light"
+                        : "dark"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Could not save theme:",
+                    error
+                );
+
+            }
 
 
             themeToggle.textContent =
