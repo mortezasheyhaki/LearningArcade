@@ -1,7 +1,6 @@
 /* =====================================================
    GRAMMAR BATTLE
    BE + COUNTRIES & NATIONALITIES
-   + THERE IS / THERE ARE
 ===================================================== */
 
 
@@ -16,6 +15,12 @@ const XP_PER_CORRECT = 10;
 
 /* =====================================================
    QUESTION BANK
+
+   5 Positive
+   5 Negative
+   5 Question + Answer
+
+   Every question has exactly ONE correct answer.
 ===================================================== */
 
 const questionBank = [
@@ -210,6 +215,9 @@ const questionBank = [
 
     /* =================================================
        QUESTION + SHORT ANSWER
+
+       The statement before the question makes
+       the correct answer unambiguous.
     ================================================= */
 
     {
@@ -338,6 +346,11 @@ const grammarButton =
         "grammarButton"
     );
 
+const grammarBackButton =
+    document.getElementById(
+        "grammarBackButton"
+    );
+
 const themeToggle =
     document.getElementById(
         "themeToggle"
@@ -394,9 +407,7 @@ const progressFill =
     );
 
 
-/* =====================================================
-   RESULTS
-===================================================== */
+/* RESULTS */
 
 const finalScore =
     document.getElementById(
@@ -437,221 +448,6 @@ const earnedXP =
     document.getElementById(
         "earnedXP"
     );
-
-
-/* =====================================================
-   GRAMMAR SELECTION
-===================================================== */
-
-let selectedGrammar =
-    "be";
-
-
-/*
- * The existing HTML already contains the BE card.
- * We add the new "There Is / There Are" card
- * automatically with JavaScript.
- */
-
-const grammarGrid =
-    document.querySelector(
-        ".grammar-grid"
-    );
-
-
-function createThereIsGrammarCard() {
-
-    if (
-        !grammarGrid
-    ) {
-
-        return;
-
-    }
-
-
-    /*
-     * Avoid creating the card twice.
-     */
-
-    if (
-        document.querySelector(
-            '[data-grammar="there-is"]'
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    const card =
-        document.createElement(
-            "button"
-        );
-
-
-    card.type =
-        "button";
-
-
-    card.className =
-        "grammar-card";
-
-
-    card.dataset.grammar =
-        "there-is";
-
-
-    card.innerHTML = `
-
-        <span class="grammar-card-icon">
-            🏠
-        </span>
-
-
-        <span class="grammar-card-title">
-            There Is / There Are
-        </span>
-
-
-        <span class="grammar-card-text">
-            Positive • Negative • Questions
-        </span>
-
-
-        <span class="grammar-card-topic">
-            Rooms &amp; Places
-        </span>
-
-    `;
-
-
-    grammarGrid.appendChild(
-        card
-    );
-
-}
-
-
-/*
- * Create the new grammar card.
- */
-
-createThereIsGrammarCard();
-
-
-/* =====================================================
-   GRAMMAR CARD SELECTION
-===================================================== */
-
-function setupGrammarCards() {
-
-    const cards =
-        document.querySelectorAll(
-            ".grammar-card"
-        );
-
-
-    cards.forEach(
-        function (card) {
-
-            /*
-             * Locked cards remain disabled.
-             */
-
-            if (
-                card.disabled
-            ) {
-
-                return;
-
-            }
-
-
-            /*
-             * Existing BE card doesn't have
-             * data-grammar in the original HTML.
-             *
-             * The first available card is BE.
-             */
-
-            if (
-                !card.dataset.grammar
-            ) {
-
-                card.dataset.grammar =
-                    "be";
-
-            }
-
-
-            card.addEventListener(
-                "click",
-                function () {
-
-                    /*
-                     * Remove selected state
-                     * from all cards.
-                     */
-
-                    cards.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "selected"
-                            );
-
-                        }
-                    );
-
-
-                    /*
-                     * Select current card.
-                     */
-
-                    card.classList.add(
-                        "selected"
-                    );
-
-
-                    selectedGrammar =
-                        card.dataset.grammar;
-
-                }
-            );
-
-        }
-    );
-
-
-    /*
-     * Make sure BE is initially selected.
-     */
-
-    const beCard =
-        document.querySelector(
-            '[data-grammar="be"]'
-        );
-
-
-    if (
-        beCard
-    ) {
-
-        beCard.classList.add(
-            "selected"
-        );
-
-        selectedGrammar =
-            "be";
-
-    }
-
-}
-
-
-setupGrammarCards();
 
 
 /* =====================================================
@@ -716,7 +512,6 @@ function shuffle(array) {
 
 
     return result;
-
 }
 
 
@@ -726,10 +521,25 @@ function shuffle(array) {
 
 function loadTheme() {
 
-    const saved =
-        localStorage.getItem(
-            "learningArcadeTheme"
+    let saved = null;
+
+    try {
+
+        saved =
+            localStorage.getItem(
+                "learningArcadeTheme"
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load theme:",
+            error
         );
+
+        saved = null;
+
+    }
 
 
     if (
@@ -768,12 +578,23 @@ themeToggle.addEventListener(
             );
 
 
-        localStorage.setItem(
-            "learningArcadeTheme",
-            isLight
-                ? "light"
-                : "dark"
-        );
+        try {
+
+            localStorage.setItem(
+                "learningArcadeTheme",
+                isLight
+                    ? "light"
+                    : "dark"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save theme:",
+                error
+            );
+
+        }
 
 
         themeToggle.textContent =
@@ -788,49 +609,145 @@ themeToggle.addEventListener(
 loadTheme();
 
 
+
+
 /* =====================================================
-   START BATTLE
+   GRAMMAR SELECTION
 ===================================================== */
 
-startBattleButton.addEventListener(
-    "click",
-    function () {
+const grammarCards =
+    [
+        ...document.querySelectorAll(
+            ".grammar-card:not(.locked)"
+        )
+    ];
 
-        /*
-         * THERE IS / THERE ARE
-         * opens the separate game.
-         *
-         * This path is relative to the current
-         * Grammar Battle folder.
-         */
-
-        if (
-            selectedGrammar ===
-            "there-is"
-        ) {
-
-            window.location.href =
-                "../grammar-there-is/index.html";
-
-            return;
-
-        }
+let selectedGrammar = "be";
 
 
-        /*
-         * BE continues to use the current
-         * built-in Grammar Battle.
-         */
+function showGrammarBackButton() {
 
-        startBattle();
+    if (!grammarBackButton) {
+        return;
+    }
+
+    grammarBackButton.classList.remove(
+        "hidden-nav-button"
+    );
+
+}
+
+
+function hideGrammarBackButton() {
+
+    if (!grammarBackButton) {
+        return;
+    }
+
+    grammarBackButton.classList.add(
+        "hidden-nav-button"
+    );
+
+}
+
+
+grammarCards.forEach(
+    function (card) {
+
+        card.addEventListener(
+            "click",
+            function () {
+
+                grammarCards.forEach(
+                    function (item) {
+
+                        item.classList.remove(
+                            "selected"
+                        );
+
+                    }
+                );
+
+
+                card.classList.add(
+                    "selected"
+                );
+
+
+                selectedGrammar =
+                    card.dataset.grammar ||
+                    "be";
+
+
+                if (
+                    selectedGrammar ===
+                    "be"
+                ) {
+
+                    showGrammarBackButton();
+
+                }
+
+                else {
+
+                    hideGrammarBackButton();
+
+                }
+
+
+                const headerSubtitle =
+                    document.querySelector(
+                        ".game-title-text p"
+                    );
+
+
+                if (headerSubtitle) {
+
+                    if (
+                        selectedGrammar ===
+                        "simple-present"
+                    ) {
+
+                        headerSubtitle.textContent =
+                            "Simple Present • A1 Grammar";
+
+                    }
+
+                    else if (
+                        selectedGrammar ===
+                        "there-is"
+                    ) {
+
+                        headerSubtitle.textContent =
+                            "There Is / There Are • A1 Grammar";
+
+                    }
+
+                    else {
+
+                        headerSubtitle.textContent =
+                            "BE • Countries & Nationalities";
+
+                    }
+
+                }
+
+            }
+        );
 
     }
 );
 
 
 /* =====================================================
-   RETRY
+   BUTTONS
 ===================================================== */
+
+startBattleButton.addEventListener(
+    "click",
+    startBattle
+);
+
 
 retryButton.addEventListener(
     "click",
@@ -838,13 +755,16 @@ retryButton.addEventListener(
 );
 
 
-/* =====================================================
-   CHOOSE GRAMMAR
-===================================================== */
-
 grammarButton.addEventListener(
     "click",
     function () {
+
+        gameActive =
+            false;
+
+        gameScreen.classList.add(
+            "hidden"
+        );
 
         resultScreen.classList.add(
             "hidden"
@@ -854,15 +774,60 @@ grammarButton.addEventListener(
             "hidden"
         );
 
+        hideGrammarBackButton();
+
     }
 );
 
 
+if (grammarBackButton) {
+
+    grammarBackButton.addEventListener(
+        "click",
+        function () {
+
+            gameActive =
+                false;
+
+            gameScreen.classList.add(
+                "hidden"
+            );
+
+            resultScreen.classList.add(
+                "hidden"
+            );
+
+            targetScreen.classList.remove(
+                "hidden"
+            );
+
+            hideGrammarBackButton();
+
+        }
+    );
+
+}
+
+hideGrammarBackButton();
+
+
 /* =====================================================
-   START BE BATTLE
+   START BATTLE
 ===================================================== */
 
 function startBattle() {
+
+    if (selectedGrammar === "simple-present") {
+        window.location.href = "../simple-present/index.html";
+        return;
+    }
+
+    if (selectedGrammar === "there-is") {
+        window.location.href = "../grammar-there-is/index.html";
+        return;
+    }
+
+    showGrammarBackButton();
 
     questions =
         shuffle(
@@ -958,7 +923,6 @@ function setQuestionType(
             "Choose the correct BE verb.";
 
         return;
-
     }
 
 
@@ -973,7 +937,6 @@ function setQuestionType(
             "Choose the correct negative form.";
 
         return;
-
     }
 
 
@@ -1005,9 +968,7 @@ function showQuestion() {
 
 
     const question =
-        questions[
-            currentQuestion
-        ];
+        questions[currentQuestion];
 
 
     setQuestionType(
@@ -1110,9 +1071,7 @@ function checkAnswer(
     if (
         !gameActive
     ) {
-
         return;
-
     }
 
 
@@ -1175,10 +1134,7 @@ function handleCorrect(
 
     const points =
         10 +
-        (
-            (combo - 1) *
-            5
-        );
+        ((combo - 1) * 5);
 
 
     score +=
@@ -1239,6 +1195,10 @@ function handleCorrect(
     setTimeout(
         function () {
 
+            if (!gameActive) {
+                return;
+            }
+
             currentQuestion++;
 
             showQuestion();
@@ -1261,8 +1221,7 @@ function handleWrong(
 
     wrongAnswers++;
 
-    combo =
-        0;
+    combo = 0;
 
 
     selectedButton.classList.add(
@@ -1307,6 +1266,10 @@ function handleWrong(
     setTimeout(
         function () {
 
+            if (!gameActive) {
+                return;
+            }
+
             currentQuestion++;
 
             showQuestion();
@@ -1324,8 +1287,7 @@ function handleWrong(
 
 function finishBattle() {
 
-    gameActive =
-        false;
+    gameActive = false;
 
 
     const accuracy =
@@ -1387,6 +1349,8 @@ function finishBattle() {
     saveProgress(
         xp
     );
+
+    showGrammarBackButton();
 
 
     gameScreen.classList.add(
@@ -1474,10 +1438,22 @@ function saveProgress(
             .toISOString()
             .split("T")[0];
 
+    const yesterday =
+        new Date(
+            Date.now() - 86400000
+        )
+            .toISOString()
+            .split("T")[0];
+
 
     if (
-        player.lastPlayed !==
-        today
+        player.lastPlayed === today
+    ) {
+
+        // already played today, streak unchanged
+
+    } else if (
+        player.lastPlayed === yesterday
     ) {
 
         player.streak =
@@ -1488,14 +1464,32 @@ function saveProgress(
         player.lastPlayed =
             today;
 
+    } else {
+
+        player.streak = 1;
+
+        player.lastPlayed =
+            today;
+
     }
 
 
-    localStorage.setItem(
-        "learningArcadePlayer",
-        JSON.stringify(
-            player
-        )
-    );
+    try {
+
+        localStorage.setItem(
+            "learningArcadePlayer",
+            JSON.stringify(
+                player
+            )
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save progress:",
+            error
+        );
+
+    }
 
 }
