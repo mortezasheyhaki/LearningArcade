@@ -113,29 +113,24 @@ body:not(.light-mode) {
 
 .game-header {
 
-    height:
-        76px;
+    height: 76px;
 
-    padding:
-        0 26px;
+    padding: 0 26px;
 
-    display:
-        grid;
+    display: grid;
 
     grid-template-columns:
-        1fr auto 1fr;
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
 
-    align-items:
-        center;
+    align-items: center;
 
-    position:
-        sticky;
+    position: sticky;
 
-    top:
-        0;
+    top: 0;
 
-    z-index:
-        100;
+    z-index: 100;
 
     background:
         rgba(255,255,255,0.94);
@@ -155,97 +150,136 @@ body:not(.light-mode) .game-header {
 }
 
 
-.back-button {
+.header-left {
 
-    justify-self:
-        start;
+    min-width: 0;
 
-    display:
-        inline-flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: flex-start;
 
-    height:
-        42px;
+    gap: 8px;
 
-    padding:
-        0 16px;
+    overflow: hidden;
 
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        12px;
-
-    background:
-        var(--bg-card);
-
-    color:
-        var(--text-main);
-
-    text-decoration:
-        none;
-
-    font-size:
-        13px;
-
-    font-weight:
-        700;
-
-    transition:
-        all 0.2s ease;
+    white-space: nowrap;
 }
 
 
-.back-button:hover {
+.back-button,
+.arcade-button {
 
-    transform:
-        translateY(-1px);
+    display: inline-flex;
 
-    background:
-        var(--bg-card-hover);
+    align-items: center;
 
-    border-color:
-        rgba(124,92,255,0.30);
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--bg-card);
+
+    color: var(--text-main);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.back-button:hover,
+.arcade-button:hover {
+
+    transform: translateY(-1px);
+
+    background: var(--bg-card-hover);
+
+    border-color: rgba(124,92,255,0.30);
+}
+
+
+.back-button:focus-visible,
+.arcade-button:focus-visible {
+
+    outline: 3px solid rgba(124,92,255,0.28);
+
+    outline-offset: 2px;
+}
+
+
+.hidden-nav-button {
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.arcade-button {
+
+    color: var(--text-muted);
+
+    font-size: 11px;
 }
 
 
 .game-title {
 
-    display:
-        flex;
+    min-width: 0;
 
-    align-items:
-        center;
+    display: flex;
 
-    gap:
-        11px;
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    overflow: hidden;
+
+    text-align: center;
 }
 
 
 .game-icon {
 
-    width:
-        44px;
+    width: 44px;
 
-    height:
-        44px;
+    height: 44px;
 
-    border-radius:
-        12px;
+    flex: 0 0 44px;
 
-    display:
-        flex;
+    border-radius: 12px;
 
-    align-items:
-        center;
+    display: flex;
 
-    justify-content:
-        center;
+    align-items: center;
+
+    justify-content: center;
 
     background:
         linear-gradient(
@@ -254,90 +288,99 @@ body:not(.light-mode) .game-header {
             var(--accent-two)
         );
 
-    color:
-        white;
+    color: white;
 
-    font-size:
-        23px;
+    font-size: 23px;
+}
+
+
+.game-title-text {
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-align: left;
 }
 
 
 .game-title-text h1 {
 
-    font-size:
-        19px;
+    max-width: 100%;
 
-    line-height:
-        1.1;
+    overflow: hidden;
 
-    font-weight:
-        800;
+    text-overflow: ellipsis;
 
-    color:
-        var(--text-main);
+    white-space: nowrap;
+
+    font-size: 19px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    color: var(--text-main);
 }
 
 
 .game-title-text p {
 
-    margin-top:
-        3px;
+    margin-top: 3px;
 
-    color:
-        var(--text-muted);
+    max-width: 100%;
 
-    font-size:
-        11px;
+    overflow: hidden;
 
-    font-weight:
-        600;
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 600;
 }
 
 
 .header-right {
 
-    justify-self:
-        end;
+    min-width: 0;
 
-    display:
-        flex;
+    justify-self: end;
 
-    align-items:
-        center;
+    display: flex;
 
-    gap:
-        9px;
+    align-items: center;
+
+    gap: 9px;
 }
 
 
 .theme-toggle {
 
-    width:
-        42px;
+    width: 42px;
 
-    height:
-        42px;
+    height: 42px;
 
-    border:
-        1px solid var(--border);
+    flex: 0 0 42px;
 
-    border-radius:
-        12px;
+    border: 1px solid var(--border);
 
-    background:
-        var(--bg-card);
+    border-radius: 12px;
 
-    color:
-        var(--text-main);
+    background: var(--bg-card);
 
-    font-size:
-        18px;
+    color: var(--text-main);
 
-    cursor:
-        pointer;
+    font-size: 18px;
+
+    cursor: pointer;
 
     transition:
-        all 0.2s ease;
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
 
@@ -349,6 +392,14 @@ body:not(.light-mode) .game-header {
 
     background:
         rgba(124,92,255,0.10);
+}
+
+
+.theme-toggle:focus-visible {
+
+    outline: 3px solid rgba(124,92,255,0.28);
+
+    outline-offset: 2px;
 }
 
 
@@ -1603,196 +1654,222 @@ main {
 }
 
 
-
-
 /* =====================================================
-   PHONE TIER — Grammar Battle
-   Uses the actual Grammar Battle DOM classes.
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+
+    main {
+        padding:
+            25px 13px 40px;
+    }
+
+
+    .selection-card {
+
+        padding:
+            30px 18px;
+
+        margin:
+            10px auto;
+    }
+
+
+    .selection-card h2 {
+        font-size:
+            31px;
+    }
+
+
+    .grammar-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .score-bar {
+        gap:
+            8px;
+    }
+
+
+    .score-item {
+        padding:
+            11px 5px;
+    }
+
+
+    .score-item strong {
+        font-size:
+            19px;
+    }
+
+
+    .question-area {
+
+        padding:
+            35px 0 25px;
+    }
+
+
+    .question-area h2 {
+
+        font-size:
+            28px;
+    }
+
+
+    .answers-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+    }
+
+
+    .answer-button {
+
+        min-height:
+            72px;
+
+        font-size:
+            17px;
+    }
+
+
+    .result-card {
+
+        padding:
+            32px 18px;
+    }
+
+
+    .result-card h2 {
+
+        font-size:
+            31px;
+    }
+
+}
+/* =====================================================
+   MOBILE — GRAMMAR BATTLE
+   Supports 320px / 390px / 430px
 ===================================================== */
 
 @media (max-width: 600px) {
 
-    html,
     body {
-        width: 100%;
-        min-width: 0;
-    }
-
-    body {
+        padding: 0;
         overflow-x: hidden;
     }
 
-    .game-header {
-        height: 62px;
-        padding: 0 10px;
-        grid-template-columns: auto minmax(0, 1fr) auto;
-        gap: 8px;
-    }
 
-    .back-button {
-        height: 34px;
-        padding: 0 9px;
-        border-radius: 9px;
-        font-size: 10px;
-        white-space: nowrap;
-    }
-
-    .game-title {
-        min-width: 0;
-        gap: 7px;
-        justify-self: center;
-    }
-
-    .game-icon {
-        width: 30px;
-        height: 30px;
-        flex: 0 0 30px;
-        border-radius: 9px;
-        font-size: 15px;
-    }
-
-    .game-title-text {
-        min-width: 0;
-    }
-
-    .game-title-text h1 {
-        font-size: 14px;
-        white-space: nowrap;
-    }
-
-    .game-title-text p {
-        max-width: 145px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-size: 8px;
-    }
-
-    .header-right {
-        gap: 0;
-    }
-
-    .theme-toggle {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        font-size: 14px;
-    }
-
-    main {
-        min-height: calc(100vh - 62px);
-        padding: 18px 10px 30px;
-    }
+    /* START */
 
     .screen {
-        max-width: 100%;
+        min-height: calc(100vh - 62px);
+        padding: 25px 12px;
     }
 
-    .selection-card {
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 28px 14px 22px;
+    .start-card {
+        padding: 30px 16px;
+        border-radius: 20px;
+    }
+
+    .big-icon {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 18px;
+        font-size: 32px;
         border-radius: 18px;
     }
 
-    .selection-icon {
-        width: 58px;
-        height: 58px;
-        margin-bottom: 14px;
-        font-size: 28px;
+    .start-card h1 {
+        font-size: clamp(34px, 11vw, 44px);
     }
 
-    .selection-card h2 {
-        font-size: clamp(25px, 8vw, 31px);
-        line-height: 1.1;
-    }
-
-    .selection-description {
-        max-width: 290px;
-        margin: 10px auto 20px;
-        font-size: 11px;
-        line-height: 1.5;
-    }
-
-    .grammar-grid {
-        grid-template-columns: 1fr !important;
-        gap: 8px;
-    }
-
-    .grammar-card {
-        min-height: 68px;
-        padding: 11px 42px 11px 12px;
-        border-radius: 12px;
-        text-align: left;
-    }
-
-    .grammar-card-icon {
-        font-size: 19px;
-    }
-
-    .grammar-card-title {
+    .start-card > p {
         font-size: 12px;
-    }
-
-    .grammar-card-text,
-    .grammar-card-topic {
-        font-size: 9px;
+        line-height: 1.55;
     }
 
     .main-button {
         width: 100%;
-        min-height: 46px;
-        padding: 12px 14px;
-        border-radius: 11px;
+        padding: 13px 15px;
         font-size: 11px;
     }
 
-    .battle-container {
+
+    /* UNIT SELECTOR */
+
+    .unit-grid,
+    .grammar-grid,
+    .topic-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .unit-card,
+    .grammar-card,
+    .topic-card {
+        min-height: 70px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+
+    /* GAME */
+
+    .game-container {
         width: 100%;
-        max-width: 100%;
+        max-width: none;
     }
 
     .score-bar {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 6px;
     }
 
     .score-item {
-        min-width: 0;
-        padding: 9px 4px;
+        padding: 10px 4px;
         border-radius: 10px;
     }
 
     .score-item span {
         font-size: 7px;
-        letter-spacing: .8px;
+        letter-spacing: 1px;
     }
 
     .score-item strong {
         font-size: 17px;
     }
 
-    .question-area {
-        padding: 28px 2px 20px;
+
+    .game-instruction {
+        padding: 25px 0 18px;
     }
 
-    .question-badge {
-        font-size: 8px;
-        letter-spacing: 1.2px;
+    .game-instruction h2 {
+        font-size: 21px;
     }
 
-    .question-area h2,
-    #questionText {
-        font-size: clamp(22px, 7vw, 30px);
-        line-height: 1.2;
-        overflow-wrap: anywhere;
+    .phrase {
+        margin-top: 10px;
+        font-size: clamp(24px, 8vw, 34px);
+        line-height: 1.15;
+        word-break: break-word;
     }
 
-    .question-hint,
-    #questionHint {
-        font-size: 10px;
+    .game-instruction p {
+        font-size: 11px;
     }
+
+
+    /* OPTIONS */
 
     .answers-container {
         grid-template-columns: 1fr !important;
@@ -1800,21 +1877,48 @@ main {
     }
 
     .answer-button {
-        width: 100%;
-        min-height: 58px;
-        padding: 10px 12px;
-        border-radius: 11px;
+        min-height: 60px;
+        padding: 9px 11px;
         font-size: 15px;
+        border-radius: 12px;
     }
 
-    .feedback {
-        min-height: 22px;
-        font-size: 11px;
-        line-height: 1.4;
+
+    /* MATCHING */
+
+    .matching-game {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        padding: 10px 6px;
     }
+
+    .match-column {
+        max-width: none;
+        gap: 6px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: min(100%, 105px);
+        aspect-ratio: 1;
+        height: auto;
+    }
+
+    .match-word {
+        padding: 7px;
+        font-size: 10px;
+        border-radius: 10px;
+    }
+
+    .match-picture {
+        border-radius: 10px;
+    }
+
+
+    /* PROGRESS */
 
     .progress-area {
-        margin-top: 16px;
+        margin-top: 18px;
     }
 
     .progress-label {
@@ -1825,84 +1929,285 @@ main {
         height: 5px;
     }
 
+
+    /* RESULTS */
+
     .result-card {
-        width: 100%;
-        max-width: 100%;
-        padding: 28px 14px;
-        border-radius: 18px;
+        padding: 30px 15px;
+        border-radius: 20px;
     }
 
-    .result-card h2 {
-        font-size: 28px;
+    .result-card h1 {
+        font-size: 30px;
     }
 
-    .result-stats {
-        gap: 7px;
+    .final-score strong {
+        font-size: 38px;
     }
 
-    .result-stat {
-        padding: 12px 6px;
-    }
-
-    .result-stat strong {
-        font-size: 19px;
-    }
-
-    .result-stat span {
-        font-size: 8px;
-    }
-
-    .breakdown {
-        padding: 14px;
-    }
-
-    .breakdown-row {
-        gap: 10px;
-        font-size: 11px;
+    .result-grid {
+        grid-template-columns: 1fr;
     }
 
     .xp-box strong {
         font-size: 22px;
     }
 
-    .result-buttons {
-        width: 100%;
+
+    /* TOUCH FRIENDLY */
+
+    button {
+        -webkit-tap-highlight-color: transparent;
     }
 
-    .secondary-button {
+}
+
+
+@media (max-width: 340px) {
+
+    .answer-button {
+        min-height: 56px;
+        font-size: 13px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: 91px;
+    }
+
+    .match-word {
+        font-size: 9px;
+    }
+
+}
+
+/* =====================================================
+   GRAMMAR BATTLE HEADER — MOBILE
+   430px / 390px / 320px
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .game-header {
+
+        height: 62px;
+
+        padding: 0 10px;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .header-left {
+        min-width: 0;
+        max-width: 100%;
+        gap: 5px;
+    }
+
+    .back-button,
+    .arcade-button {
+        height: 36px;
+        padding: 0 9px;
+        border-radius: 10px;
         font-size: 10px;
+    }
+
+    .arcade-button {
+        font-size: 9px;
+    }
+
+    .game-title {
+        min-width: 0;
+        max-width: 100%;
+        gap: 6px;
+    }
+
+    .game-icon {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+
+    .game-title-text {
+        min-width: 0;
+        max-width: 170px;
+    }
+
+    .game-title-text h1 {
+        font-size: 14px;
+    }
+
+    .game-title-text p {
+        font-size: 8px;
+    }
+
+    .header-right {
+        min-width: 0;
+        gap: 4px;
+    }
+
+    .theme-toggle {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        border-radius: 10px;
+        font-size: 14px;
     }
 }
 
-@media (max-width: 360px) {
+
+@media (max-width: 430px) {
+
+    .game-header {
+        padding: 0 7px;
+        gap: 5px;
+    }
+
+    .header-left {
+        gap: 3px;
+    }
+
+    .back-button,
+    .arcade-button {
+        height: 34px;
+        padding: 0 7px;
+        border-radius: 9px;
+        font-size: 8px;
+    }
+
+    .arcade-button {
+        font-size: 7.5px;
+    }
+
+    .game-title {
+        gap: 4px;
+    }
+
+    .game-icon {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+        font-size: 13px;
+    }
+
+    .game-title-text {
+        max-width: 140px;
+    }
+
+    .game-title-text h1 {
+        font-size: 12px;
+    }
 
     .game-title-text p {
         display: none;
     }
 
-    .game-title-text h1 {
+    .theme-toggle {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
         font-size: 13px;
+    }
+}
+
+
+@media (max-width: 390px) {
+
+    .game-header {
+        padding: 0 6px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+        gap: 4px;
+    }
+
+    .header-left {
+        gap: 3px;
     }
 
     .back-button {
-        padding: 0 7px;
-        font-size: 9px;
+        padding: 0 6px;
+        font-size: 8px;
     }
 
-    .selection-card {
-        padding-inline: 11px;
+    .arcade-button {
+        padding: 0 6px;
+        font-size: 7px;
     }
 
-    .score-item strong {
-        font-size: 15px;
+    .game-title {
+        gap: 3px;
     }
 
-    .answer-button {
-        min-height: 54px;
-        font-size: 14px;
+    .game-title-text {
+        max-width: 110px;
     }
 
-    .result-stats {
-        grid-template-columns: 1fr;
+    .game-title-text h1 {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 340px) {
+
+    .game-header {
+        padding: 0 5px;
+        gap: 3px;
+    }
+
+    .header-left {
+        gap: 2px;
+    }
+
+    .back-button {
+        padding: 0 5px;
+        font-size: 7px;
+    }
+
+    .arcade-button {
+        padding: 0 5px;
+        font-size: 6.5px;
+    }
+
+    .game-title {
+        gap: 2px;
+    }
+
+    .game-icon {
+        width: 26px;
+        height: 26px;
+        flex-basis: 26px;
+        font-size: 12px;
+    }
+
+    .game-title-text {
+        max-width: 90px;
+    }
+
+    .game-title-text h1 {
+        font-size: 10px;
+    }
+
+    .theme-toggle {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+        font-size: 11px;
     }
 }
