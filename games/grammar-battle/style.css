@@ -623,7 +623,7 @@ main {
 .grammar-card.selected::after {
 
     content:
-        "âœ“";
+        "✓";
 
     position:
         absolute;
@@ -1051,7 +1051,7 @@ main {
 .answer-button.correct::after {
 
     content:
-        "âœ“";
+        "✓";
 
     position:
         absolute;
@@ -1093,7 +1093,7 @@ main {
 .answer-button.wrong::after {
 
     content:
-        "âœ•";
+        "✕";
 
     position:
         absolute;
@@ -1603,324 +1603,196 @@ main {
 }
 
 
+
+
 /* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .game-header {
-
-        height:
-            68px;
-
-        padding:
-            0 12px;
-
-        grid-template-columns:
-            auto 1fr auto;
-    }
-
-
-    .back-button {
-
-        height:
-            38px;
-
-        padding:
-            0 11px;
-
-        font-size:
-            12px;
-    }
-
-
-    .game-title {
-
-        gap:
-            8px;
-    }
-
-
-    .game-icon {
-
-        width:
-            38px;
-
-        height:
-            38px;
-
-        border-radius:
-            10px;
-
-        font-size:
-            19px;
-    }
-
-
-    .game-title-text h1 {
-        font-size:
-            16px;
-    }
-
-
-    .game-title-text p {
-        font-size:
-            9px;
-    }
-
-
-    .theme-toggle {
-
-        width:
-            38px;
-
-        height:
-            38px;
-
-        font-size:
-            16px;
-    }
-
-
-    main {
-        padding:
-            25px 13px 40px;
-    }
-
-
-    .selection-card {
-
-        padding:
-            30px 18px;
-
-        margin:
-            10px auto;
-    }
-
-
-    .selection-card h2 {
-        font-size:
-            31px;
-    }
-
-
-    .grammar-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-
-    .score-bar {
-        gap:
-            8px;
-    }
-
-
-    .score-item {
-        padding:
-            11px 5px;
-    }
-
-
-    .score-item strong {
-        font-size:
-            19px;
-    }
-
-
-    .question-area {
-
-        padding:
-            35px 0 25px;
-    }
-
-
-    .question-area h2 {
-
-        font-size:
-            28px;
-    }
-
-
-    .answers-container {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            10px;
-    }
-
-
-    .answer-button {
-
-        min-height:
-            72px;
-
-        font-size:
-            17px;
-    }
-
-
-    .result-card {
-
-        padding:
-            32px 18px;
-    }
-
-
-    .result-card h2 {
-
-        font-size:
-            31px;
-    }
-
-}
-/* =====================================================
-   MOBILE â€” GRAMMAR BATTLE
-   Supports 320px / 390px / 430px
+   PHONE TIER — Grammar Battle
+   Uses the actual Grammar Battle DOM classes.
 ===================================================== */
 
 @media (max-width: 600px) {
 
+    html,
     body {
-        padding: 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+    body {
         overflow-x: hidden;
     }
 
     .game-header {
         height: 62px;
         padding: 0 10px;
-        grid-template-columns: auto 1fr auto;
-    }
-
-    .game-title {
-        justify-self: center;
-        font-size: 10px;
-        letter-spacing: 1px;
-        white-space: nowrap;
-    }
-
-    .game-title span {
-        width: 28px;
-        height: 28px;
-        font-size: 13px;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 8px;
     }
 
     .back-button {
+        height: 34px;
+        padding: 0 9px;
+        border-radius: 9px;
+        font-size: 10px;
+        white-space: nowrap;
+    }
+
+    .game-title {
+        min-width: 0;
+        gap: 7px;
+        justify-self: center;
+    }
+
+    .game-icon {
+        width: 30px;
+        height: 30px;
+        flex: 0 0 30px;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+
+    .game-title-text {
+        min-width: 0;
+    }
+
+    .game-title-text h1 {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .game-title-text p {
+        max-width: 145px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         font-size: 8px;
     }
 
-    .theme-toggle {
-        width: 32px;
-        height: 32px;
-        font-size: 13px;
+    .header-right {
+        gap: 0;
     }
 
+    .theme-toggle {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        font-size: 14px;
+    }
 
-    /* START */
+    main {
+        min-height: calc(100vh - 62px);
+        padding: 18px 10px 30px;
+    }
 
     .screen {
-        min-height: calc(100vh - 62px);
-        padding: 25px 12px;
+        max-width: 100%;
     }
 
-    .start-card {
-        padding: 30px 16px;
-        border-radius: 20px;
-    }
-
-    .big-icon {
-        width: 68px;
-        height: 68px;
-        margin-bottom: 18px;
-        font-size: 32px;
+    .selection-card {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 28px 14px 22px;
         border-radius: 18px;
     }
 
-    .start-card h1 {
-        font-size: clamp(34px, 11vw, 44px);
+    .selection-icon {
+        width: 58px;
+        height: 58px;
+        margin-bottom: 14px;
+        font-size: 28px;
     }
 
-    .start-card > p {
+    .selection-card h2 {
+        font-size: clamp(25px, 8vw, 31px);
+        line-height: 1.1;
+    }
+
+    .selection-description {
+        max-width: 290px;
+        margin: 10px auto 20px;
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .grammar-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+    }
+
+    .grammar-card {
+        min-height: 68px;
+        padding: 11px 42px 11px 12px;
+        border-radius: 12px;
+        text-align: left;
+    }
+
+    .grammar-card-icon {
+        font-size: 19px;
+    }
+
+    .grammar-card-title {
         font-size: 12px;
-        line-height: 1.55;
+    }
+
+    .grammar-card-text,
+    .grammar-card-topic {
+        font-size: 9px;
     }
 
     .main-button {
         width: 100%;
-        padding: 13px 15px;
+        min-height: 46px;
+        padding: 12px 14px;
+        border-radius: 11px;
         font-size: 11px;
     }
 
-
-    /* UNIT SELECTOR */
-
-    .unit-grid,
-    .grammar-grid,
-    .topic-grid {
-        grid-template-columns: 1fr !important;
-        gap: 8px !important;
-    }
-
-    .unit-card,
-    .grammar-card,
-    .topic-card {
-        min-height: 70px;
-        padding: 12px;
-        border-radius: 12px;
-    }
-
-
-    /* GAME */
-
-    .game-container {
+    .battle-container {
         width: 100%;
-        max-width: none;
+        max-width: 100%;
     }
 
     .score-bar {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 6px;
     }
 
     .score-item {
-        padding: 10px 4px;
+        min-width: 0;
+        padding: 9px 4px;
         border-radius: 10px;
     }
 
     .score-item span {
         font-size: 7px;
-        letter-spacing: 1px;
+        letter-spacing: .8px;
     }
 
     .score-item strong {
         font-size: 17px;
     }
 
-
-    .game-instruction {
-        padding: 25px 0 18px;
+    .question-area {
+        padding: 28px 2px 20px;
     }
 
-    .game-instruction h2 {
-        font-size: 21px;
+    .question-badge {
+        font-size: 8px;
+        letter-spacing: 1.2px;
     }
 
-    .phrase {
-        margin-top: 10px;
-        font-size: clamp(24px, 8vw, 34px);
-        line-height: 1.15;
-        word-break: break-word;
+    .question-area h2,
+    #questionText {
+        font-size: clamp(22px, 7vw, 30px);
+        line-height: 1.2;
+        overflow-wrap: anywhere;
     }
 
-    .game-instruction p {
-        font-size: 11px;
+    .question-hint,
+    #questionHint {
+        font-size: 10px;
     }
-
-
-    /* OPTIONS */
 
     .answers-container {
         grid-template-columns: 1fr !important;
@@ -1928,48 +1800,21 @@ main {
     }
 
     .answer-button {
-        min-height: 60px;
-        padding: 9px 11px;
+        width: 100%;
+        min-height: 58px;
+        padding: 10px 12px;
+        border-radius: 11px;
         font-size: 15px;
-        border-radius: 12px;
     }
 
-
-    /* MATCHING */
-
-    .matching-game {
-        grid-template-columns: 1fr 1fr;
-        gap: 7px;
-        padding: 10px 6px;
+    .feedback {
+        min-height: 22px;
+        font-size: 11px;
+        line-height: 1.4;
     }
-
-    .match-column {
-        max-width: none;
-        gap: 6px;
-    }
-
-    .match-word,
-    .match-picture {
-        width: min(100%, 105px);
-        aspect-ratio: 1;
-        height: auto;
-    }
-
-    .match-word {
-        padding: 7px;
-        font-size: 10px;
-        border-radius: 10px;
-    }
-
-    .match-picture {
-        border-radius: 10px;
-    }
-
-
-    /* PROGRESS */
 
     .progress-area {
-        margin-top: 18px;
+        margin-top: 16px;
     }
 
     .progress-label {
@@ -1980,76 +1825,84 @@ main {
         height: 5px;
     }
 
-
-    /* RESULTS */
-
     .result-card {
-        padding: 30px 15px;
-        border-radius: 20px;
+        width: 100%;
+        max-width: 100%;
+        padding: 28px 14px;
+        border-radius: 18px;
     }
 
-    .result-card h1 {
-        font-size: 30px;
+    .result-card h2 {
+        font-size: 28px;
     }
 
-    .final-score strong {
-        font-size: 38px;
+    .result-stats {
+        gap: 7px;
     }
 
-    .result-grid {
-        grid-template-columns: 1fr;
+    .result-stat {
+        padding: 12px 6px;
+    }
+
+    .result-stat strong {
+        font-size: 19px;
+    }
+
+    .result-stat span {
+        font-size: 8px;
+    }
+
+    .breakdown {
+        padding: 14px;
+    }
+
+    .breakdown-row {
+        gap: 10px;
+        font-size: 11px;
     }
 
     .xp-box strong {
         font-size: 22px;
     }
 
-
-    /* TOUCH FRIENDLY */
-
-    button {
-        -webkit-tap-highlight-color: transparent;
+    .result-buttons {
+        width: 100%;
     }
 
+    .secondary-button {
+        font-size: 10px;
+    }
 }
 
+@media (max-width: 360px) {
 
-@media (max-width: 340px) {
+    .game-title-text p {
+        display: none;
+    }
 
-    .answer-button {
-        min-height: 56px;
+    .game-title-text h1 {
         font-size: 13px;
     }
 
-    .match-word,
-    .match-picture {
-        width: 91px;
-    }
-
-    .match-word {
+    .back-button {
+        padding: 0 7px;
         font-size: 9px;
     }
 
-}
+    .selection-card {
+        padding-inline: 11px;
+    }
 
-/* =====================================================
-   THERE IS / THERE ARE AVAILABLE CARD
-===================================================== */
+    .score-item strong {
+        font-size: 15px;
+    }
 
-.grammar-card[data-grammar="there-is"] {
-    background:
-        linear-gradient(145deg,
-            rgba(78,203,255,0.06),
-            var(--bg-card)
-        );
-}
+    .answer-button {
+        min-height: 54px;
+        font-size: 14px;
+    }
 
-.grammar-card[data-grammar="there-is"] .grammar-card-topic {
-    color:
-        var(--accent-two);
-}
-
-.grammar-card[data-grammar="there-is"]:hover:not(:disabled) {
-    border-color:
-        rgba(78,203,255,0.40);
+    .result-stats {
+        grid-template-columns: 1fr;
+    }
 }
