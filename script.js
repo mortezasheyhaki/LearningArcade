@@ -153,10 +153,21 @@ function loadPlayer() {
 
 function savePlayer(player) {
 
-    localStorage.setItem(
-        PLAYER_KEY,
-        JSON.stringify(player)
-    );
+    try {
+
+        localStorage.setItem(
+            PLAYER_KEY,
+            JSON.stringify(player)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save player:",
+            error
+        );
+
+    }
 }
 
 
@@ -293,10 +304,25 @@ function applyTheme(theme) {
 
 function loadTheme() {
 
-    const savedTheme =
-        localStorage.getItem(
-            THEME_KEY
+    let savedTheme = null;
+
+    try {
+
+        savedTheme =
+            localStorage.getItem(
+                THEME_KEY
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load theme:",
+            error
         );
+
+        savedTheme = null;
+
+    }
 
 
     if (
@@ -334,10 +360,21 @@ themeToggle.addEventListener(
         );
 
 
-        localStorage.setItem(
-            THEME_KEY,
-            newTheme
-        );
+        try {
+
+            localStorage.setItem(
+                THEME_KEY,
+                newTheme
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save theme:",
+                error
+            );
+
+        }
 
     }
 );
