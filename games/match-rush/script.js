@@ -365,10 +365,25 @@ const xpEarnedElement =
 
 function loadTheme() {
 
-    const savedTheme =
-        localStorage.getItem(
-            "learningArcadeTheme"
+    let savedTheme = null;
+
+    try {
+
+        savedTheme =
+            localStorage.getItem(
+                "learningArcadeTheme"
+            );
+
+    } catch (error) {
+
+        console.error(
+            "Could not load theme:",
+            error
         );
+
+        savedTheme = null;
+
+    }
 
 
     if (
@@ -413,12 +428,23 @@ themeToggle.addEventListener(
             );
 
 
-        localStorage.setItem(
-            "learningArcadeTheme",
-            isLight
-                ? "light"
-                : "dark"
-        );
+        try {
+
+            localStorage.setItem(
+                "learningArcadeTheme",
+                isLight
+                    ? "light"
+                    : "dark"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save theme:",
+                error
+            );
+
+        }
 
 
         themeToggle.textContent =
@@ -766,6 +792,10 @@ function handleCorrect(
     setTimeout(
         function () {
 
+            if (!gameActive) {
+                return;
+            }
+
             currentQuestion++;
 
             showQuestion();
@@ -828,6 +858,10 @@ function handleWrong(
 
     setTimeout(
         function () {
+
+            if (!gameActive) {
+                return;
+            }
 
             currentQuestion++;
 
@@ -1055,9 +1089,22 @@ function saveGameProgress(
             .toISOString()
             .split("T")[0];
 
+    const yesterday =
+        new Date(
+            Date.now() - 86400000
+        )
+            .toISOString()
+            .split("T")[0];
+
 
     if (
-        player.lastPlayed !== today
+        player.lastPlayed === today
+    ) {
+
+        // already played today, streak unchanged
+
+    } else if (
+        player.lastPlayed === yesterday
     ) {
 
         player.streak =
@@ -1068,15 +1115,33 @@ function saveGameProgress(
         player.lastPlayed =
             today;
 
+    } else {
+
+        player.streak = 1;
+
+        player.lastPlayed =
+            today;
+
     }
 
 
-    localStorage.setItem(
-        "learningArcadePlayer",
-        JSON.stringify(
-            player
-        )
-    );
+    try {
+
+        localStorage.setItem(
+            "learningArcadePlayer",
+            JSON.stringify(
+                player
+            )
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save progress:",
+            error
+        );
+
+    }
 
 }
 
