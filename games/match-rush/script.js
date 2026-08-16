@@ -367,7 +367,7 @@ function loadTheme() {
 
     const savedTheme =
         localStorage.getItem(
-            "matchRushTheme"
+            "learningArcadeTheme"
         );
 
 
@@ -414,7 +414,7 @@ themeToggle.addEventListener(
 
 
         localStorage.setItem(
-            "matchRushTheme",
+            "learningArcadeTheme",
             isLight
                 ? "light"
                 : "dark"
