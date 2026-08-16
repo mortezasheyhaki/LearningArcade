@@ -425,7 +425,7 @@ let p2AttemptId = 0;
 
 const savedTheme =
     localStorage.getItem(
-        "grammarThereIsTheme"
+        "learningArcadeTheme"
     );
 
 
@@ -461,7 +461,7 @@ themeToggle.addEventListener(
                 : "☀️";
 
         localStorage.setItem(
-            "grammarThereIsTheme",
+            "learningArcadeTheme",
             light
                 ? "light"
                 : "dark"
