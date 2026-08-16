@@ -909,6 +909,11 @@ document
 
                         }
 
+
+                        saveArcadeProgress(
+                            quizScore * 10
+                        );
+
                     }
 
                 }
@@ -1545,10 +1550,25 @@ function updateThemeButton() {
 }
 
 
-const savedTheme =
-    localStorage.getItem(
-        "videoQuestTheme"
+let savedTheme = null;
+
+try {
+
+    savedTheme =
+        localStorage.getItem(
+            "learningArcadeTheme"
+        );
+
+} catch (error) {
+
+    console.error(
+        "Could not load theme:",
+        error
     );
+
+    savedTheme = null;
+
+}
 
 
 if (
@@ -1582,18 +1602,148 @@ if (themeBtn) {
                 );
 
 
-            localStorage.setItem(
-                "videoQuestTheme",
-                isLight
-                    ? "light"
-                    : "dark"
-            );
+            try {
+
+                localStorage.setItem(
+                    "learningArcadeTheme",
+                    isLight
+                        ? "light"
+                        : "dark"
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "Could not save theme:",
+                    error
+                );
+
+            }
 
 
             updateThemeButton();
 
         }
     );
+
+}
+
+
+/* =====================================================
+   SAVE ARCADE PLAYER DATA
+   Writes into the same shared profile the homepage,
+   Match Rush, Multiple Choice, and Grammar Battle use,
+   so Video Quest progress shows up in the site-wide
+   XP/streak/games-played stats.
+===================================================== */
+
+function saveArcadeProgress(xp) {
+
+    let player;
+
+
+    try {
+
+        player =
+            JSON.parse(
+                localStorage.getItem(
+                    "learningArcadePlayer"
+                )
+            );
+
+    } catch (error) {
+
+        player = null;
+
+    }
+
+
+    if (!player) {
+
+        player = {
+
+            name: "Guest Player",
+
+            xp: 0,
+
+            gamesPlayed: 0,
+
+            streak: 0,
+
+            lastPlayed: null
+
+        };
+
+    }
+
+
+    player.xp =
+        Number(player.xp || 0) +
+        xp;
+
+
+    player.gamesPlayed =
+        Number(
+            player.gamesPlayed || 0
+        ) + 1;
+
+
+    const today =
+        new Date()
+            .toISOString()
+            .split("T")[0];
+
+    const yesterday =
+        new Date(
+            Date.now() - 86400000
+        )
+            .toISOString()
+            .split("T")[0];
+
+
+    if (
+        player.lastPlayed === today
+    ) {
+
+        // already played today, streak unchanged
+
+    } else if (
+        player.lastPlayed === yesterday
+    ) {
+
+        player.streak =
+            Number(
+                player.streak || 0
+            ) + 1;
+
+        player.lastPlayed =
+            today;
+
+    } else {
+
+        player.streak = 1;
+
+        player.lastPlayed =
+            today;
+
+    }
+
+
+    try {
+
+        localStorage.setItem(
+            "learningArcadePlayer",
+            JSON.stringify(player)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save progress:",
+            error
+        );
+
+    }
 
 }
 
