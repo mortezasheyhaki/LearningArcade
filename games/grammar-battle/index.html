@@ -28,12 +28,27 @@
 
     <header class="game-header">
 
-        <a
-            href="../../index.html"
-            class="back-button"
-        >
-            ← Arcade
-        </a>
+        <div class="header-left">
+
+            <button
+                id="grammarBackButton"
+                class="back-button hidden-nav-button"
+                type="button"
+                aria-label="Return to Grammar Battle selection"
+            >
+                ← Grammar Battle
+            </button>
+
+
+            <a
+                href="../../index.html"
+                class="arcade-button"
+                aria-label="Return to Learning Arcade"
+            >
+                ← Arcade
+            </a>
+
+        </div>
 
 
         <div class="game-title">
@@ -144,13 +159,13 @@
 
 
                     <button
-                        class="grammar-card locked"
+                        class="grammar-card"
+                        data-grammar="simple-present"
                         type="button"
-                        disabled
                     >
 
                         <span class="grammar-card-icon">
-                            🔒
+                            🕐
                         </span>
 
                         <span class="grammar-card-title">
@@ -158,13 +173,15 @@
                         </span>
 
                         <span class="grammar-card-text">
-                            Coming soon
+                            Positive • Negative • Questions
+                        </span>
+
+                        <span class="grammar-card-topic">
+                            A1 Grammar
                         </span>
 
                     </button>
 
-
-                    <!-- THERE IS / THERE ARE -->
 
                     <button
                         class="grammar-card"
@@ -185,7 +202,7 @@
                         </span>
 
                         <span class="grammar-card-topic">
-                            Rooms &amp; Places
+                            Rooms &amp; Places • some / any
                         </span>
 
                     </button>
