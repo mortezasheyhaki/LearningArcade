@@ -1,1113 +1,1081 @@
 /* =====================================================
    GRAMMAR BATTLE
-   BE + COUNTRIES & NATIONALITIES
 ===================================================== */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* =====================================================
-   SETTINGS
-===================================================== */
 
-const TOTAL_QUESTIONS = 15;
+:root {
 
-const XP_PER_CORRECT = 10;
+    --bg-main: #f3f5fa;
 
+    --bg-card: #ffffff;
 
-/* =====================================================
-   QUESTION BANK
+    --bg-card-hover: #f0f2f8;
 
-   5 Positive
-   5 Negative
-   5 Question + Answer
+    --text-main: #161927;
 
-   Every question has exactly ONE correct answer.
-===================================================== */
+    --text-muted: #60677a;
 
-const questionBank = [
+    --text-soft: #7c8395;
 
-    /* =================================================
-       POSITIVE
-    ================================================= */
+    --border: rgba(20,25,45,0.10);
 
-    {
-        type: "positive",
+    --accent: #7c5cff;
 
-        text:
-            "She _____ from Brazil.",
+    --accent-two: #4ecbff;
 
-        options:
-            [
-                "am",
-                "is",
-                "are"
-            ],
+    --success: #22c55e;
 
-        answer:
-            "is"
-    },
+    --success-bg: #dcfce7;
 
+    --danger: #ef4444;
 
-    {
-        type: "positive",
+    --danger-bg: #fee2e2;
+}
 
-        text:
-            "They _____ from Canada.",
 
-        options:
-            [
-                "am",
-                "is",
-                "are"
-            ],
+body:not(.light-mode) {
 
-        answer:
-            "are"
-    },
+    --bg-main: #080a12;
 
+    --bg-card: #141827;
 
-    {
-        type: "positive",
+    --bg-card-hover: #191e31;
 
-        text:
-            "I _____ from Japan.",
+    --text-main: #ffffff;
 
-        options:
-            [
-                "am",
-                "is",
-                "are"
-            ],
+    --text-muted: #858b9e;
 
-        answer:
-            "am"
-    },
+    --text-soft: #71788c;
 
-
-    {
-        type: "positive",
-
-        text:
-            "He _____ Turkish.",
-
-        options:
-            [
-                "am",
-                "is",
-                "are"
-            ],
-
-        answer:
-            "is"
-    },
-
-
-    {
-        type: "positive",
-
-        text:
-            "We _____ from Mexico.",
-
-        options:
-            [
-                "am",
-                "is",
-                "are"
-            ],
-
-        answer:
-            "are"
-    },
-
-
-    /* =================================================
-       NEGATIVE
-    ================================================= */
-
-    {
-        type: "negative",
-
-        text:
-            "I _____ from Spain.",
-
-        options:
-            [
-                "isn't",
-                "aren't",
-                "am not"
-            ],
-
-        answer:
-            "am not"
-    },
-
-
-    {
-        type: "negative",
-
-        text:
-            "He _____ Japanese.",
-
-        options:
-            [
-                "isn't",
-                "aren't",
-                "am not"
-            ],
-
-        answer:
-            "isn't"
-    },
-
-
-    {
-        type: "negative",
-
-        text:
-            "They _____ from China.",
-
-        options:
-            [
-                "isn't",
-                "aren't",
-                "am not"
-            ],
-
-        answer:
-            "aren't"
-    },
-
-
-    {
-        type: "negative",
-
-        text:
-            "She _____ Canadian.",
-
-        options:
-            [
-                "isn't",
-                "aren't",
-                "am not"
-            ],
-
-        answer:
-            "isn't"
-    },
-
-
-    {
-        type: "negative",
-
-        text:
-            "We _____ from Peru.",
-
-        options:
-            [
-                "isn't",
-                "aren't",
-                "am not"
-            ],
-
-        answer:
-            "aren't"
-    },
-
-
-    /* =================================================
-       QUESTION + SHORT ANSWER
-
-       The statement before the question makes
-       the correct answer unambiguous.
-    ================================================= */
-
-    {
-        type: "question",
-
-        text:
-            "Maria is from Japan.<br><br>Is Maria Japanese?",
-
-        options:
-            [
-                "Yes, she is.",
-                "No, she isn't.",
-                "Yes, they are."
-            ],
-
-        answer:
-            "Yes, she is."
-    },
-
-
-    {
-        type: "question",
-
-        text:
-            "David is from Brazil.<br><br>Is David Chinese?",
-
-        options:
-            [
-                "Yes, he is.",
-                "No, he isn't.",
-                "No, they aren't."
-            ],
-
-        answer:
-            "No, he isn't."
-    },
-
-
-    {
-        type: "question",
-
-        text:
-            "Anna and Leo are from Canada.<br><br>Are they Canadian?",
-
-        options:
-            [
-                "Yes, they are.",
-                "No, they aren't.",
-                "Yes, she is."
-            ],
-
-        answer:
-            "Yes, they are."
-    },
-
-
-    {
-        type: "question",
-
-        text:
-            "Sara is from Mexico.<br><br>Is Sara Spanish?",
-
-        options:
-            [
-                "Yes, she is.",
-                "No, she isn't.",
-                "Yes, they are."
-            ],
-
-        answer:
-            "No, she isn't."
-    },
-
-
-    {
-        type: "question",
-
-        text:
-            "Tom and Jack are from Vietnam.<br><br>Are they Vietnamese?",
-
-        options:
-            [
-                "Yes, they are.",
-                "No, they aren't.",
-                "Yes, he is."
-            ],
-
-        answer:
-            "Yes, they are."
-    }
-
-];
-
-
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
-const targetScreen =
-    document.getElementById(
-        "targetScreen"
-    );
-
-const gameScreen =
-    document.getElementById(
-        "gameScreen"
-    );
-
-const resultScreen =
-    document.getElementById(
-        "resultScreen"
-    );
-
-const startBattleButton =
-    document.getElementById(
-        "startBattleButton"
-    );
-
-const retryButton =
-    document.getElementById(
-        "retryButton"
-    );
-
-const grammarButton =
-    document.getElementById(
-        "grammarButton"
-    );
-
-const grammarBackButton =
-    document.getElementById(
-        "grammarBackButton"
-    );
-
-const themeToggle =
-    document.getElementById(
-        "themeToggle"
-    );
-
-const questionType =
-    document.getElementById(
-        "questionType"
-    );
-
-const questionText =
-    document.getElementById(
-        "questionText"
-    );
-
-const questionHint =
-    document.getElementById(
-        "questionHint"
-    );
-
-const answersContainer =
-    document.getElementById(
-        "answersContainer"
-    );
-
-const feedback =
-    document.getElementById(
-        "feedback"
-    );
-
-const scoreElement =
-    document.getElementById(
-        "score"
-    );
-
-const questionNumberElement =
-    document.getElementById(
-        "questionNumber"
-    );
-
-const comboElement =
-    document.getElementById(
-        "combo"
-    );
-
-const progressText =
-    document.getElementById(
-        "progressText"
-    );
-
-const progressFill =
-    document.getElementById(
-        "progressFill"
-    );
-
-
-/* RESULTS */
-
-const finalScore =
-    document.getElementById(
-        "finalScore"
-    );
-
-const finalCorrect =
-    document.getElementById(
-        "finalCorrect"
-    );
-
-const finalWrong =
-    document.getElementById(
-        "finalWrong"
-    );
-
-const finalAccuracy =
-    document.getElementById(
-        "finalAccuracy"
-    );
-
-const positiveResult =
-    document.getElementById(
-        "positiveResult"
-    );
-
-const negativeResult =
-    document.getElementById(
-        "negativeResult"
-    );
-
-const questionResult =
-    document.getElementById(
-        "questionResult"
-    );
-
-const earnedXP =
-    document.getElementById(
-        "earnedXP"
-    );
-
-
-/* =====================================================
-   GAME STATE
-===================================================== */
-
-let questions = [];
-
-let currentQuestion = 0;
-
-let score = 0;
-
-let correctAnswers = 0;
-
-let wrongAnswers = 0;
-
-let combo = 0;
-
-let bestCombo = 0;
-
-let positiveCorrect = 0;
-
-let negativeCorrect = 0;
-
-let questionCorrect = 0;
-
-let gameActive = false;
-
-
-/* =====================================================
-   SHUFFLE
-===================================================== */
-
-function shuffle(array) {
-
-    const result =
-        [...array];
-
-
-    for (
-        let i = result.length - 1;
-        i > 0;
-        i--
-    ) {
-
-        const j =
-            Math.floor(
-                Math.random() *
-                (i + 1)
-            );
-
-
-        [
-            result[i],
-            result[j]
-        ] = [
-            result[j],
-            result[i]
-        ];
-
-    }
-
-
-    return result;
+    --border: rgba(255,255,255,0.08);
 }
 
 
 /* =====================================================
-   THEME
+   BODY
 ===================================================== */
 
-function loadTheme() {
-
-    let saved = null;
-
-    try {
-
-        saved =
-            localStorage.getItem(
-                "learningArcadeTheme"
-            );
-
-    } catch (error) {
-
-        console.error(
-            "Could not load theme:",
-            error
-        );
-
-        saved = null;
-
-    }
-
-
-    if (
-        saved === "light"
-    ) {
-
-        document.body.classList.add(
-            "light-mode"
-        );
-
-        themeToggle.textContent =
-            "🌙";
-
-    } else {
-
-        themeToggle.textContent =
-            "☀️";
-
-    }
-
+html {
+    scroll-behavior: smooth;
 }
 
 
-themeToggle.addEventListener(
-    "click",
-    function () {
+body {
 
-        document.body.classList.toggle(
-            "light-mode"
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #ffffff 0%,
+            #f3f5fa 55%,
+            #eef1f7 100%
         );
 
+    color:
+        var(--text-main);
 
-        const isLight =
-            document.body.classList.contains(
-                "light-mode"
-            );
+    overflow-x:
+        hidden;
 
-
-        try {
-
-            localStorage.setItem(
-                "learningArcadeTheme",
-                isLight
-                    ? "light"
-                    : "dark"
-            );
-
-        } catch (error) {
-
-            console.error(
-                "Could not save theme:",
-                error
-            );
-
-        }
-
-
-        themeToggle.textContent =
-            isLight
-                ? "🌙"
-                : "☀️";
-
-    }
-);
-
-
-loadTheme();
-
-
-
-
-/* =====================================================
-   GRAMMAR SELECTION
-===================================================== */
-
-const grammarCards =
-    [
-        ...document.querySelectorAll(
-            ".grammar-card:not(.locked)"
-        )
-    ];
-
-let selectedGrammar = "be";
-
-
-function showGrammarBackButton() {
-
-    if (!grammarBackButton) {
-        return;
-    }
-
-    grammarBackButton.classList.remove(
-        "hidden-nav-button"
-    );
-
+    transition:
+        background 0.3s ease,
+        color 0.3s ease;
 }
 
 
-function hideGrammarBackButton() {
+body:not(.light-mode) {
 
-    if (!grammarBackButton) {
-        return;
-    }
-
-    grammarBackButton.classList.add(
-        "hidden-nav-button"
-    );
-
-}
-
-
-grammarCards.forEach(
-    function (card) {
-
-        card.addEventListener(
-            "click",
-            function () {
-
-                grammarCards.forEach(
-                    function (item) {
-
-                        item.classList.remove(
-                            "selected"
-                        );
-
-                    }
-                );
-
-
-                card.classList.add(
-                    "selected"
-                );
-
-
-                selectedGrammar =
-                    card.dataset.grammar ||
-                    "be";
-
-
-                if (
-                    selectedGrammar ===
-                    "be"
-                ) {
-
-                    showGrammarBackButton();
-
-                }
-
-                else {
-
-                    hideGrammarBackButton();
-
-                }
-
-
-                const headerSubtitle =
-                    document.querySelector(
-                        ".game-title-text p"
-                    );
-
-
-                if (headerSubtitle) {
-
-                    if (
-                        selectedGrammar ===
-                        "simple-present"
-                    ) {
-
-                        headerSubtitle.textContent =
-                            "Simple Present • A1 Grammar";
-
-                    }
-
-                    else if (
-                        selectedGrammar ===
-                        "there-is"
-                    ) {
-
-                        headerSubtitle.textContent =
-                            "There Is / There Are • A1 Grammar";
-
-                    }
-
-                    else {
-
-                        headerSubtitle.textContent =
-                            "BE • Countries & Nationalities";
-
-                    }
-
-                }
-
-            }
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #171c35 0%,
+            #080a12 55%,
+            #080a12 100%
         );
-
-    }
-);
-
-
-/* =====================================================
-   BUTTONS
-===================================================== */
-
-startBattleButton.addEventListener(
-    "click",
-    startBattle
-);
-
-
-retryButton.addEventListener(
-    "click",
-    startBattle
-);
-
-
-grammarButton.addEventListener(
-    "click",
-    function () {
-
-        gameActive =
-            false;
-
-        gameScreen.classList.add(
-            "hidden"
-        );
-
-        resultScreen.classList.add(
-            "hidden"
-        );
-
-        targetScreen.classList.remove(
-            "hidden"
-        );
-
-        hideGrammarBackButton();
-
-    }
-);
-
-
-if (grammarBackButton) {
-
-    grammarBackButton.addEventListener(
-        "click",
-        function () {
-
-            gameActive =
-                false;
-
-            gameScreen.classList.add(
-                "hidden"
-            );
-
-            resultScreen.classList.add(
-                "hidden"
-            );
-
-            targetScreen.classList.remove(
-                "hidden"
-            );
-
-            hideGrammarBackButton();
-
-        }
-    );
-
-}
-
-hideGrammarBackButton();
-
-
-/* =====================================================
-   START BATTLE
-===================================================== */
-
-function startBattle() {
-
-    if (selectedGrammar === "simple-present") {
-        window.location.href = "../simple-present/index.html";
-        return;
-    }
-
-    if (selectedGrammar === "there-is") {
-        window.location.href = "../grammar-there-is/index.html";
-        return;
-    }
-
-    showGrammarBackButton();
-
-    questions =
-        shuffle(
-            questionBank
-        );
-
-
-    currentQuestion = 0;
-
-    score = 0;
-
-    correctAnswers = 0;
-
-    wrongAnswers = 0;
-
-    combo = 0;
-
-    bestCombo = 0;
-
-    positiveCorrect = 0;
-
-    negativeCorrect = 0;
-
-    questionCorrect = 0;
-
-    gameActive = true;
-
-
-    scoreElement.textContent =
-        "0";
-
-
-    comboElement.textContent =
-        "×1";
-
-
-    questionNumberElement.textContent =
-        `1 / ${TOTAL_QUESTIONS}`;
-
-
-    progressText.textContent =
-        `0 / ${TOTAL_QUESTIONS}`;
-
-
-    progressFill.style.width =
-        "0%";
-
-
-    feedback.textContent =
-        "";
-
-
-    feedback.className =
-        "feedback";
-
-
-    targetScreen.classList.add(
-        "hidden"
-    );
-
-
-    resultScreen.classList.add(
-        "hidden"
-    );
-
-
-    gameScreen.classList.remove(
-        "hidden"
-    );
-
-
-    showQuestion();
-
 }
 
 
 /* =====================================================
-   QUESTION TYPE
+   HEADER
 ===================================================== */
 
-function setQuestionType(
-    type
-) {
+.game-header {
 
-    if (
-        type === "positive"
-    ) {
+    height: 76px;
 
-        questionType.textContent =
-            "COMPLETE THE SENTENCE";
+    padding: 0 26px;
 
-        questionHint.textContent =
-            "Choose the correct BE verb.";
+    display: grid;
 
-        return;
-    }
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-bottom:
+        1px solid var(--border);
+
+    backdrop-filter:
+        blur(15px);
+}
 
 
-    if (
-        type === "negative"
-    ) {
+body:not(.light-mode) .game-header {
 
-        questionType.textContent =
-            "MAKE IT NEGATIVE";
-
-        questionHint.textContent =
-            "Choose the correct negative form.";
-
-        return;
-    }
+    background:
+        rgba(8,10,18,0.92);
+}
 
 
-    questionType.textContent =
-        "ANSWER THE QUESTION";
+.header-left {
 
-    questionHint.textContent =
-        "Choose the best short answer.";
+    min-width: 0;
 
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+}
+
+
+.back-button,
+.arcade-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 auto;
+
+    height: 42px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--bg-card);
+
+    color: var(--text-main);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.back-button:hover,
+.arcade-button:hover {
+
+    transform: translateY(-1px);
+
+    background: var(--bg-card-hover);
+
+    border-color: rgba(124,92,255,0.30);
+}
+
+
+.back-button:focus-visible,
+.arcade-button:focus-visible {
+
+    outline: 3px solid rgba(124,92,255,0.28);
+
+    outline-offset: 2px;
+}
+
+
+.hidden-nav-button {
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.arcade-button {
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+.game-title {
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    overflow: hidden;
+
+    text-align: center;
+}
+
+
+.game-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    flex: 0 0 44px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent-two)
+        );
+
+    color: white;
+
+    font-size: 23px;
+}
+
+
+.game-title-text {
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-align: left;
+}
+
+
+.game-title-text h1 {
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 19px;
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    color: var(--text-main);
+}
+
+
+.game-title-text p {
+
+    margin-top: 3px;
+
+    max-width: 100%;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.header-right {
+
+    min-width: 0;
+
+    justify-self: end;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.theme-toggle {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: var(--bg-card);
+
+    color: var(--text-main);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.theme-toggle:hover {
+
+    transform:
+        translateY(-2px)
+        rotate(8deg);
+
+    background:
+        rgba(124,92,255,0.10);
+}
+
+
+.theme-toggle:focus-visible {
+
+    outline: 3px solid rgba(124,92,255,0.28);
+
+    outline-offset: 2px;
 }
 
 
 /* =====================================================
-   SHOW QUESTION
+   MAIN
 ===================================================== */
 
-function showQuestion() {
+main {
 
-    if (
-        currentQuestion >=
-        questions.length
-    ) {
+    min-height:
+        calc(100vh - 76px);
 
-        finishBattle();
+    padding:
+        45px 20px 60px;
 
-        return;
+    display:
+        flex;
 
+    justify-content:
+        center;
+
+    align-items:
+        flex-start;
+}
+
+
+.screen {
+
+    width:
+        100%;
+
+    max-width:
+        900px;
+
+    margin:
+        0 auto;
+
+    animation:
+        screenIn 0.3s ease;
+}
+
+
+.hidden {
+    display:
+        none !important;
+}
+
+
+@keyframes screenIn {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translateY(10px);
     }
 
+    to {
+        opacity:
+            1;
 
-    const question =
-        questions[currentQuestion];
-
-
-    setQuestionType(
-        question.type
-    );
-
-
-    questionText.innerHTML =
-        question.text;
-
-
-    questionNumberElement.textContent =
-        `${currentQuestion + 1} / ${TOTAL_QUESTIONS}`;
-
-
-    progressText.textContent =
-        `${currentQuestion} / ${TOTAL_QUESTIONS}`;
-
-
-    progressFill.style.width =
-        `${(
-            currentQuestion /
-            TOTAL_QUESTIONS
-        ) * 100}%`;
-
-
-    feedback.textContent =
-        "";
-
-
-    feedback.className =
-        "feedback";
-
-
-    answersContainer.innerHTML =
-        "";
-
-
-    const options =
-        shuffle(
-            question.options
-        );
-
-
-    options.forEach(
-        function (option) {
-
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-
-            button.type =
-                "button";
-
-
-            button.className =
-                "answer-button";
-
-
-            button.textContent =
-                option;
-
-
-            button.addEventListener(
-                "click",
-                function () {
-
-                    checkAnswer(
-                        option,
-                        question,
-                        button
-                    );
-
-                }
-            );
-
-
-            answersContainer.appendChild(
-                button
-            );
-
-        }
-    );
-
+        transform:
+            translateY(0);
+    }
 }
 
 
 /* =====================================================
-   CHECK ANSWER
+   COMMON
 ===================================================== */
 
-function checkAnswer(
-    selected,
-    question,
-    selectedButton
-) {
+.eyebrow {
 
-    if (
-        !gameActive
-    ) {
-        return;
-    }
+    display:
+        inline-block;
+
+    color:
+        var(--accent);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+}
 
 
-    document
-        .querySelectorAll(
-            ".answer-button"
-        )
-        .forEach(
-            function (button) {
+/* =====================================================
+   TARGET GRAMMAR
+===================================================== */
 
-                button.disabled =
-                    true;
+.selection-card {
 
-            }
+    max-width:
+        780px;
+
+    margin:
+        30px auto;
+
+    padding:
+        42px;
+
+    text-align:
+        center;
+
+    background:
+        var(--bg-card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        26px;
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,0.08);
+}
+
+
+.selection-icon {
+
+    width:
+        82px;
+
+    height:
+        82px;
+
+    margin:
+        0 auto 20px;
+
+    border-radius:
+        23px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent-two)
         );
 
+    font-size:
+        40px;
+}
 
-    if (
-        selected ===
-        question.answer
-    ) {
 
-        handleCorrect(
-            question,
-            selectedButton
+.selection-card h2 {
+
+    margin-top:
+        10px;
+
+    font-size:
+        38px;
+
+    color:
+        var(--text-main);
+}
+
+
+.selection-description {
+
+    margin:
+        10px auto 28px;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        14px;
+}
+
+
+/* =====================================================
+   GRAMMAR CARDS
+===================================================== */
+
+.grammar-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:
+        13px;
+
+    text-align:
+        left;
+}
+
+
+.grammar-card {
+
+    min-height:
+        155px;
+
+    padding:
+        20px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        18px;
+
+    background:
+        var(--bg-card);
+
+    color:
+        var(--text-main);
+
+    cursor:
+        pointer;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        center;
+
+    position:
+        relative;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.grammar-card:hover:not(:disabled) {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        var(--bg-card-hover);
+
+    border-color:
+        rgba(124,92,255,0.35);
+}
+
+
+.grammar-card.selected {
+
+    border-color:
+        var(--accent);
+
+    background:
+        rgba(124,92,255,0.07);
+}
+
+
+.grammar-card.selected::after {
+
+    content:
+        "✓";
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    right:
+        14px;
+
+    width:
+        27px;
+
+    height:
+        27px;
+
+    border-radius:
+        50%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        var(--accent);
+
+    color:
+        white;
+
+    font-size:
+        13px;
+}
+
+
+.grammar-card.locked {
+
+    opacity:
+        0.45;
+
+    cursor:
+        not-allowed;
+}
+
+
+.grammar-card-icon {
+
+    font-size:
+        26px;
+
+    margin-bottom:
+        10px;
+}
+
+
+.grammar-card-title {
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+}
+
+
+.grammar-card-text {
+
+    margin-top:
+        5px;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        12px;
+}
+
+
+.grammar-card-topic {
+
+    margin-top:
+        9px;
+
+    color:
+        var(--accent);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* =====================================================
+   MAIN BUTTON
+===================================================== */
+
+.main-button {
+
+    margin-top:
+        28px;
+
+    padding:
+        15px 32px;
+
+    border:
+        none;
+
+    border-radius:
+        12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent),
+            var(--accent-two)
         );
 
-    } else {
+    color:
+        white;
 
-        handleWrong(
-            question,
-            selectedButton
-        );
+    font-size:
+        12px;
 
-    }
+    font-weight:
+        900;
 
+    letter-spacing:
+        1px;
+
+    cursor:
+        pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+.main-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 14px 35px
+        rgba(92,72,255,0.25);
+}
+
+
+.main-button:active {
+    transform:
+        scale(0.98);
+}
+
+
+/* =====================================================
+   GAME
+===================================================== */
+
+.battle-container {
+
+    width:
+        100%;
+
+    max-width:
+        850px;
+
+    margin:
+        0 auto;
+}
+
+
+.score-bar {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:
+        13px;
+}
+
+
+.score-item {
+
+    padding:
+        14px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        14px;
+
+    background:
+        var(--bg-card);
+}
+
+
+.score-item span {
+
+    display:
+        block;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        1.5px;
+}
+
+
+.score-item strong {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        var(--text-main);
+
+    font-size:
+        23px;
+}
+
+
+.combo-item strong {
+    color:
+        var(--accent);
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question-area {
+
+    padding:
+        48px 0 32px;
+
+    text-align:
+        center;
+}
+
+
+.question-badge {
+
+    display:
+        inline-block;
+
+    padding:
+        7px 12px;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(124,92,255,0.08);
+
+    color:
+        var(--accent);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        0.8px;
+}
+
+
+.question-area h2 {
+
+    max-width:
+        700px;
+
+    margin:
+        18px auto 0;
+
+    color:
+        var(--text-main);
+
+    font-size:
+        clamp(28px,5vw,42px);
+
+    line-height:
+        1.3;
+}
+
+
+#questionHint {
+
+    margin-top:
+        11px;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        13px;
+}
+
+
+/* =====================================================
+   ANSWERS
+===================================================== */
+
+.answers-container {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:
+        14px;
+}
+
+
+.answer-button {
+
+    min-height:
+        110px;
+
+    padding:
+        18px;
+
+    border:
+        2px solid var(--border);
+
+    border-radius:
+        17px;
+
+    background:
+        var(--bg-card);
+
+    color:
+        var(--text-main);
+
+    cursor:
+        pointer;
+
+    font-size:
+        20px;
+
+    font-weight:
+        800;
+
+    line-height:
+        1.35;
+
+    position:
+        relative;
+
+    transition:
+        all 0.18s ease;
+}
+
+
+.answer-button:hover:not(:disabled) {
+
+    transform:
+        translateY(-4px);
+
+    border-color:
+        rgba(124,92,255,0.50);
+
+    background:
+        var(--bg-card-hover);
+
+    box-shadow:
+        0 10px 24px
+        rgba(124,92,255,0.08);
+}
+
+
+.answer-button:disabled {
+    cursor:
+        default;
 }
 
 
@@ -1115,98 +1083,41 @@ function checkAnswer(
    CORRECT
 ===================================================== */
 
-function handleCorrect(
-    question,
-    selectedButton
-) {
+.answer-button.correct {
 
-    correctAnswers++;
+    border-color:
+        var(--success);
 
-    combo++;
+    background:
+        var(--success-bg);
 
+    color:
+        #15803d;
 
-    bestCombo =
-        Math.max(
-            bestCombo,
-            combo
-        );
-
-
-    const points =
-        10 +
-        ((combo - 1) * 5);
+    animation:
+        correctAnswer 0.4s ease;
+}
 
 
-    score +=
-        points;
+.answer-button.correct::after {
 
+    content:
+        "✓";
 
-    selectedButton.classList.add(
-        "correct"
-    );
+    position:
+        absolute;
 
+    top:
+        10px;
 
-    scoreElement.textContent =
-        score;
+    right:
+        12px;
 
+    color:
+        #16a34a;
 
-    comboElement.textContent =
-        "×" + combo;
-
-
-    feedback.textContent =
-        `✅ Correct! +${points} points`;
-
-
-    feedback.className =
-        "feedback correct";
-
-
-    if (
-        question.type ===
-        "positive"
-    ) {
-
-        positiveCorrect++;
-
-    }
-
-
-    if (
-        question.type ===
-        "negative"
-    ) {
-
-        negativeCorrect++;
-
-    }
-
-
-    if (
-        question.type ===
-        "question"
-    ) {
-
-        questionCorrect++;
-
-    }
-
-
-    setTimeout(
-        function () {
-
-            if (!gameActive) {
-                return;
-            }
-
-            currentQuestion++;
-
-            showQuestion();
-
-        },
-        650
-    );
-
+    font-size:
+        18px;
 }
 
 
@@ -1214,282 +1125,1089 @@ function handleCorrect(
    WRONG
 ===================================================== */
 
-function handleWrong(
-    question,
-    selectedButton
-) {
+.answer-button.wrong {
 
-    wrongAnswers++;
+    border-color:
+        var(--danger);
 
-    combo = 0;
+    background:
+        var(--danger-bg);
 
+    color:
+        #b91c1c;
 
-    selectedButton.classList.add(
-        "wrong"
-    );
-
-
-    comboElement.textContent =
-        "×1";
+    animation:
+        wrongAnswer 0.4s ease;
+}
 
 
-    document
-        .querySelectorAll(
-            ".answer-button"
-        )
-        .forEach(
-            function (button) {
+.answer-button.wrong::after {
 
-                if (
-                    button.textContent.trim() ===
-                    question.answer
-                ) {
+    content:
+        "✕";
 
-                    button.classList.add(
-                        "correct-answer"
-                    );
+    position:
+        absolute;
 
-                }
+    top:
+        10px;
 
-            }
-        );
+    right:
+        12px;
 
+    color:
+        #dc2626;
 
-    feedback.textContent =
-        `❌ Correct answer: ${question.answer}`;
+    font-size:
+        18px;
+}
 
 
-    feedback.className =
-        "feedback wrong";
+.answer-button.correct-answer {
+
+    border-color:
+        var(--success);
+
+    background:
+        rgba(34,197,94,0.08);
+
+    color:
+        #15803d;
+}
 
 
-    setTimeout(
-        function () {
+@keyframes correctAnswer {
 
-            if (!gameActive) {
-                return;
-            }
+    50% {
+        transform:
+            scale(1.04);
+    }
+}
 
-            currentQuestion++;
 
-            showQuestion();
+@keyframes wrongAnswer {
 
-        },
-        900
-    );
+    25% {
+        transform:
+            translateX(-6px);
+    }
 
+    50% {
+        transform:
+            translateX(6px);
+    }
+
+    75% {
+        transform:
+            translateX(-4px);
+    }
 }
 
 
 /* =====================================================
-   FINISH
+   FEEDBACK
 ===================================================== */
 
-function finishBattle() {
+.feedback {
 
-    gameActive = false;
+    min-height:
+        34px;
 
+    margin-top:
+        16px;
 
-    const accuracy =
-        Math.round(
-            (
-                correctAnswers /
-                TOTAL_QUESTIONS
-            ) * 100
-        );
+    text-align:
+        center;
 
+    color:
+        var(--text-muted);
 
-    const xp =
-        correctAnswers *
-        XP_PER_CORRECT;
+    font-size:
+        14px;
 
-
-    finalScore.textContent =
-        `${correctAnswers} / ${TOTAL_QUESTIONS}`;
-
-
-    finalCorrect.textContent =
-        correctAnswers;
+    font-weight:
+        800;
+}
 
 
-    finalWrong.textContent =
-        wrongAnswers;
+.feedback.correct {
+    color:
+        var(--success);
+}
 
 
-    finalAccuracy.textContent =
-        accuracy + "%";
-
-
-    positiveResult.textContent =
-        `${positiveCorrect} / 5`;
-
-
-    negativeResult.textContent =
-        `${negativeCorrect} / 5`;
-
-
-    questionResult.textContent =
-        `${questionCorrect} / 5`;
-
-
-    earnedXP.textContent =
-        "+" +
-        xp +
-        " XP";
-
-
-    progressText.textContent =
-        `${TOTAL_QUESTIONS} / ${TOTAL_QUESTIONS}`;
-
-
-    progressFill.style.width =
-        "100%";
-
-
-    saveProgress(
-        xp
-    );
-
-    showGrammarBackButton();
-
-
-    gameScreen.classList.add(
-        "hidden"
-    );
-
-
-    resultScreen.classList.remove(
-        "hidden"
-    );
-
+.feedback.wrong {
+    color:
+        var(--danger);
 }
 
 
 /* =====================================================
-   SAVE PROGRESS
+   PROGRESS
 ===================================================== */
 
-function saveProgress(
-    xp
-) {
-
-    let player;
-
-
-    try {
-
-        player =
-            JSON.parse(
-                localStorage.getItem(
-                    "learningArcadePlayer"
-                )
-            );
-
-    } catch (
-        error
-    ) {
-
-        player =
-            null;
-
-    }
+.progress-area {
+    margin-top:
+        26px;
+}
 
 
-    if (
-        !player
-    ) {
+.progress-label {
 
-        player = {
+    display:
+        flex;
 
-            name:
-                "Guest Player",
+    justify-content:
+        space-between;
 
-            xp:
-                0,
+    color:
+        var(--text-soft);
 
-            gamesPlayed:
-                0,
+    font-size:
+        9px;
 
-            streak:
-                0,
-
-            lastPlayed:
-                null
-
-        };
-
-    }
+    letter-spacing:
+        1px;
+}
 
 
-    player.xp =
-        Number(
-            player.xp || 0
-        ) + xp;
+.progress-bar {
+
+    height:
+        7px;
+
+    margin-top:
+        8px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        20px;
+
+    background:
+        rgba(127,127,127,0.13);
+}
 
 
-    player.gamesPlayed =
-        Number(
-            player.gamesPlayed || 0
-        ) + 1;
+.progress-fill {
 
+    width:
+        0%;
 
-    const today =
-        new Date()
-            .toISOString()
-            .split("T")[0];
+    height:
+        100%;
 
-    const yesterday =
-        new Date(
-            Date.now() - 86400000
-        )
-            .toISOString()
-            .split("T")[0];
+    border-radius:
+        20px;
 
-
-    if (
-        player.lastPlayed === today
-    ) {
-
-        // already played today, streak unchanged
-
-    } else if (
-        player.lastPlayed === yesterday
-    ) {
-
-        player.streak =
-            Number(
-                player.streak || 0
-            ) + 1;
-
-        player.lastPlayed =
-            today;
-
-    } else {
-
-        player.streak = 1;
-
-        player.lastPlayed =
-            today;
-
-    }
-
-
-    try {
-
-        localStorage.setItem(
-            "learningArcadePlayer",
-            JSON.stringify(
-                player
-            )
+    background:
+        linear-gradient(
+            90deg,
+            var(--accent),
+            var(--accent-two)
         );
 
-    } catch (error) {
+    transition:
+        width 0.3s ease;
+}
 
-        console.error(
-            "Could not save progress:",
-            error
-        );
 
+/* =====================================================
+   RESULT
+===================================================== */
+
+.result-card {
+
+    max-width:
+        650px;
+
+    margin:
+        20px auto;
+
+    padding:
+        42px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        26px;
+
+    background:
+        var(--bg-card);
+}
+
+
+.result-icon {
+
+    font-size:
+        52px;
+
+    margin-bottom:
+        12px;
+}
+
+
+.result-card h2 {
+
+    margin-top:
+        8px;
+
+    color:
+        var(--text-main);
+
+    font-size:
+        38px;
+}
+
+
+.final-score {
+
+    margin:
+        25px auto;
+
+    padding:
+        18px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(124,92,255,0.08);
+}
+
+
+.final-score span {
+
+    display:
+        block;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        2px;
+}
+
+
+.final-score strong {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        var(--accent);
+
+    font-size:
+        42px;
+}
+
+
+.result-stats {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:
+        10px;
+}
+
+
+.result-stat {
+
+    padding:
+        15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        13px;
+
+    background:
+        rgba(124,92,255,0.04);
+}
+
+
+.result-stat strong {
+
+    display:
+        block;
+
+    color:
+        var(--text-main);
+
+    font-size:
+        22px;
+}
+
+
+.result-stat span {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        10px;
+}
+
+
+/* =====================================================
+   BREAKDOWN
+===================================================== */
+
+.breakdown {
+
+    margin-top:
+        18px;
+
+    padding:
+        18px;
+
+    text-align:
+        left;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(124,92,255,0.03);
+}
+
+
+.breakdown h3 {
+
+    margin-bottom:
+        12px;
+
+    color:
+        var(--text-main);
+
+    font-size:
+        14px;
+}
+
+
+.breakdown-row {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        9px 0;
+
+    border-bottom:
+        1px solid var(--border);
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        13px;
+}
+
+
+.breakdown-row:last-child {
+    border-bottom:
+        none;
+}
+
+
+.breakdown-row strong {
+    color:
+        var(--text-main);
+}
+
+
+/* =====================================================
+   XP
+===================================================== */
+
+.xp-box {
+
+    margin-top:
+        15px;
+
+    padding:
+        17px;
+
+    border-radius:
+        14px;
+
+    background:
+        rgba(34,197,94,0.08);
+
+    border:
+        1px solid
+        rgba(34,197,94,0.16);
+}
+
+
+.xp-box span {
+
+    display:
+        block;
+
+    color:
+        var(--text-soft);
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        2px;
+}
+
+
+.xp-box strong {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        var(--success);
+
+    font-size:
+        25px;
+}
+
+
+/* =====================================================
+   RESULT BUTTONS
+===================================================== */
+
+.result-buttons {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+}
+
+
+.secondary-button {
+
+    margin-top:
+        12px;
+
+    padding:
+        12px 20px;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        var(--text-muted);
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+}
+
+
+.secondary-button:hover {
+    color:
+        var(--text-main);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+
+    main {
+        padding:
+            25px 13px 40px;
     }
 
+
+    .selection-card {
+
+        padding:
+            30px 18px;
+
+        margin:
+            10px auto;
+    }
+
+
+    .selection-card h2 {
+        font-size:
+            31px;
+    }
+
+
+    .grammar-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .score-bar {
+        gap:
+            8px;
+    }
+
+
+    .score-item {
+        padding:
+            11px 5px;
+    }
+
+
+    .score-item strong {
+        font-size:
+            19px;
+    }
+
+
+    .question-area {
+
+        padding:
+            35px 0 25px;
+    }
+
+
+    .question-area h2 {
+
+        font-size:
+            28px;
+    }
+
+
+    .answers-container {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+    }
+
+
+    .answer-button {
+
+        min-height:
+            72px;
+
+        font-size:
+            17px;
+    }
+
+
+    .result-card {
+
+        padding:
+            32px 18px;
+    }
+
+
+    .result-card h2 {
+
+        font-size:
+            31px;
+    }
+
+}
+/* =====================================================
+   MOBILE — GRAMMAR BATTLE
+   Supports 320px / 390px / 430px
+===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+
+    /* START */
+
+    .screen {
+        min-height: calc(100vh - 62px);
+        padding: 25px 12px;
+    }
+
+    .start-card {
+        padding: 30px 16px;
+        border-radius: 20px;
+    }
+
+    .big-icon {
+        width: 68px;
+        height: 68px;
+        margin-bottom: 18px;
+        font-size: 32px;
+        border-radius: 18px;
+    }
+
+    .start-card h1 {
+        font-size: clamp(34px, 11vw, 44px);
+    }
+
+    .start-card > p {
+        font-size: 12px;
+        line-height: 1.55;
+    }
+
+    .main-button {
+        width: 100%;
+        padding: 13px 15px;
+        font-size: 11px;
+    }
+
+
+    /* UNIT SELECTOR */
+
+    .unit-grid,
+    .grammar-grid,
+    .topic-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .unit-card,
+    .grammar-card,
+    .topic-card {
+        min-height: 70px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+
+    /* GAME */
+
+    .game-container {
+        width: 100%;
+        max-width: none;
+    }
+
+    .score-bar {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+
+    .score-item {
+        padding: 10px 4px;
+        border-radius: 10px;
+    }
+
+    .score-item span {
+        font-size: 7px;
+        letter-spacing: 1px;
+    }
+
+    .score-item strong {
+        font-size: 17px;
+    }
+
+
+    .game-instruction {
+        padding: 25px 0 18px;
+    }
+
+    .game-instruction h2 {
+        font-size: 21px;
+    }
+
+    .phrase {
+        margin-top: 10px;
+        font-size: clamp(24px, 8vw, 34px);
+        line-height: 1.15;
+        word-break: break-word;
+    }
+
+    .game-instruction p {
+        font-size: 11px;
+    }
+
+
+    /* OPTIONS */
+
+    .answers-container {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+    }
+
+    .answer-button {
+        min-height: 60px;
+        padding: 9px 11px;
+        font-size: 15px;
+        border-radius: 12px;
+    }
+
+
+    /* MATCHING */
+
+    .matching-game {
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+        padding: 10px 6px;
+    }
+
+    .match-column {
+        max-width: none;
+        gap: 6px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: min(100%, 105px);
+        aspect-ratio: 1;
+        height: auto;
+    }
+
+    .match-word {
+        padding: 7px;
+        font-size: 10px;
+        border-radius: 10px;
+    }
+
+    .match-picture {
+        border-radius: 10px;
+    }
+
+
+    /* PROGRESS */
+
+    .progress-area {
+        margin-top: 18px;
+    }
+
+    .progress-label {
+        font-size: 8px;
+    }
+
+    .progress-bar {
+        height: 5px;
+    }
+
+
+    /* RESULTS */
+
+    .result-card {
+        padding: 30px 15px;
+        border-radius: 20px;
+    }
+
+    .result-card h1 {
+        font-size: 30px;
+    }
+
+    .final-score strong {
+        font-size: 38px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .xp-box strong {
+        font-size: 22px;
+    }
+
+
+    /* TOUCH FRIENDLY */
+
+    button {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+}
+
+
+@media (max-width: 340px) {
+
+    .answer-button {
+        min-height: 56px;
+        font-size: 13px;
+    }
+
+    .match-word,
+    .match-picture {
+        width: 91px;
+    }
+
+    .match-word {
+        font-size: 9px;
+    }
+
+}
+
+/* =====================================================
+   GRAMMAR BATTLE HEADER — MOBILE
+   430px / 390px / 320px
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .game-header {
+
+        height: 62px;
+
+        padding: 0 10px;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .header-left {
+        min-width: 0;
+        max-width: 100%;
+        gap: 5px;
+    }
+
+    .back-button,
+    .arcade-button {
+        height: 36px;
+        padding: 0 9px;
+        border-radius: 10px;
+        font-size: 10px;
+    }
+
+    .arcade-button {
+        font-size: 9px;
+    }
+
+    .game-title {
+        min-width: 0;
+        max-width: 100%;
+        gap: 6px;
+    }
+
+    .game-icon {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        border-radius: 9px;
+        font-size: 15px;
+    }
+
+    .game-title-text {
+        min-width: 0;
+        max-width: 170px;
+    }
+
+    .game-title-text h1 {
+        font-size: 14px;
+    }
+
+    .game-title-text p {
+        font-size: 8px;
+    }
+
+    .header-right {
+        min-width: 0;
+        gap: 4px;
+    }
+
+    .theme-toggle {
+        width: 34px;
+        height: 34px;
+        flex-basis: 34px;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+}
+
+
+@media (max-width: 430px) {
+
+    .game-header {
+        padding: 0 7px;
+        gap: 5px;
+    }
+
+    .header-left {
+        gap: 3px;
+    }
+
+    .back-button,
+    .arcade-button {
+        height: 34px;
+        padding: 0 7px;
+        border-radius: 9px;
+        font-size: 8px;
+    }
+
+    .arcade-button {
+        font-size: 7.5px;
+    }
+
+    .game-title {
+        gap: 4px;
+    }
+
+    .game-icon {
+        width: 29px;
+        height: 29px;
+        flex-basis: 29px;
+        font-size: 13px;
+    }
+
+    .game-title-text {
+        max-width: 140px;
+    }
+
+    .game-title-text h1 {
+        font-size: 12px;
+    }
+
+    .game-title-text p {
+        display: none;
+    }
+
+    .theme-toggle {
+        width: 32px;
+        height: 32px;
+        flex-basis: 32px;
+        font-size: 13px;
+    }
+}
+
+
+@media (max-width: 390px) {
+
+    .game-header {
+        padding: 0 6px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            auto
+            minmax(0, 1fr);
+        gap: 4px;
+    }
+
+    .header-left {
+        gap: 3px;
+    }
+
+    .back-button {
+        padding: 0 6px;
+        font-size: 8px;
+    }
+
+    .arcade-button {
+        padding: 0 6px;
+        font-size: 7px;
+    }
+
+    .game-title {
+        gap: 3px;
+    }
+
+    .game-title-text {
+        max-width: 110px;
+    }
+
+    .game-title-text h1 {
+        font-size: 11px;
+        text-align: center;
+    }
+
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+        flex-basis: 30px;
+        font-size: 12px;
+    }
+}
+
+
+@media (max-width: 340px) {
+
+    .game-header {
+        padding: 0 5px;
+        gap: 3px;
+    }
+
+    .header-left {
+        gap: 2px;
+    }
+
+    .back-button {
+        padding: 0 5px;
+        font-size: 7px;
+    }
+
+    .arcade-button {
+        padding: 0 5px;
+        font-size: 6.5px;
+    }
+
+    .game-title {
+        gap: 2px;
+    }
+
+    .game-icon {
+        width: 26px;
+        height: 26px;
+        flex-basis: 26px;
+        font-size: 12px;
+    }
+
+    .game-title-text {
+        max-width: 90px;
+    }
+
+    .game-title-text h1 {
+        font-size: 10px;
+    }
+
+    .theme-toggle {
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
+        font-size: 11px;
+    }
 }
