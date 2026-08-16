@@ -728,7 +728,7 @@ function loadTheme() {
 
     const saved =
         localStorage.getItem(
-            "grammarBattleTheme"
+            "learningArcadeTheme"
         );
 
 
@@ -769,7 +769,7 @@ themeToggle.addEventListener(
 
 
         localStorage.setItem(
-            "grammarBattleTheme",
+            "learningArcadeTheme",
             isLight
                 ? "light"
                 : "dark"
